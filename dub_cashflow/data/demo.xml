@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Cashflow configuration for Account Move Line (receivable/payable lines) -->
+        <!--
+            This config tracks invoice receivable/payable lines as cashflow entries.
+            The filter excludes:
+            - Non-receivable/payable lines
+            - Cancelled invoices
+            - Fully paid invoices (payment_state = 'paid')
+
+            Partial payments are handled by calculating: original_amount - sum(linked_payments)
+        -->
+        <record id="cashflow_config_move_line" model="cashflow.config">
+            <field name="name">Invoice Lines Cashflow</field>
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="filter_domain">[('account_id.account_type', 'in', ['asset_receivable', 'liability_payable']), ('move_id.state', '!=', 'cancel'), ('move_id.payment_state', '!=', 'paid')]</field>
+            <field name="name_code">record.move_id.name or record.display_name</field>
+            <field name="active">True</field>
+        </record>
+
+        <!-- Field mappings for account.move.line -->
+
+        <!-- Entry state mapping: draft -> draft, posted -> confirmed, cancel -> cancelled -->
+        <record id="cashflow_config_line_state" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_move_line"/>
+            <field name="sequence">5</field>
+            <field name="cashflow_field">state</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">{'draft': 'draft', 'posted': 'confirmed', 'cancel': 'cancelled'}.get(record.move_id.state, 'draft')</field>
+        </record>
+
+        <!-- Entry type: invoices are forecast until fully paid -->
+        <record id="cashflow_config_line_entry_type" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_move_line"/>
+            <field name="sequence">6</field>
+            <field name="cashflow_field">entry_type</field>
+            <field name="source_type">fixed_value</field>
+            <field name="fixed_value">forecast</field>
+        </record>
+
+        <record id="cashflow_config_line_date" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_move_line"/>
+            <field name="sequence">10</field>
+            <field name="cashflow_field">date</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.date_maturity or record.date</field>
+        </record>
+
+        <!--
+            Amount calculation for partial payments:
+            - Finds all payments linked to this invoice via memo field
+            - Subtracts sum of active payments (in_process, posted, paid) from original balance
+            - Uses max(0, ...) to prevent negative amounts
+        -->
+        <record id="cashflow_config_line_amount" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_move_line"/>
+            <field name="sequence">20</field>
+            <field name="cashflow_field">amount</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">(lambda base: max(0, base - sum(env['account.payment'].search([('memo', '=', record.move_id.name), ('state', 'in', ['in_process', 'posted', 'paid'])]).mapped('amount'))))(abs(record.balance))</field>
+        </record>
+
+        <record id="cashflow_config_line_type" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_move_line"/>
+            <field name="sequence">30</field>
+            <field name="cashflow_field">type</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">'in' if record.balance > 0 else 'out'</field>
+        </record>
+
+        <record id="cashflow_config_line_currency" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_move_line"/>
+            <field name="sequence">40</field>
+            <field name="cashflow_field">currency_id</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.currency_id.id or record.company_currency_id.id</field>
+        </record>
+
+        <record id="cashflow_config_line_partner" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_move_line"/>
+            <field name="sequence">50</field>
+            <field name="cashflow_field">partner_id</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.partner_id.id if record.partner_id else False</field>
+        </record>
+
+        <record id="cashflow_config_line_description" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_move_line"/>
+            <field name="sequence">60</field>
+            <field name="cashflow_field">description</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.move_id.name or record.name or ''</field>
+        </record>
+
+        <!-- Bank journal: use invoice journal if bank type, otherwise default bank -->
+        <record id="cashflow_config_line_journal" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_move_line"/>
+            <field name="sequence">70</field>
+            <field name="cashflow_field">journal_id</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.move_id.journal_id.id if record.move_id.journal_id.type == 'bank' else env['account.journal'].search([('type', '=', 'bank'), ('company_id', '=', record.company_id.id)], limit=1).id</field>
+        </record>
+
+        <!-- Cashflow configuration for Account Payment -->
+        <!--
+            This config tracks payments as cashflow entries.
+            When a payment is created or updated, it also updates the linked invoice's
+            cashflow to reflect the remaining amount (partial payment support).
+        -->
+        <record id="cashflow_config_payment" model="cashflow.config">
+            <field name="name">Payments Cashflow</field>
+            <field name="model_id" ref="account.model_account_payment"/>
+            <field name="filter_domain">[('state', '!=', 'cancel')]</field>
+            <field name="name_code">record.name or record.display_name</field>
+            <field name="active">True</field>
+            <field name="action_code">
+# Default behavior: generate/update payment cashflow
+if operation == 'unlink':
+    delete_cashflow()
+else:
+    generate_cashflow()
+
+# Also update linked invoice cashflow when payment changes
+if operation in ('create', 'write'):
+    for payment in records:
+        if payment.memo:
+            # Find invoice by name (stored in memo field)
+            invoice = env['account.move'].search([('name', '=', payment.memo)], limit=1)
+            if invoice:
+                # Get receivable/payable lines
+                lines = invoice.line_ids.filtered(
+                    lambda l: l.account_id.account_type in ('asset_receivable', 'liability_payable')
+                )
+                if lines:
+                    # Trigger cashflow update for these lines
+                    invoice_config = env['cashflow.config'].search([('model_name', '=', 'account.move.line')], limit=1)
+                    if invoice_config:
+                        invoice_config.generate_cashflow(lines)
+                        _logger.info('CASHFLOW: Updated invoice cashflow for %s', invoice.name)
+            </field>
+        </record>
+
+        <!-- Field mappings for account.payment -->
+
+        <!-- Entry state: draft/in_process -> draft, posted/sent/reconciled/paid -> confirmed -->
+        <record id="cashflow_config_payment_state" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_payment"/>
+            <field name="sequence">5</field>
+            <field name="cashflow_field">state</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">{'draft': 'draft', 'in_process': 'draft', 'posted': 'confirmed', 'sent': 'confirmed', 'reconciled': 'confirmed', 'paid': 'confirmed', 'cancel': 'cancelled'}.get(record.state, 'draft')</field>
+        </record>
+
+        <!-- Entry type: draft/in_process -> forecast, posted/sent/reconciled/paid -> actual -->
+        <record id="cashflow_config_payment_entry_type" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_payment"/>
+            <field name="sequence">6</field>
+            <field name="cashflow_field">entry_type</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">'actual' if record.state in ('posted', 'sent', 'reconciled', 'paid') else 'forecast'</field>
+        </record>
+
+        <!-- Date -->
+        <record id="cashflow_config_payment_date" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_payment"/>
+            <field name="sequence">10</field>
+            <field name="cashflow_field">date</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.date</field>
+        </record>
+
+        <!-- Amount -->
+        <record id="cashflow_config_payment_amount" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_payment"/>
+            <field name="sequence">20</field>
+            <field name="cashflow_field">amount</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">abs(record.amount)</field>
+        </record>
+
+        <!-- Type: inbound -> in, outbound -> out -->
+        <record id="cashflow_config_payment_type" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_payment"/>
+            <field name="sequence">30</field>
+            <field name="cashflow_field">type</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">'in' if record.payment_type == 'inbound' else 'out'</field>
+        </record>
+
+        <!-- Currency -->
+        <record id="cashflow_config_payment_currency" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_payment"/>
+            <field name="sequence">40</field>
+            <field name="cashflow_field">currency_id</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.currency_id.id</field>
+        </record>
+
+        <!-- Partner -->
+        <record id="cashflow_config_payment_partner" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_payment"/>
+            <field name="sequence">50</field>
+            <field name="cashflow_field">partner_id</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.partner_id.id if record.partner_id else False</field>
+        </record>
+
+        <!-- Journal (Bank) -->
+        <record id="cashflow_config_payment_journal" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_payment"/>
+            <field name="sequence">55</field>
+            <field name="cashflow_field">journal_id</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.journal_id.id if record.journal_id else False</field>
+        </record>
+
+        <!-- Description -->
+        <record id="cashflow_config_payment_description" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_payment"/>
+            <field name="sequence">60</field>
+            <field name="cashflow_field">description</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.name or ''</field>
+        </record>
+
+        <!-- Configuration for Reconciliation - updates invoice cashflow when payment is reconciled -->
+        <!--
+            This config handles reconciliation events (account.partial.reconcile).
+            When reconciliation is created: updates invoice cashflow (amount may change due to amount_residual update)
+            When reconciliation is removed: recreates invoice cashflow if needed
+
+            Note: In Odoo setups without proper journal entries, reconciliation may not occur.
+            The Payments Cashflow config handles updating invoice cashflow via the memo field link.
+        -->
+        <record id="cashflow_config_reconcile" model="cashflow.config">
+            <field name="name">Reconciliation - Update Invoice Cashflow</field>
+            <field name="model_id" ref="account.model_account_partial_reconcile"/>
+            <field name="filter_domain">[]</field>
+            <field name="active">True</field>
+            <field name="trigger_on_create">True</field>
+            <field name="trigger_on_write">False</field>
+            <field name="trigger_on_unlink">True</field>
+            <field name="action_code">
+# _logger is available from eval_context
+# Process each reconcile record (handles both single record and recordset)
+for rec in records:
+    _logger.info("CASHFLOW RECONCILE: Processing partial_reconcile id=%s, operation=%s", rec.id, operation)
+
+    # Get the debit and credit move lines
+    lines = env['account.move.line']
+    if rec.debit_move_id:
+        lines |= rec.debit_move_id
+    if rec.credit_move_id:
+        lines |= rec.credit_move_id
+
+    # Filter to invoice receivable/payable lines
+    invoice_lines = lines.filtered(
+        lambda l: l.account_id.account_type in ('asset_receivable', 'liability_payable')
+        and l.move_id.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')
+    )
+
+    if invoice_lines:
+        # Update invoice cashflow (recalculate amount based on linked payments)
+        _logger.info("CASHFLOW RECONCILE: Updating cashflow for invoice_lines=%s", invoice_lines.ids)
+        env['cashflow.config'].process_records(invoice_lines, 'write')
+            </field>
+        </record>
+
+    </data>
+</odoo>

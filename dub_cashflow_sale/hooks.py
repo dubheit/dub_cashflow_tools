@@ -1,0 +1,41 @@
+"""Installation hooks for module migration."""
+import logging
+
+_logger = logging.getLogger(__name__)
+
+OLD_MODULE = 'db_cashflow_sale'
+NEW_MODULE = 'dub_cashflow_sale'
+
+
+def pre_init_hook(env):
+    """Migrate from old module if it exists."""
+    cr = env.cr
+
+    # Check if old module exists and is installed
+    cr.execute(
+        "SELECT id, state FROM ir_module_module WHERE name = %s",
+        (OLD_MODULE,)
+    )
+    old_module = cr.fetchone()
+
+    if not old_module or old_module[1] != 'installed':
+        _logger.info(f"No installed {OLD_MODULE} found, skipping migration")
+        return
+
+    _logger.info(f"Migrating {OLD_MODULE} -> {NEW_MODULE}")
+
+    # Update module references in ir_model_data
+    cr.execute(
+        "UPDATE ir_model_data SET module = %s WHERE module = %s",
+        (NEW_MODULE, OLD_MODULE)
+    )
+    _logger.info(f"Updated ir_model_data: {cr.rowcount} rows")
+
+    # Delete old module entry
+    cr.execute(
+        "DELETE FROM ir_module_module WHERE name = %s",
+        (OLD_MODULE,)
+    )
+    _logger.info("Deleted old module entry")
+
+    _logger.info(f"Migration {OLD_MODULE} -> {NEW_MODULE} completed")

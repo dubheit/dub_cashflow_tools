@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="401.00003"
+   height="401.00003"
+   viewBox="0 0 401.00003 401.00003"
+   version="1.1"
+   id="svg11"
+   sodipodi:docname="icon.svg"
+   inkscape:export-filename="icon.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview11"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.19"
+     inkscape:cx="200"
+     inkscape:cy="196.21849"
+     inkscape:window-width="1456"
+     inkscape:window-height="920"
+     inkscape:window-x="0"
+     inkscape:window-y="34"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg11" />
+  <defs
+     id="defs4">
+    <linearGradient
+       id="bankGrad"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="1">
+      <stop
+         offset="0"
+         stop-color="#3B82F6"
+         id="stop1" />
+      <stop
+         offset="1"
+         stop-color="#1E40AF"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="noteGrad"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="1">
+      <stop
+         offset="0"
+         stop-color="#22C55E"
+         id="stop3" />
+      <stop
+         offset="1"
+         stop-color="#16A34A"
+         id="stop4" />
+    </linearGradient>
+    <filter
+       id="ds"
+       x="-0.00125"
+       y="-0.00125"
+       width="1.0025"
+       height="1.0025">
+      <feDropShadow
+         dx="0"
+         dy="12"
+         stdDeviation="12"
+         flood-color="#000"
+         flood-opacity="0.18" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#bankGrad"
+       id="linearGradient11"
+       x1="85.444719"
+       y1="273.86128"
+       x2="194.98923"
+       y2="383.40579"
+       gradientTransform="scale(1.8257419,0.54772256)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#bankGrad"
+       id="linearGradient12"
+       x1="321.33057"
+       y1="115.02174"
+       x2="387.05727"
+       y2="180.74844"
+       gradientTransform="matrix(0.73093724,0,0,2.312567,-139.28886,-124.90853)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#bankGrad"
+       id="linearGradient13"
+       x1="434.52656"
+       y1="115.02174"
+       x2="500.25327"
+       y2="180.74844"
+       gradientTransform="matrix(0.73093724,0,0,2.312567,-139.28886,-124.90853)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#bankGrad"
+       id="linearGradient14"
+       x1="547.72256"
+       y1="115.02174"
+       x2="613.44926"
+       y2="180.74844"
+       gradientTransform="matrix(0.73093724,0,0,2.312567,-139.28886,-124.90853)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#bankGrad"
+       id="linearGradient15"
+       x1="61.101009"
+       y1="864.14285"
+       x2="134.42222"
+       y2="937.46406"
+       gradientTransform="matrix(3.4945484,0,0,0.48370809,-139.28886,-124.90853)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#noteGrad"
+       id="linearGradient16"
+       x1="107.02591"
+       y1="378.41304"
+       x2="185.51158"
+       y2="456.89871"
+       gradientTransform="matrix(1.8703453,0,0,0.90375897,-139.28886,-124.90853)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#noteGrad"
+       id="linearGradient17"
+       x1="117.7285"
+       y1="357.39009"
+       x2="196.21417"
+       y2="435.87576"
+       gradientTransform="matrix(1.8703453,0,0,0.90375897,-139.28886,-124.90853)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#noteGrad"
+       id="linearGradient18"
+       x1="128.43109"
+       y1="336.36715"
+       x2="206.91676"
+       y2="414.85281"
+       gradientTransform="matrix(1.8703453,0,0,0.90375897,-139.28886,-124.90853)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <!-- app tile -->
+  <rect
+     x="0.5"
+     y="0.5"
+     width="400"
+     height="400"
+     rx="56"
+     fill="#ffffff"
+     stroke="#e5e7eb"
+     stroke-width="1"
+     filter="url(#ds)"
+     id="rect4" />
+  <!-- bank -->
+  <polygon
+     points="256,150 356,210 156,210 "
+     fill="url(#bankGrad)"
+     id="polygon4"
+     style="fill:url(#linearGradient11)"
+     transform="matrix(1.3345027,0,0,1.2666451,-139.28886,-124.90853)" />
+  <rect
+     x="95.583618"
+     y="141.08694"
+     width="48.042099"
+     height="151.99742"
+     rx="16.014032"
+     fill="url(#bankGrad)"
+     opacity="0.85"
+     id="rect5"
+     style="fill:url(#linearGradient12);stroke-width:1.30013" />
+  <rect
+     x="178.32278"
+     y="141.08694"
+     width="48.042099"
+     height="151.99742"
+     rx="16.014032"
+     fill="url(#bankGrad)"
+     opacity="0.85"
+     id="rect6"
+     style="fill:url(#linearGradient13);stroke-width:1.30013" />
+  <rect
+     x="261.06198"
+     y="141.08694"
+     width="48.042099"
+     height="151.99742"
+     rx="16.014032"
+     fill="url(#bankGrad)"
+     opacity="0.85"
+     id="rect7"
+     style="fill:url(#linearGradient14);stroke-width:1.30013" />
+  <rect
+     x="74.231567"
+     y="293.08435"
+     width="256.22452"
+     height="35.466064"
+     rx="18.683039"
+     fill="url(#bankGrad)"
+     id="rect8"
+     style="fill:url(#linearGradient15);stroke-width:1.30013" />
+  <!-- banknotes -->
+  <rect
+     x="60.886555"
+     y="217.08565"
+     width="146.7953"
+     height="70.932129"
+     rx="21.352043"
+     fill="url(#noteGrad)"
+     opacity="0.85"
+     id="rect9"
+     style="fill:url(#linearGradient16);stroke-width:1.30013" />
+  <rect
+     x="80.904091"
+     y="198.08597"
+     width="146.7953"
+     height="70.932129"
+     rx="21.352043"
+     fill="url(#noteGrad)"
+     opacity="0.65"
+     id="rect10"
+     style="fill:url(#linearGradient17);stroke-width:1.30013" />
+  <rect
+     x="100.92163"
+     y="179.08629"
+     width="146.7953"
+     height="70.932129"
+     rx="21.352043"
+     fill="url(#noteGrad)"
+     opacity="0.45"
+     id="rect11"
+     style="fill:url(#linearGradient18);stroke-width:1.30013" />
+</svg>

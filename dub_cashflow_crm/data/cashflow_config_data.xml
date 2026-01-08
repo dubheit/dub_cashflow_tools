@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Cashflow configuration for CRM Opportunities -->
+        <record id="cashflow_config_crm_opportunity" model="cashflow.config">
+            <field name="name">CRM Opportunities</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="filter_domain">[('type', '=', 'opportunity'), ('probability', '>', 0)]</field>
+            <field name="trigger_on_create">True</field>
+            <field name="trigger_on_write">True</field>
+            <field name="trigger_on_unlink">True</field>
+            <field name="name_code">f"[CRM] {record.name}"</field>
+            <field name="action_code">
+# Delete cashflow when opportunity is lost (stage_id.is_won = False and probability = 0)
+# or when explicitly cancelled
+if operation in ('unlink', 'cancel'):
+    delete_cashflow()
+elif operation in ('create', 'write'):
+    # Check if opportunity is lost
+    if record.probability == 0:
+        delete_cashflow()
+    else:
+        generate_cashflow()
+            </field>
+        </record>
+
+        <!-- Field mapping: Date from date_deadline -->
+        <record id="cashflow_config_line_crm_date" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_crm_opportunity"/>
+            <field name="sequence">10</field>
+            <field name="cashflow_field">date</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.date_deadline or record.create_date.date()</field>
+        </record>
+
+        <!-- Field mapping: Amount = expected_revenue * probability / 100 -->
+        <record id="cashflow_config_line_crm_amount" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_crm_opportunity"/>
+            <field name="sequence">20</field>
+            <field name="cashflow_field">amount</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">(record.expected_revenue or 0) * (record.probability or 0) / 100</field>
+        </record>
+
+        <!-- Field mapping: Type = 'in' (cash in) -->
+        <record id="cashflow_config_line_crm_type" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_crm_opportunity"/>
+            <field name="sequence">30</field>
+            <field name="cashflow_field">type</field>
+            <field name="source_type">fixed_value</field>
+            <field name="fixed_value">in</field>
+        </record>
+
+        <!-- Field mapping: Currency from company -->
+        <record id="cashflow_config_line_crm_currency" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_crm_opportunity"/>
+            <field name="sequence">40</field>
+            <field name="cashflow_field">currency_id</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.company_id.currency_id.id or env.company.currency_id.id</field>
+        </record>
+
+        <!-- Field mapping: Partner -->
+        <record id="cashflow_config_line_crm_partner" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_crm_opportunity"/>
+            <field name="sequence">50</field>
+            <field name="cashflow_field">partner_id</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.partner_id.id if record.partner_id else False</field>
+        </record>
+
+        <!-- Field mapping: Description -->
+        <record id="cashflow_config_line_crm_description" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_crm_opportunity"/>
+            <field name="sequence">60</field>
+            <field name="cashflow_field">description</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">f"Probability: {record.probability}%"</field>
+        </record>
+
+        <!-- Field mapping: Entry type = 'forecast' -->
+        <record id="cashflow_config_line_crm_entry_type" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_crm_opportunity"/>
+            <field name="sequence">70</field>
+            <field name="cashflow_field">entry_type</field>
+            <field name="source_type">fixed_value</field>
+            <field name="fixed_value">forecast</field>
+        </record>
+
+        <!-- Field mapping: Bank journal (default) -->
+        <record id="cashflow_config_line_crm_journal" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_crm_opportunity"/>
+            <field name="sequence">80</field>
+            <field name="cashflow_field">journal_id</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">env['account.journal'].search([('type', '=', 'bank'), ('company_id', '=', record.company_id.id or env.company.id)], limit=1).id</field>
+        </record>
+
+    </data>
+</odoo>

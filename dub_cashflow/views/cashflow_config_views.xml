@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Cashflow Config Line Tree (embedded) -->
+    <record id="view_cashflow_config_line_tree" model="ir.ui.view">
+        <field name="name">cashflow.config.line.tree</field>
+        <field name="model">cashflow.config.line</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="cashflow_field"/>
+                <field name="source_type"/>
+                <field name="source_field_id" invisible="source_type != 'field'"/>
+                <field name="python_code" invisible="source_type != 'python_code'"/>
+                <field name="fixed_value" invisible="source_type != 'fixed_value'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Cashflow Config Tree -->
+    <record id="view_cashflow_config_tree" model="ir.ui.view">
+        <field name="name">cashflow.config.tree</field>
+        <field name="model">cashflow.config</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="model_id"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Cashflow Config Form -->
+    <record id="view_cashflow_config_form" model="ir.ui.view">
+        <field name="name">cashflow.config.form</field>
+        <field name="model">cashflow.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Invoice Cashflow"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="model_id" options="{'no_create': True}"/>
+                            <field name="model_name" invisible="1"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="filter_domain" widget="domain" options="{'model': 'model_name'}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="name_code" placeholder="record.display_name"/>
+                    </group>
+                    <notebook>
+                        <page string="Field Mappings" name="mappings">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="cashflow_field"/>
+                                    <field name="source_type"/>
+                                    <field name="source_field_id"
+                                           domain="[('model_id', '=', parent.model_id)]"
+                                           options="{'no_create': True}"
+                                           invisible="source_type != 'field'"/>
+                                    <field name="python_code" invisible="source_type != 'python_code'"/>
+                                    <field name="fixed_value" invisible="source_type != 'fixed_value'"/>
+                                </list>
+                            </field>
+                            <div class="alert alert-info" role="alert">
+                                <strong>Python Code Examples:</strong>
+                                <ul>
+                                    <li><code>record.date_maturity or record.date</code> - Field with fallback</li>
+                                    <li><code>abs(record.balance)</code> - Absolute value</li>
+                                    <li><code>'in' if record.balance > 0 else 'out'</code> - Conditional</li>
+                                    <li><code>record.partner_id.id</code> - Related field ID</li>
+                                    <li><code>record.currency_id.id or env.company.currency_id.id</code> - With default</li>
+                                </ul>
+                            </div>
+                        </page>
+                        <page string="Triggers" name="triggers">
+                            <group>
+                                <group string="Trigger on Operations">
+                                    <field name="trigger_on_create"/>
+                                    <field name="trigger_on_write"/>
+                                    <field name="trigger_on_unlink"/>
+                                    <field name="trigger_on_copy"/>
+                                </group>
+                                <group string="Payment Terms">
+                                    <field name="use_payment_terms"/>
+                                    <field name="payment_term_field" invisible="not use_payment_terms"/>
+                                    <field name="amount_field" invisible="not use_payment_terms"/>
+                                    <field name="date_field" invisible="not use_payment_terms"/>
+                                </group>
+                            </group>
+                            <separator string="Custom Action Code"/>
+                            <field name="action_code" widget="code" options="{'mode': 'python'}"/>
+                            <div class="alert alert-info" role="alert">
+                                <strong>Custom Action Code:</strong>
+                                <p>Leave empty to use default behavior (generate on create/write, delete on unlink).</p>
+                                <p>Available variables:</p>
+                                <ul>
+                                    <li><code>record</code> / <code>records</code> - The source record(s)</li>
+                                    <li><code>operation</code> - 'create', 'write', 'unlink', 'copy', 'post', 'draft', 'cancel'</li>
+                                    <li><code>config</code> - This configuration record</li>
+                                    <li><code>env</code> - The Odoo environment</li>
+                                    <li><code>generate_cashflow()</code> - Call to execute default generate behavior</li>
+                                    <li><code>delete_cashflow()</code> - Call to execute default delete behavior</li>
+                                </ul>
+                                <strong>Example:</strong>
+                                <pre>if operation == 'unlink':
+    delete_cashflow()
+elif operation in ('create', 'write', 'post'):
+    # Only generate if amount_residual > 0
+    if records.filtered(lambda r: r.amount_residual > 0):
+        generate_cashflow()</pre>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_cashflow_config" model="ir.actions.act_window">
+        <field name="name">Cashflow Configurations</field>
+        <field name="res_model">cashflow.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first cashflow configuration
+            </p>
+            <p>
+                Configure which models should generate cashflow entries and how their fields map to cashflow items.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_cashflow_config" name="Cashflow Configurations" action="action_cashflow_config" parent="account.menu_finance_configuration" sequence="90" groups="account.group_account_manager"/>
+</odoo>

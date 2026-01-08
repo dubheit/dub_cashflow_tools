@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Cashflow Entry Tree -->
+    <record id="view_cashflow_entry_tree" model="ir.ui.view">
+        <field name="name">cashflow.entry.tree</field>
+        <field name="model">cashflow.entry</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="state == 'cancelled'" decoration-info="state == 'draft'">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="journal_id" optional="show"/>
+                <field name="model_label" widget="badge"/>
+                <field name="reference"/>
+                <field name="entry_type" widget="badge" decoration-info="entry_type == 'forecast'" decoration-success="entry_type == 'actual'"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'confirmed'" decoration-danger="state == 'cancelled'"/>
+                <field name="config_id" optional="hide"/>
+                <field name="total_in" sum="Total In"/>
+                <field name="total_out" sum="Total Out"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Cashflow Entry Form -->
+    <record id="view_cashflow_entry_form" model="ir.ui.view">
+        <field name="name">cashflow.entry.form</field>
+        <field name="model">cashflow.entry</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_source_record" type="object"
+                                class="oe_stat_button" icon="fa-external-link"
+                                invisible="not model or not res_id">
+                            <span>Source Record</span>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="journal_id"/>
+                            <field name="reference"/>
+                            <field name="entry_type"/>
+                            <field name="config_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="currency_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Cashflow Items" name="items">
+                            <field name="item_ids">
+                                <list editable="bottom">
+                                    <field name="date"/>
+                                    <field name="type"/>
+                                    <field name="amount" sum="Total"/>
+                                    <field name="currency_id"/>
+                                    <field name="partner_id"/>
+                                    <field name="description"/>
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer">
+                                <field name="total_in" widget="monetary"/>
+                                <field name="total_out" widget="monetary"/>
+                            </group>
+                        </page>
+                        <page string="Other Info" name="other_info" groups="base.group_no_one">
+                            <group>
+                                <group>
+                                    <field name="model" readonly="1"/>
+                                    <field name="res_id" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Cashflow Entry Search -->
+    <record id="view_cashflow_entry_search" model="ir.ui.view">
+        <field name="name">cashflow.entry.search</field>
+        <field name="model">cashflow.entry</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="reference"/>
+                <field name="journal_id"/>
+                <field name="config_id"/>
+                <field name="model_id"/>
+                <separator/>
+                <filter name="filter_forecast" string="Forecast" domain="[('entry_type', '=', 'forecast')]"/>
+                <filter name="filter_actual" string="Actual" domain="[('entry_type', '=', 'actual')]"/>
+                <separator/>
+                <filter name="filter_this_month" string="This Month" domain="[('date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_journal" string="Bank" context="{'group_by': 'journal_id'}"/>
+                    <filter name="group_entry_type" string="Entry Type" context="{'group_by': 'entry_type'}"/>
+                    <filter name="group_model" string="Source" context="{'group_by': 'model_id'}"/>
+                    <filter name="group_config" string="Configuration" context="{'group_by': 'config_id'}"/>
+                    <filter name="group_date" string="Date" context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_cashflow_entry" model="ir.actions.act_window">
+        <field name="name">Cashflow Entries</field>
+        <field name="res_model">cashflow.entry</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_cashflow_entry_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No cashflow entries yet
+            </p>
+            <p>
+                Cashflow entries are automatically generated based on your configurations.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_cashflow_root" name="Cashflow" parent="account.menu_finance_entries" sequence="90" groups="account.group_account_readonly"/>
+    <menuitem id="menu_cashflow_entry" name="Entries" action="action_cashflow_entry" parent="menu_cashflow_root" sequence="10" groups="account.group_account_readonly"/>
+</odoo>
