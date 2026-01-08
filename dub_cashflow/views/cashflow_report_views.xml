@@ -14,14 +14,15 @@
         </field>
     </record>
 
-    <!-- Cashflow Analysis Graph View - Line chart with Actual vs Forecast -->
+    <!-- Cashflow Analysis Graph View - Line chart with Cash In, Cash Out, and Net Balance -->
     <record id="view_cashflow_item_graph" model="ir.ui.view">
         <field name="name">cashflow.item.graph</field>
         <field name="model">cashflow.item</field>
         <field name="arch" type="xml">
             <graph string="Cashflow Analysis" type="line" stacked="0">
                 <field name="date" interval="month"/>
-                <field name="entry_type"/>
+                <field name="amount_in" type="measure"/>
+                <field name="amount_out" type="measure"/>
                 <field name="amount_signed" type="measure"/>
             </graph>
         </field>
