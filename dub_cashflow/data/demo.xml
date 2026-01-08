@@ -44,7 +44,7 @@
             <field name="sequence">10</field>
             <field name="cashflow_field">date</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">record.date_maturity or record.date</field>
+            <field name="python_code">record.date_maturity or record.move_id.invoice_date or record.date</field>
         </record>
 
         <!--
