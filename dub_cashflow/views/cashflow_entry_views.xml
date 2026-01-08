@@ -92,24 +92,22 @@
         <field name="name">cashflow.entry.search</field>
         <field name="model">cashflow.entry</field>
         <field name="arch" type="xml">
-            <search>
+            <search string="Search Cashflow Entries">
                 <field name="name"/>
                 <field name="reference"/>
                 <field name="journal_id"/>
                 <field name="config_id"/>
                 <field name="model_id"/>
-                <separator/>
                 <filter name="filter_forecast" string="Forecast" domain="[('entry_type', '=', 'forecast')]"/>
                 <filter name="filter_actual" string="Actual" domain="[('entry_type', '=', 'actual')]"/>
                 <separator/>
                 <filter name="filter_this_month" string="This Month" domain="[('date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
-                <group expand="0" string="Group By">
-                    <filter name="group_journal" string="Bank" context="{'group_by': 'journal_id'}"/>
-                    <filter name="group_entry_type" string="Entry Type" context="{'group_by': 'entry_type'}"/>
-                    <filter name="group_model" string="Source" context="{'group_by': 'model_id'}"/>
-                    <filter name="group_config" string="Configuration" context="{'group_by': 'config_id'}"/>
-                    <filter name="group_date" string="Date" context="{'group_by': 'date:month'}"/>
-                </group>
+                <separator/>
+                <filter name="group_journal" string="Bank" context="{'group_by': 'journal_id'}"/>
+                <filter name="group_entry_type" string="Entry Type" context="{'group_by': 'entry_type'}"/>
+                <filter name="group_model" string="Source" context="{'group_by': 'model_id'}"/>
+                <filter name="group_config" string="Configuration" context="{'group_by': 'config_id'}"/>
+                <filter name="group_date" string="Date" context="{'group_by': 'date:month'}"/>
             </search>
         </field>
     </record>
