@@ -22,11 +22,11 @@ Features:
     "data": [
         "security/ir.model.access.csv",
         "views/cashflow_config_views.xml",
+        "views/cashflow_entry_match_views.xml",
         "views/cashflow_entry_views.xml",
         "views/cashflow_report_views.xml",
         "views/cashflow_item_views.xml",
         "views/cashflow_recurring_views.xml",
-        "views/cashflow_entry_match_views.xml",
         "views/res_config_settings_views.xml",
         "data/demo.xml",
         "data/ir_cron.xml",
