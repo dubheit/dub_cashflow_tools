@@ -140,6 +140,6 @@ elif operation in ('create', 'write', 'post'):
         </field>
     </record>
 
-    <!-- Menu -->
-    <menuitem id="menu_cashflow_config" name="Cashflow Configurations" action="action_cashflow_config" parent="account.menu_finance_configuration" sequence="90" groups="account.group_account_manager"/>
+    <!-- Menu under Accounting > Configuration > Accounting -->
+    <menuitem id="menu_cashflow_config" name="Cashflow Configurations" action="action_cashflow_config" parent="account.account_account_menu" sequence="90" groups="account.group_account_manager"/>
 </odoo>

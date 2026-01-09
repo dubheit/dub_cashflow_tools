@@ -52,8 +52,17 @@ class AccountMove(models.Model):
             lambda l: l.account_id.account_type in ('asset_receivable', 'liability_payable')
         )
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        # Process account.move configs
+        self.env['cashflow.config'].process_records(records, 'create')
+        return records
+
     def write(self, vals):
         result = super().write(vals)
+        # Process account.move configs
+        self.env['cashflow.config'].process_records(self, 'write')
         # If payment_state changes, re-process the cashflow for invoice lines
         if 'payment_state' in vals:
             _logger.info("CASHFLOW: account.move.write() payment_state changed to %s for moves %s", vals.get('payment_state'), self.ids)
@@ -65,6 +74,11 @@ class AccountMove(models.Model):
                 lines.invalidate_recordset(['move_id'])
                 self.env['cashflow.config'].process_records(lines, 'write')
         return result
+
+    def unlink(self):
+        # Process account.move configs before deletion
+        self.env['cashflow.config'].process_records(self, 'unlink')
+        return super().unlink()
 
     def action_post(self):
         result = super().action_post()

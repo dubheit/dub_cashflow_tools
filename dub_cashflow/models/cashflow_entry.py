@@ -56,6 +56,36 @@ class CashflowEntry(models.Model):
         ondelete='cascade',
         index=True,
     )
+    source_type = fields.Selection(
+        selection=[
+            ('auto', 'Automatic'),
+            ('manual', 'Manual'),
+            ('recurring', 'Recurring'),
+        ],
+        string='Source Type',
+        default='auto',
+        help='How this entry was created:\n'
+             '- Automatic: Generated from invoices, payments, etc.\n'
+             '- Manual: Created manually by user\n'
+             '- Recurring: Generated from recurring template',
+    )
+    recurring_id = fields.Many2one(
+        'cashflow.recurring',
+        string='Recurring Template',
+        ondelete='set null',
+        index=True,
+    )
+    match_id = fields.Many2one(
+        'cashflow.entry.match',
+        string='Pending Match',
+        ondelete='set null',
+        index=True,
+    )
+    has_pending_match = fields.Boolean(
+        compute='_compute_has_pending_match',
+        string='Has Pending Match',
+        store=True,
+    )
     item_ids = fields.One2many('cashflow.item', 'entry_id', string='Cashflow Items')
     total_in = fields.Monetary(
         compute='_compute_totals',
@@ -71,6 +101,11 @@ class CashflowEntry(models.Model):
         'res.currency',
         default=lambda self: self.env.company.currency_id,
     )
+
+    @api.depends('match_id', 'match_id.state')
+    def _compute_has_pending_match(self):
+        for entry in self:
+            entry.has_pending_match = entry.match_id and entry.match_id.state == 'pending'
 
     @api.depends('model')
     def _compute_model_id(self):

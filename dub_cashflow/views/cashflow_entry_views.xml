@@ -5,7 +5,7 @@
         <field name="name">cashflow.entry.tree</field>
         <field name="model">cashflow.entry</field>
         <field name="arch" type="xml">
-            <list decoration-muted="state == 'cancelled'" decoration-info="state == 'draft'">
+            <list decoration-muted="state == 'cancelled'" decoration-info="state == 'draft'" decoration-warning="has_pending_match">
                 <field name="name"/>
                 <field name="date"/>
                 <field name="journal_id" optional="show"/>
@@ -17,6 +17,11 @@
                 <field name="total_in" sum="Total In"/>
                 <field name="total_out" sum="Total Out"/>
                 <field name="currency_id" column_invisible="1"/>
+                <field name="has_pending_match" column_invisible="1"/>
+                <button name="%(action_cashflow_entry_match)d" type="action"
+                        icon="fa-exclamation-triangle" class="text-warning"
+                        invisible="not has_pending_match"
+                        title="Pending match - click to review"/>
             </list>
         </field>
     </record>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_cashflow" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.cashflow</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='account']" position="inside">
+                <block title="Cashflow" name="cashflow_settings">
+                    <setting id="cashflow_matching_behavior_setting" string="Recurring Entry Matching" help="How to handle recurring entries when matched with actual invoices">
+                        <field name="cashflow_matching_behavior" widget="radio"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -14,16 +14,15 @@
         </field>
     </record>
 
-    <!-- Cashflow Analysis Graph View - Line chart with Cash In, Cash Out, and Net Balance -->
+    <!-- Cashflow Analysis Graph View - Line chart with Cash In vs Cash Out -->
     <record id="view_cashflow_item_graph" model="ir.ui.view">
         <field name="name">cashflow.item.graph</field>
         <field name="model">cashflow.item</field>
         <field name="arch" type="xml">
             <graph string="Cashflow Analysis" type="line" stacked="0">
                 <field name="date" interval="month"/>
-                <field name="amount_in" type="measure"/>
-                <field name="amount_out" type="measure"/>
-                <field name="amount_signed" type="measure"/>
+                <field name="type"/>
+                <field name="amount" type="measure"/>
             </graph>
         </field>
     </record>
@@ -85,29 +84,101 @@
         </field>
     </record>
 
-    <!-- Cashflow Analysis Action -->
+    <!-- Old Cashflow Analysis Action - DISABLED, replaced by cashflow.report -->
+    <!--
     <record id="action_cashflow_analysis" model="ir.actions.act_window">
-        <field name="name">Cashflow Analysis</field>
+        <field name="name">Cashflow Analysis (Old)</field>
         <field name="res_model">cashflow.item</field>
         <field name="view_mode">graph,pivot,list</field>
         <field name="search_view_id" ref="view_cashflow_item_search_analysis"/>
         <field name="context">{}</field>
+    </record>
+    -->
+
+    <!-- ==================== CASHFLOW REPORT (Monthly with Running Balance) ==================== -->
+
+    <!-- Cashflow Report List View -->
+    <record id="view_cashflow_report_tree" model="ir.ui.view">
+        <field name="name">cashflow.report.tree</field>
+        <field name="model">cashflow.report</field>
+        <field name="arch" type="xml">
+            <list string="Cashflow Report">
+                <field name="month"/>
+                <field name="cash_in" sum="Total In"/>
+                <field name="cash_out" sum="Total Out"/>
+                <field name="net" sum="Net"/>
+                <field name="running_balance"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Cashflow Report Pivot View -->
+    <record id="view_cashflow_report_pivot" model="ir.ui.view">
+        <field name="name">cashflow.report.pivot</field>
+        <field name="model">cashflow.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Cashflow Report">
+                <field name="month" type="row"/>
+                <field name="cash_in" type="measure"/>
+                <field name="cash_out" type="measure"/>
+                <field name="net" type="measure"/>
+                <field name="running_balance" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Cashflow Report Graph View - Running Balance -->
+    <record id="view_cashflow_report_graph" model="ir.ui.view">
+        <field name="name">cashflow.report.graph</field>
+        <field name="model">cashflow.report</field>
+        <field name="arch" type="xml">
+            <graph string="Cashflow Forecast" type="line" stacked="0">
+                <field name="date" interval="month"/>
+                <field name="running_balance" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Cashflow Report Search View -->
+    <record id="view_cashflow_report_search" model="ir.ui.view">
+        <field name="name">cashflow.report.search</field>
+        <field name="model">cashflow.report</field>
+        <field name="arch" type="xml">
+            <search string="Search Cashflow Report">
+                <field name="month"/>
+                <field name="journal_id"/>
+                <filter name="filter_forecast" string="Forecast" domain="[('entry_type', '=', 'forecast')]"/>
+                <filter name="filter_actual" string="Actual" domain="[('entry_type', '=', 'actual')]"/>
+                <separator/>
+                <filter name="group_journal" string="Bank" context="{'group_by': 'journal_id'}"/>
+                <filter name="group_entry_type" string="Entry Type" context="{'group_by': 'entry_type'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Cashflow Analysis Action -->
+    <record id="action_cashflow_report" model="ir.actions.act_window">
+        <field name="name">Cashflow Analysis</field>
+        <field name="res_model">cashflow.report</field>
+        <field name="view_mode">graph,pivot,list</field>
+        <field name="search_view_id" ref="view_cashflow_report_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                No cashflow data to analyze
+                No cashflow data available
             </p>
             <p>
-                Cashflow entries are automatically generated based on your configurations.
+                This report shows monthly cashflow with running balance.
             </p>
         </field>
     </record>
 
-    <!-- Menu in Accounting Reporting -->
+    <!-- Menu for Cashflow Analysis (under Management, like Invoice Analysis) -->
     <menuitem id="menu_cashflow_analysis"
               name="Cashflow Analysis"
-              action="action_cashflow_analysis"
-              parent="account.menu_finance_reports"
-              sequence="50"
+              action="action_cashflow_report"
+              parent="account.account_reports_management_menu"
+              sequence="20"
               groups="account.group_account_readonly"/>
 
 </odoo>

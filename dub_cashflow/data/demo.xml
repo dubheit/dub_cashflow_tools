@@ -17,6 +17,52 @@
             <field name="filter_domain">[('account_id.account_type', 'in', ['asset_receivable', 'liability_payable']), ('move_id.state', '!=', 'cancel'), ('move_id.payment_state', '!=', 'paid')]</field>
             <field name="name_code">record.move_id.name or record.display_name</field>
             <field name="active">True</field>
+            <field name="action_code">
+# Handle recurring entry matching for vendor invoices
+if operation in ('create', 'write', 'post'):
+    for rec in records:
+        # Only for vendor invoices (payable lines)
+        if rec.account_id.account_type == 'liability_payable' and rec.move_id.state == 'posted':
+            partner_id = rec.partner_id.id if rec.partner_id else False
+            amount = abs(rec.balance)
+            target_date = rec.date_maturity or rec.move_id.invoice_date or rec.date
+
+            # Find matching recurring entry
+            recurring_entry = env['cashflow.recurring'].find_matching_recurring_entry(
+                partner_id, amount, target_date
+            )
+
+            if recurring_entry:
+                # Get matching behavior from settings
+                matching_behavior = env['ir.config_parameter'].sudo().get_param(
+                    'dub_cashflow.matching_behavior', 'delete'
+                )
+                if matching_behavior == 'delete':
+                    # Delete recurring entry
+                    _logger.info('CASHFLOW: Deleting recurring entry %s matched with invoice %s',
+                                recurring_entry.id, rec.move_id.name)
+                    recurring_entry.unlink()
+                else:
+                    # Convert: link recurring entry to invoice
+                    _logger.info('CASHFLOW: Converting recurring entry %s to invoice %s',
+                                recurring_entry.id, rec.move_id.name)
+                    recurring_entry.write({
+                        'model': 'account.move.line',
+                        'res_id': rec.id,
+                        'config_id': config.id,
+                        'source_type': 'auto',
+                        'recurring_id': False,
+                    })
+                    # Skip default generate for this record
+                    continue
+
+    # Default behavior for remaining records
+    generate_cashflow()
+elif operation == 'unlink':
+    delete_cashflow()
+else:
+    generate_cashflow()
+            </field>
         </record>
 
         <!-- Field mappings for account.move.line -->

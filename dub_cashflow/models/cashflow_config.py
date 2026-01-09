@@ -213,10 +213,13 @@ Example:
                     'model': self.model_name,
                     'res_id': record.id,
                     'config_id': self.id,
-                    'date': fields.Date.today(),
+                    'date': item_vals.get('date') or fields.Date.today(),
                 })
                 entry = CashflowEntry.create(base_entry_vals)
             else:
+                # Also update the entry date from item values
+                if item_vals.get('date'):
+                    base_entry_vals['date'] = item_vals['date']
                 entry.write(base_entry_vals)
 
             # Remove existing items and recreate
@@ -232,16 +235,23 @@ Example:
                     entry.unlink()
                     continue
 
+                created_items = []
                 if self.use_payment_terms:
                     # Generate multiple items based on payment terms
                     items_data = self._compute_payment_term_items(record, item_vals)
                     for item_data in items_data:
                         item_data['entry_id'] = entry.id
-                        CashflowItem.create(item_data)
+                        created_items.append(CashflowItem.create(item_data))
                 else:
                     # Single item
                     item_vals['entry_id'] = entry.id
-                    CashflowItem.create(item_vals)
+                    created_items.append(CashflowItem.create(item_vals))
+
+                # Update entry date to earliest item date
+                if created_items:
+                    item_dates = [item.date for item in created_items if item.date]
+                    if item_dates:
+                        entry.date = min(item_dates)
 
         return True
 

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Cashflow Recurring Tree -->
+    <record id="view_cashflow_recurring_tree" model="ir.ui.view">
+        <field name="name">cashflow.recurring.tree</field>
+        <field name="model">cashflow.recurring</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="type" widget="badge" decoration-success="type == 'in'" decoration-danger="type == 'out'"/>
+                <field name="amount"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="recurrence_type"/>
+                <field name="day_of_month"/>
+                <field name="next_generation_date"/>
+                <field name="entry_count"/>
+                <field name="active" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Cashflow Recurring Form -->
+    <record id="view_cashflow_recurring_form" model="ir.ui.view">
+        <field name="name">cashflow.recurring.form</field>
+        <field name="model">cashflow.recurring</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_generate_entries" type="object" string="Generate Now" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_entries" type="object"
+                                class="oe_stat_button" icon="fa-list">
+                            <field name="entry_count" widget="statinfo" string="Entries"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Monthly Rent"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Cashflow Details">
+                            <field name="partner_id"/>
+                            <field name="type"/>
+                            <label for="amount"/>
+                            <div class="o_row">
+                                <field name="amount"/>
+                                <field name="currency_id"/>
+                            </div>
+                            <field name="journal_id"/>
+                            <field name="description"/>
+                        </group>
+                        <group string="Recurrence">
+                            <field name="recurrence_type"/>
+                            <field name="day_of_month"/>
+                            <field name="advance_days"/>
+                            <field name="last_generated_date"/>
+                            <field name="next_generation_date"/>
+                        </group>
+                    </group>
+                    <group string="Matching Settings">
+                        <group>
+                            <field name="matching_enabled"/>
+                            <field name="matching_mode" invisible="not matching_enabled" widget="radio"/>
+                            <field name="matching_tolerance_days" invisible="not matching_enabled"/>
+                            <field name="matching_tolerance_amount" invisible="not matching_enabled"/>
+                        </group>
+                    </group>
+                    <field name="active" invisible="1"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Cashflow Recurring Search -->
+    <record id="view_cashflow_recurring_search" model="ir.ui.view">
+        <field name="name">cashflow.recurring.search</field>
+        <field name="model">cashflow.recurring</field>
+        <field name="arch" type="xml">
+            <search string="Search Recurring Templates">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <filter name="filter_cash_in" string="Cash In" domain="[('type', '=', 'in')]"/>
+                <filter name="filter_cash_out" string="Cash Out" domain="[('type', '=', 'out')]"/>
+                <separator/>
+                <filter name="filter_monthly" string="Monthly" domain="[('recurrence_type', '=', 'monthly')]"/>
+                <filter name="filter_quarterly" string="Quarterly" domain="[('recurrence_type', '=', 'quarterly')]"/>
+                <filter name="filter_yearly" string="Yearly" domain="[('recurrence_type', '=', 'yearly')]"/>
+                <separator/>
+                <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter name="group_type" string="Type" context="{'group_by': 'type'}"/>
+                <filter name="group_recurrence" string="Recurrence" context="{'group_by': 'recurrence_type'}"/>
+                <filter name="group_partner" string="Partner" context="{'group_by': 'partner_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_cashflow_recurring" model="ir.actions.act_window">
+        <field name="name">Recurring Templates</field>
+        <field name="res_model">cashflow.recurring</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_cashflow_recurring_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first recurring template
+            </p>
+            <p>
+                Recurring templates automatically generate cashflow forecast entries
+                for expected expenses like rent, salaries, or subscriptions.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_cashflow_recurring"
+              name="Recurring"
+              action="action_cashflow_recurring"
+              parent="menu_cashflow_root"
+              sequence="20"
+              groups="account.group_account_readonly"/>
+</odoo>
