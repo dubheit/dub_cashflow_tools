@@ -18,7 +18,7 @@
                 <field name="total_out" sum="Total Out"/>
                 <field name="currency_id" column_invisible="1"/>
                 <field name="has_pending_match" column_invisible="1"/>
-                <button name="%(action_cashflow_entry_match)d" type="action"
+                <button name="action_open_match" type="object"
                         icon="fa-exclamation-triangle" class="text-warning"
                         invisible="not has_pending_match"
                         title="Pending match - click to review"/>

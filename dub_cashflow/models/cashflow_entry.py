@@ -126,6 +126,19 @@ class CashflowEntry(models.Model):
                 item.amount for item in entry.item_ids if item.type == 'out'
             )
 
+    def action_open_match(self):
+        """Open the match review for this entry."""
+        self.ensure_one()
+        if not self.match_id:
+            return False
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'cashflow.entry.match',
+            'res_id': self.match_id.id,
+            'view_mode': 'form',
+            'target': 'current',
+        }
+
     def action_open_source_record(self):
         """Open the source record linked to this cashflow entry."""
         self.ensure_one()
