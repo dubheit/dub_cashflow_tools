@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 {
     "name": "DUB Cashflow",
     "version": "19.0.3.0.0",

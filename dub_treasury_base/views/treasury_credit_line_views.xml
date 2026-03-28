@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Treasury Credit Line Tree View -->
+    <record id="treasury_credit_line_view_list" model="ir.ui.view">
+        <field name="name">treasury.credit.line.list</field>
+        <field name="model">treasury.credit.line</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="state in ('closed', 'expired')" decoration-warning="state == 'expired'">
+                <field name="name"/>
+                <field name="account_id"/>
+                <field name="credit_type"/>
+                <field name="limit_amount" sum="Total Limit"/>
+                <field name="used_amount" sum="Total Used"/>
+                <field name="available_amount" sum="Total Available"/>
+                <field name="utilization_rate" widget="progressbar"/>
+                <field name="interest_rate" optional="show"/>
+                <field name="expiry_date"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'active'"
+                       decoration-warning="state == 'expired'"
+                       decoration-muted="state in ('draft', 'closed')"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Treasury Credit Line Form View -->
+    <record id="treasury_credit_line_view_form" model="ir.ui.view">
+        <field name="name">treasury.credit.line.form</field>
+        <field name="model">treasury.credit.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_activate" string="Activate" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="%(credit_line_movement_wizard_action)d" string="Record Movement" type="action"
+                            class="oe_highlight" invisible="state != 'active'"/>
+                    <button name="action_refresh_usage" string="Refresh Usage" type="object"
+                            icon="fa-refresh" invisible="state != 'active'"/>
+                    <button name="action_expire" string="Mark Expired" type="object"
+                            invisible="state != 'active'" confirm="Are you sure you want to mark this credit line as expired?"/>
+                    <button name="action_close" string="Close" type="object"
+                            invisible="state not in ('active', 'expired')"
+                            confirm="Are you sure you want to close this credit line?"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_moves"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-book"
+                                invisible="move_count == 0">
+                            <field name="move_count" widget="statinfo" string="Movements"/>
+                        </button>
+                        <button name="action_view_linked_invoices"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-pencil-square-o"
+                                invisible="linked_invoice_count == 0">
+                            <field name="linked_invoice_count" widget="statinfo" string="Invoices"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Credit Line Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="main">
+                            <field name="account_id"/>
+                            <field name="credit_type"/>
+                            <field name="partner_id"/>
+                            <field name="contract_reference"/>
+                        </group>
+                        <group name="amounts">
+                            <field name="limit_amount"/>
+                            <label for="used_amount"/>
+                            <div class="o_row">
+                                <field name="used_amount" class="oe_inline"/>
+                                <field name="auto_compute_usage" widget="boolean_toggle" nolabel="1"/>
+                                <span class="text-muted" invisible="not auto_compute_usage">Auto</span>
+                                <span class="text-muted" invisible="auto_compute_usage">Manual</span>
+                            </div>
+                            <field name="available_amount"/>
+                            <field name="utilization_rate" widget="progressbar"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group name="conditions" string="Conditions">
+                            <field name="interest_rate"/>
+                            <field name="spread"/>
+                            <field name="commission_rate"/>
+                        </group>
+                        <group name="dates" string="Dates">
+                            <field name="start_date"/>
+                            <field name="expiry_date"/>
+                            <field name="renewal_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Covenants" name="covenants">
+                            <field name="covenant_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="covenant_type"/>
+                                    <field name="comparison"/>
+                                    <field name="threshold_value"/>
+                                    <field name="current_value"/>
+                                    <field name="is_compliant" widget="boolean_toggle"/>
+                                    <field name="frequency"/>
+                                    <field name="check_date"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Accounting" name="accounting">
+                            <group>
+                                <group string="Configuration">
+                                    <field name="journal_id"/>
+                                    <field name="credit_account_id"/>
+                                    <field name="bank_account_id"/>
+                                    <field name="interest_account_id"/>
+                                </group>
+                            </group>
+                            <separator string="Movements" invisible="not utilization_move_ids"/>
+                            <field name="utilization_move_ids" invisible="not utilization_move_ids">
+                                <list>
+                                    <field name="date"/>
+                                    <field name="ref"/>
+                                    <field name="credit_line_movement_type" string="Type"/>
+                                    <field name="amount_total_signed" string="Amount"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Treasury Credit Line Search View -->
+    <record id="treasury_credit_line_view_search" model="ir.ui.view">
+        <field name="name">treasury.credit.line.search</field>
+        <field name="model">treasury.credit.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="account_id"/>
+                <field name="credit_type"/>
+                <filter name="filter_active" string="Active" domain="[('state', '=', 'active')]"/>
+                <filter name="filter_expired" string="Expired" domain="[('state', '=', 'expired')]"/>
+                <separator/>
+                <filter name="filter_overdraft" string="Overdraft" domain="[('credit_type', '=', 'overdraft')]"/>
+                <filter name="filter_advance" string="Advances" domain="[('credit_type', '=', 'advance')]"/>
+                <filter name="filter_discount" string="Bill Discount" domain="[('credit_type', '=', 'discount')]"/>
+                <separator/>
+                <filter name="filter_expiring_soon" string="Expiring Soon (30 days)"
+                        domain="[('expiry_date', '&lt;=', (context_today() + relativedelta(days=30)).strftime('%Y-%m-%d')),
+                                 ('expiry_date', '&gt;=', context_today().strftime('%Y-%m-%d')),
+                                 ('state', '=', 'active')]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_account" string="Account" context="{'group_by': 'account_id'}"/>
+                    <filter name="group_type" string="Type" context="{'group_by': 'credit_type'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_bank" string="Bank" context="{'group_by': 'bank_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="treasury_credit_line_action" model="ir.actions.act_window">
+        <field name="name">Credit Lines</field>
+        <field name="res_model">treasury.credit.line</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="treasury_credit_line_view_search"/>
+        <field name="context">{'search_default_filter_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first credit line
+            </p>
+            <p>
+                Credit lines represent your banking facilities: overdrafts, invoice advances,
+                bill discounts, factoring, and other credit facilities.
+            </p>
+        </field>
+    </record>
+
+    <!-- Covenant Views -->
+    <record id="treasury_covenant_view_list" model="ir.ui.view">
+        <field name="name">treasury.covenant.list</field>
+        <field name="model">treasury.covenant</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="not is_compliant" decoration-success="is_compliant">
+                <field name="credit_line_id"/>
+                <field name="name"/>
+                <field name="covenant_type"/>
+                <field name="comparison"/>
+                <field name="threshold_value"/>
+                <field name="current_value"/>
+                <field name="is_compliant"/>
+                <field name="frequency"/>
+                <field name="check_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="treasury_covenant_view_form" model="ir.ui.view">
+        <field name="name">treasury.covenant.form</field>
+        <field name="model">treasury.covenant</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_calculate_value" string="Calculate Value" type="object"
+                            class="oe_highlight" icon="fa-calculator"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Covenant Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Definition">
+                            <field name="credit_line_id"/>
+                            <field name="covenant_type"/>
+                            <field name="frequency"/>
+                            <field name="use_custom_formula" widget="boolean_toggle"/>
+                        </group>
+                        <group string="Threshold">
+                            <field name="comparison"/>
+                            <field name="threshold_value"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Current Status">
+                            <field name="current_value"/>
+                            <field name="is_compliant" widget="boolean_toggle"/>
+                            <field name="check_date"/>
+                        </group>
+                        <group string="Calculated Values" invisible="use_custom_formula">
+                            <field name="numerator_value"/>
+                            <field name="denominator_value"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Account Configuration" name="accounts" invisible="use_custom_formula">
+                            <div class="alert alert-info" role="alert">
+                                <strong>Formula:</strong> Valore = (Numeratore + − Numeratore −) / (Denominatore + − Denominatore −)
+                            </div>
+                            <group string="Numerator (Numeratore)">
+                                <group string="(+) Add">
+                                    <field name="numerator_add_account_ids" widget="many2many_tags" nolabel="1"
+                                           options="{'no_create': True}" placeholder="Select accounts to add..."/>
+                                </group>
+                                <group string="(−) Subtract">
+                                    <field name="numerator_subtract_account_ids" widget="many2many_tags" nolabel="1"
+                                           options="{'no_create': True}" placeholder="Select accounts to subtract..."/>
+                                </group>
+                            </group>
+                            <group string="Denominator (Denominatore)">
+                                <group string="(+) Add">
+                                    <field name="denominator_add_account_ids" widget="many2many_tags" nolabel="1"
+                                           options="{'no_create': True}" placeholder="Select accounts to add..."/>
+                                </group>
+                                <group string="(−) Subtract">
+                                    <field name="denominator_subtract_account_ids" widget="many2many_tags" nolabel="1"
+                                           options="{'no_create': True}" placeholder="Select accounts to subtract..."/>
+                                </group>
+                            </group>
+                            <separator string="Examples"/>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>Debt/Equity (simple):</b></p>
+                                    <ul>
+                                        <li>Num (+): Liability accounts</li>
+                                        <li>Den (+): Equity accounts</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><b>Interest Coverage (EBIT):</b></p>
+                                    <ul>
+                                        <li>Num (+): Revenue accounts</li>
+                                        <li>Num (−): Operating expense accounts</li>
+                                        <li>Den (+): Interest expense accounts</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </page>
+                        <page string="Python Formula" name="custom_formula" invisible="not use_custom_formula">
+                            <div class="alert alert-warning" role="alert">
+                                <strong>⚡ Advanced Mode:</strong> Write a Python expression that returns the covenant value.
+                            </div>
+                            <field name="custom_formula" widget="code"
+                                   placeholder="# Example: Debt/Equity Ratio&#10;abs(balance('2%')) / abs(balance('3%'))"/>
+                            <separator string="Available Functions"/>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>balance(code_pattern)</b></p>
+                                    <p class="text-muted">Returns the sum of balances for accounts matching the pattern.
+                                    Use '%' as wildcard.</p>
+                                    <ul>
+                                        <li><code>balance('120000')</code> - Exact account</li>
+                                        <li><code>balance('12%')</code> - All accounts starting with 12</li>
+                                        <li><code>balance('2%')</code> - All liability accounts (class 2)</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><b>Other Functions</b></p>
+                                    <ul>
+                                        <li><code>abs(x)</code> - Absolute value</li>
+                                        <li><code>round(x, n)</code> - Round to n decimals</li>
+                                        <li><code>min(a, b)</code>, <code>max(a, b)</code></li>
+                                        <li><code>sum([a, b, c])</code></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <separator string="Examples"/>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p><b>Debt/Equity:</b></p>
+                                    <code>abs(balance('2%')) / abs(balance('3%'))</code>
+                                </div>
+                                <div class="col-md-4">
+                                    <p><b>Current Ratio:</b></p>
+                                    <code>abs(balance('21%') + balance('22%')) / abs(balance('41%'))</code>
+                                </div>
+                                <div class="col-md-4">
+                                    <p><b>Interest Coverage:</b></p>
+                                    <code>(abs(balance('7%')) - abs(balance('6%'))) / abs(balance('661%'))</code>
+                                </div>
+                            </div>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" placeholder="Additional notes..."/>
+                        </page>
+                    </notebook>
+                    <field name="company_id" invisible="1"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="treasury_covenant_action" model="ir.actions.act_window">
+        <field name="name">Covenants</field>
+        <field name="res_model">treasury.covenant</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No covenants defined
+            </p>
+            <p>
+                Covenants are financial conditions required by banks.
+                Configure accounts to automatically calculate covenant values.
+            </p>
+        </field>
+    </record>
+
+</odoo>

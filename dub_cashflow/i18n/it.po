@@ -1,0 +1,767 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* dub_cashflow
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20251222\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-11 08:05+0000\n"
+"PO-Revision-Date: 2026-02-11 08:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "<code>'in' if record.balance &gt; 0 else 'out'</code> - Conditional"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "<code>abs(record.balance)</code> - Absolute value"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "<code>config</code> - This configuration record"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid ""
+"<code>delete_cashflow()</code> - Call to execute default delete behavior"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "<code>env</code> - The Odoo environment"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid ""
+"<code>generate_cashflow()</code> - Call to execute default generate behavior"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid ""
+"<code>operation</code> - 'create', 'write', 'unlink', 'copy', 'post', "
+"'draft', 'cancel'"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid ""
+"<code>record.currency_id.id or env.company.currency_id.id</code> - With "
+"default"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "<code>record.date_maturity or record.date</code> - Field with fallback"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "<code>record.partner_id.id</code> - Related field ID"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "<code>record</code> / <code>records</code> - The source record(s)"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_form
+msgid "<span>Source Record</span>"
+msgstr "<span>Record di origine</span>"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "<strong>Custom Action Code:</strong>"
+msgstr "<strong>Codice azione personalizzato:</strong>"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "<strong>Example:</strong>"
+msgstr "<strong>Esempio:</strong>"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "<strong>Python Code Examples:</strong>"
+msgstr "<strong>Esempi di codice Python:</strong>"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__active
+msgid "Active"
+msgstr "Attivo"
+
+#. module: dub_cashflow
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_entry__entry_type__actual
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Actual"
+msgstr "Consuntivo"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__amount
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__amount
+msgid "Amount"
+msgstr "Importo"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__amount_field
+msgid "Amount Field"
+msgstr "Campo importo"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "Available variables:"
+msgstr "Variabili disponibili:"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__amount_signed
+msgid "Balance"
+msgstr "Saldo"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__journal_id
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__journal_id
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__journal_id
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Bank"
+msgstr "Banca"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_entry__journal_id
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_item__journal_id
+msgid "Bank journal for this cashflow entry"
+msgstr "Registro bancario per questo movimento di cashflow"
+
+#. module: dub_cashflow
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_entry__state__cancelled
+msgid "Cancelled"
+msgstr "Annullato"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__amount_in
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_item__type__in
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Cash In"
+msgstr "Entrata"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__amount_out
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_item__type__out
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Cash Out"
+msgstr "Uscita"
+
+#. module: dub_cashflow
+#: model:ir.ui.menu,name:dub_cashflow.menu_cashflow_root
+msgid "Cashflow"
+msgstr "Cashflow"
+
+#. module: dub_cashflow
+#: model:ir.actions.act_window,name:dub_cashflow.action_cashflow_analysis
+#: model:ir.ui.menu,name:dub_cashflow.menu_cashflow_analysis
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_graph
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_graph_bar
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_pivot
+msgid "Cashflow Analysis"
+msgstr "Analisi cashflow"
+
+#. module: dub_cashflow
+#: model:ir.model,name:dub_cashflow.model_cashflow_config
+msgid "Cashflow Configuration"
+msgstr "Configurazione cashflow"
+
+#. module: dub_cashflow
+#: model:ir.model,name:dub_cashflow.model_cashflow_config_line
+msgid "Cashflow Configuration Line"
+msgstr "Riga configurazione cashflow"
+
+#. module: dub_cashflow
+#: model:ir.actions.act_window,name:dub_cashflow.action_cashflow_config
+#: model:ir.ui.menu,name:dub_cashflow.menu_cashflow_config
+msgid "Cashflow Configurations"
+msgstr "Configurazioni cashflow"
+
+#. module: dub_cashflow
+#: model:ir.actions.act_window,name:dub_cashflow.action_cashflow_entry
+msgid "Cashflow Entries"
+msgstr "Movimenti cashflow"
+
+#. module: dub_cashflow
+#: model:ir.model,name:dub_cashflow.model_cashflow_entry
+msgid "Cashflow Entry"
+msgstr "Movimento cashflow"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__cashflow_field
+msgid "Cashflow Field"
+msgstr "Campo cashflow"
+
+#. module: dub_cashflow
+#: model:ir.model,name:dub_cashflow.model_cashflow_item
+msgid "Cashflow Item"
+msgstr "Voce cashflow"
+
+#. module: dub_cashflow
+#: model:ir.actions.act_window,name:dub_cashflow.action_cashflow_item
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__item_ids
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_form
+msgid "Cashflow Items"
+msgstr "Voci cashflow"
+
+#. module: dub_cashflow
+#: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_analysis
+#: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_entry
+msgid ""
+"Cashflow entries are automatically generated based on your configurations."
+msgstr ""
+"I movimenti di cashflow vengono generati automaticamente in base alle "
+"configurazioni."
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__config_id
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__config_id
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
+msgid "Configuration"
+msgstr "Configurazione"
+
+#. module: dub_cashflow
+#: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_config
+msgid ""
+"Configure which models should generate cashflow entries and how their fields"
+" map to cashflow items."
+msgstr ""
+"Configura quali modelli devono generare movimenti di cashflow e come i loro "
+"campi vengono mappati sulle voci di cashflow."
+
+#. module: dub_cashflow
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_entry__state__confirmed
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Confirmed"
+msgstr "Confermato"
+
+#. module: dub_cashflow
+#: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_config
+msgid "Create your first cashflow configuration"
+msgstr "Crea la tua prima configurazione cashflow"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__create_uid
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__create_uid
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__create_uid
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__create_date
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__create_date
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__create_date
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__currency_id
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__currency_id
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__currency_id
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__action_code
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "Custom Action Code"
+msgstr "Codice azione personalizzato"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__date
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__date
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__date
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Date"
+msgstr "Data"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__date_field
+msgid "Date Field"
+msgstr "Campo data"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__trigger_on_unlink
+msgid "Delete cashflow when a record is deleted"
+msgstr "Elimina il cashflow quando un record viene cancellato"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__description
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__description
+msgid "Description"
+msgstr "Descrizione"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__display_name
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__display_name
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__display_name
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__filter_domain
+msgid "Domain to filter which records should generate cashflow entries"
+msgstr "Dominio per filtrare quali record devono generare movimenti di cashflow"
+
+#. module: dub_cashflow
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_entry__state__draft
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Draft"
+msgstr "Bozza"
+
+#. module: dub_cashflow
+#: model:ir.ui.menu,name:dub_cashflow.menu_cashflow_entry
+msgid "Entries"
+msgstr "Movimenti"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__entry_id
+msgid "Entry"
+msgstr "Movimento"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__entry_name
+msgid "Entry Name"
+msgstr "Nome movimento"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__name_code
+msgid "Entry Name Code"
+msgstr "Codice nome movimento"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__entry_type
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__entry_type
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Entry Type"
+msgstr "Tipo voce"
+
+#. module: dub_cashflow
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__entry_type
+msgid "Entry Type (forecast/actual)"
+msgstr "Tipo voce (previsione/consuntivo)"
+
+#. module: dub_cashflow
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__source_type__field
+msgid "Field"
+msgstr "Campo"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__line_ids
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "Field Mappings"
+msgstr "Mappatura campi"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__date_field
+msgid ""
+"Field name containing the base date for payment term calculation (e.g., "
+"date, date_order, invoice_date)"
+msgstr ""
+"Nome del campo contenente la data base per il calcolo dei termini di "
+"pagamento (es. date, date_order, invoice_date)"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__payment_term_field
+msgid "Field name containing the payment term (e.g., payment_term_id)"
+msgstr ""
+"Nome del campo contenente i termini di pagamento (es. payment_term_id)"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__amount_field
+msgid ""
+"Field name containing the total amount to split (e.g., amount_total, "
+"amount_residual)"
+msgstr ""
+"Nome del campo contenente l'importo totale da suddividere (es. "
+"amount_total, amount_residual)"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__filter_domain
+msgid "Filter Domain"
+msgstr "Dominio filtro"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__fixed_value
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__source_type__fixed_value
+msgid "Fixed Value"
+msgstr "Valore fisso"
+
+#. module: dub_cashflow
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_entry__entry_type__forecast
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Forecast"
+msgstr "Previsione"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_entry__entry_type
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_item__entry_type
+msgid ""
+"Forecast: expected cashflow (invoices, planned payments)\n"
+"Actual: real cashflow (bank transactions, confirmed payments)"
+msgstr ""
+"Previsione: cashflow atteso (fatture, pagamenti pianificati)\n"
+"Consuntivo: cashflow reale (transazioni bancarie, pagamenti confermati)"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__trigger_on_create
+msgid "Generate cashflow when a record is created"
+msgstr "Genera il cashflow quando un record viene creato"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__trigger_on_copy
+msgid "Generate cashflow when a record is duplicated"
+msgstr "Genera il cashflow quando un record viene duplicato"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__use_payment_terms
+msgid "Generate multiple cashflow items based on payment terms installments"
+msgstr "Genera voci di cashflow multiple in base alle rate dei termini di pagamento"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
+msgid "Group By"
+msgstr "Raggruppa per"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__id
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__id
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__id
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__id
+msgid "ID"
+msgstr ""
+
+#. module: dub_cashflow
+#: model:ir.ui.menu,name:dub_cashflow.menu_cashflow_item
+msgid "Items"
+msgstr "Voci"
+
+#. module: dub_cashflow
+#: model:ir.model,name:dub_cashflow.model_account_move
+msgid "Journal Entry"
+msgstr "Registrazione contabile"
+
+#. module: dub_cashflow
+#: model:ir.model,name:dub_cashflow.model_account_move_line
+msgid "Journal Item"
+msgstr "Movimento contabile"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__write_uid
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__write_uid
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__write_uid
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__write_date
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__write_date
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__write_date
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid ""
+"Leave empty to use default behavior (generate on create/write, delete on "
+"unlink)."
+msgstr ""
+"Lasciare vuoto per usare il comportamento predefinito (genera alla "
+"creazione/modifica, elimina alla cancellazione)."
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__model_id
+msgid "Model"
+msgstr "Modello"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__model_name
+msgid "Model Name"
+msgstr "Nome modello"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__name
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Next 3 Months"
+msgstr "Prossimi 3 mesi"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Next Month"
+msgstr "Prossimo mese"
+
+#. module: dub_cashflow
+#: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_analysis
+msgid "No cashflow data to analyze"
+msgstr "Nessun dato di cashflow da analizzare"
+
+#. module: dub_cashflow
+#: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_entry
+msgid "No cashflow entries yet"
+msgstr "Nessun movimento di cashflow"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__action_code
+msgid ""
+"Optional Python code to execute instead of default behavior.\n"
+"Available variables:\n"
+"  - record: the source record being processed\n"
+"  - records: all records being processed (recordset)\n"
+"  - operation: the operation type ('create', 'write', 'unlink', 'copy', 'post', 'draft', 'cancel')\n"
+"  - config: this configuration record\n"
+"  - env: the Odoo environment\n"
+"  - generate_cashflow(): call to execute default generate behavior\n"
+"  - delete_cashflow(): call to execute default delete behavior\n"
+"\n"
+"Example:\n"
+"  if operation == 'unlink':\n"
+"      delete_cashflow()\n"
+"  elif operation in ('create', 'write', 'post'):\n"
+"      generate_cashflow()\n"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_form
+msgid "Other Info"
+msgstr "Altre informazioni"
+
+#. module: dub_cashflow
+#: model:ir.model,name:dub_cashflow.model_account_partial_reconcile
+msgid "Partial Reconcile"
+msgstr "Riconciliazione parziale"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__partner_id
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__partner_id
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Partner"
+msgstr "Partner"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__payment_term_field
+msgid "Payment Term Field"
+msgstr "Campo termini di pagamento"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "Payment Terms"
+msgstr "Termini di pagamento"
+
+#. module: dub_cashflow
+#: model:ir.model,name:dub_cashflow.model_account_payment
+msgid "Payments"
+msgstr "Pagamenti"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_item__amount_signed
+msgid "Positive for Cash In, negative for Cash Out"
+msgstr "Positivo per le entrate, negativo per le uscite"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__python_code
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__source_type__python_code
+msgid "Python Code"
+msgstr "Codice Python"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_config_line__python_code
+msgid ""
+"Python expression to evaluate. Use 'record' to access the source record.\n"
+"Examples:\n"
+"  - record.date_maturity or record.date\n"
+"  - abs(record.balance)\n"
+"  - 'in' if record.balance > 0 else 'out'\n"
+"  - record.partner_id.id"
+msgstr ""
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__name_code
+msgid ""
+"Python expression to generate the entry name.\n"
+"Available variables: record, env, config\n"
+"Examples:\n"
+"  - record.display_name (default)\n"
+"  - record.move_id.name or record.name\n"
+"  - f\"Invoice {record.move_id.name}\"\n"
+msgstr ""
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__reference
+msgid "Reference"
+msgstr "Riferimento"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__sequence
+msgid "Sequence"
+msgstr "Sequenza"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__model_label
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__source_model
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Source"
+msgstr "Origine"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__source_field_id
+msgid "Source Field"
+msgstr "Campo di origine"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__model_id
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__model_id
+msgid "Source Model"
+msgstr "Modello di origine"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__model
+msgid "Source Model Name"
+msgstr "Nome modello di origine"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__res_id
+msgid "Source Record ID"
+msgstr "ID record di origine"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__source_type
+msgid "Source Type"
+msgstr "Tipo di origine"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__state
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__state
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__state
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Status"
+msgstr "Stato"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "This Month"
+msgstr "Questo mese"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "This Year"
+msgstr "Quest'anno"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_form
+msgid "Total"
+msgstr "Totale"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__total_in
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_tree
+msgid "Total In"
+msgstr "Totale entrate"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__total_out
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_tree
+msgid "Total Out"
+msgstr "Totale uscite"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__trigger_on_copy
+msgid "Trigger on Copy"
+msgstr "Attivazione alla copia"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__trigger_on_create
+msgid "Trigger on Create"
+msgstr "Attivazione alla creazione"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "Trigger on Operations"
+msgstr "Attivazione sulle operazioni"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__trigger_on_unlink
+msgid "Trigger on Unlink"
+msgstr "Attivazione alla cancellazione"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__trigger_on_write
+msgid "Trigger on Write"
+msgstr "Attivazione alla modifica"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "Triggers"
+msgstr "Attivazioni"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__type
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Type"
+msgstr "Tipo"
+
+#. module: dub_cashflow
+#: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__type
+msgid "Type (in/out)"
+msgstr "Tipo (entrata/uscita)"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__trigger_on_write
+msgid "Update cashflow when a record is modified"
+msgstr "Aggiorna il cashflow quando un record viene modificato"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__use_payment_terms
+msgid "Use Payment Terms"
+msgstr "Usa termini di pagamento"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "e.g. Invoice Cashflow"
+msgstr "es. Cashflow fatture"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid ""
+"if operation == 'unlink':\n"
+"    delete_cashflow()\n"
+"elif operation in ('create', 'write', 'post'):\n"
+"    # Only generate if amount_residual &gt; 0\n"
+"    if records.filtered(lambda r: r.amount_residual &gt; 0):\n"
+"        generate_cashflow()"
+msgstr ""
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "record.display_name"
+msgstr ""

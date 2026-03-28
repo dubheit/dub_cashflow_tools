@@ -391,7 +391,7 @@ Example:
                 '_logger': _logger,  # Pre-configured logger for action_code logging
             }
             try:
-                safe_eval(self.action_code, eval_context, mode='exec')
+                safe_eval(self.action_code, eval_context, mode='exec', nocopy=True)
                 _logger.info("CASHFLOW: action_code executed successfully for config %s", self.name)
             except Exception as e:
                 _logger.error(

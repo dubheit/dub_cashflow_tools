@@ -47,9 +47,14 @@ class AccountMove(models.Model):
             self._compute_amount()
 
     def _get_cashflow_lines(self):
-        """Get lines that may generate cashflow entries."""
+        """Get lines that may generate cashflow entries.
+
+        Only invoice-type moves generate cashflow from receivable/payable lines.
+        Payment journal entries are handled by cashflow_config_payment.
+        """
         return self.line_ids.filtered(
             lambda l: l.account_id.account_type in ('asset_receivable', 'liability_payable')
+            and l.move_id.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')
         )
 
     @api.model_create_multi

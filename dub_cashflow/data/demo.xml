@@ -14,7 +14,7 @@
         <record id="cashflow_config_move_line" model="cashflow.config">
             <field name="name">Invoice Lines Cashflow</field>
             <field name="model_id" ref="account.model_account_move_line"/>
-            <field name="filter_domain">[('account_id.account_type', 'in', ['asset_receivable', 'liability_payable']), ('move_id.state', '!=', 'cancel'), ('move_id.payment_state', '!=', 'paid')]</field>
+            <field name="filter_domain">[('account_id.account_type', 'in', ['asset_receivable', 'liability_payable']), ('move_id.move_type', 'in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')), ('move_id.state', '!=', 'cancel'), ('move_id.payment_state', '!=', 'paid')]</field>
             <field name="name_code">record.move_id.name or record.display_name</field>
             <field name="active">True</field>
             <field name="action_code">
@@ -90,7 +90,7 @@ else:
             <field name="sequence">10</field>
             <field name="cashflow_field">date</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">record.date_maturity or record.move_id.invoice_date or record.date</field>
+            <field name="python_code">record.date_maturity or record.date</field>
         </record>
 
         <!--
