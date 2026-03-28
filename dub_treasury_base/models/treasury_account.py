@@ -1,5 +1,6 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+from odoo.models import Constraint
 
 
 class TreasuryAccount(models.Model):
@@ -141,10 +142,10 @@ class TreasuryAccount(models.Model):
     # Notes
     notes = fields.Html(string='Notes')
 
-    _sql_constraints = [
-        ('code_company_uniq', 'unique(code, company_id)',
-         'The code must be unique per company!'),
-    ]
+    _code_company_uniq = Constraint(
+        'unique(code, company_id)',
+        'The code must be unique per company!',
+    )
 
     @api.depends('journal_id', 'opening_balance', 'credit_line_ids.available_amount')
     def _compute_balances(self):
