@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Main Treasury Menu -->
+    <menuitem id="menu_treasury_root"
+              name="Treasury"
+              web_icon="dub_treasury_base,static/description/icon.png"
+              sequence="25"/>
+
+    <!-- Treasury Accounts Menu -->
+    <menuitem id="menu_treasury_accounts"
+              name="Accounts"
+              parent="menu_treasury_root"
+              sequence="10"/>
+
+    <menuitem id="menu_treasury_account_list"
+              name="Treasury Accounts"
+              parent="menu_treasury_accounts"
+              action="treasury_account_action"
+              sequence="10"/>
+
+    <menuitem id="menu_treasury_credit_line_list"
+              name="Credit Lines"
+              parent="menu_treasury_accounts"
+              action="treasury_credit_line_action"
+              sequence="20"/>
+
+    <!-- Financial Instruments Menu -->
+    <menuitem id="menu_treasury_instruments"
+              name="Financial Instruments"
+              parent="menu_treasury_root"
+              sequence="20"/>
+
+    <menuitem id="menu_treasury_instrument_list"
+              name="Instruments"
+              parent="menu_treasury_instruments"
+              action="treasury_financial_instrument_action"
+              sequence="10"/>
+
+    <menuitem id="menu_treasury_installment_list"
+              name="Installments"
+              parent="menu_treasury_instruments"
+              action="treasury_installment_action"
+              sequence="20"/>
+
+    <menuitem id="menu_treasury_installment_calendar"
+              name="Installments Calendar"
+              parent="menu_treasury_instruments"
+              action="treasury_installment_action_calendar"
+              sequence="30"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_treasury_configuration"
+              name="Configuration"
+              parent="menu_treasury_root"
+              sequence="90"
+              groups="account.group_account_manager"/>
+
+    <menuitem id="menu_treasury_covenant_list"
+              name="Covenants"
+              parent="menu_treasury_configuration"
+              action="treasury_covenant_action"
+              sequence="10"/>
+
+</odoo>

@@ -1,0 +1,1977 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* dub_treasury_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20251208\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-19 17:57+0000\n"
+"PO-Revision-Date: 2025-12-19 17:57+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_installment.py:0
+msgid "%(name)s - Installment %(seq)s"
+msgstr "%(name)s - Rata %(seq)s"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+msgid ""
+"<span class=\"text-muted\" invisible=\"not auto_compute_usage\">Auto</span>\n"
+"                                <span class=\"text-muted\" invisible=\"auto_compute_usage\">Manual</span>"
+msgstr ""
+"<span class=\"text-muted\" invisible=\"not auto_compute_usage\">Auto</span>\n"
+"                                <span class=\"text-muted\" invisible=\"auto_compute_usage\">Manuale</span>"
+"<span class=\"text-muted\" invisible=\"not auto_compute_usage\">Auto</span>\n"
+"                                <span class=\"text-muted\" invisible=\"auto_compute_usage\">Manuale</span>"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_kanban
+msgid "<span class=\"text-muted\">Available:</span>"
+msgstr "<span class=\"text-muted\">Disponibile:</span>"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_kanban
+msgid "<span class=\"text-muted\">Balance:</span>"
+msgstr "<span class=\"text-muted\">Saldo:</span>"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
+msgid "Account"
+msgstr "Conto"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+msgid "Account Name"
+msgstr "Nome Conto"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__account_type
+msgid "Account Type"
+msgstr "Tipo Conto"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Accounting"
+msgstr "Contabilità"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__journal_id
+msgid "Accounting Journal"
+msgstr "Giornale Contabile"
+
+#. module: dub_treasury_base
+#: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_accounts
+msgid "Accounts"
+msgstr "Conti"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__message_needaction
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__message_needaction
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__message_needaction
+msgid "Action Needed"
+msgstr "Azione Richiesta"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Activate"
+msgstr "Attiva"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__active
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__state__active
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__state__active
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
+msgid "Active"
+msgstr "Attivo"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__activity_ids
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__activity_ids
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__activity_ids
+msgid "Activities"
+msgstr "Attività"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__activity_exception_decoration
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__activity_exception_decoration
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decorazione Eccezione Attività"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__activity_state
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__activity_state
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__activity_state
+msgid "Activity State"
+msgstr "Stato Attività"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__activity_type_icon
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__activity_type_icon
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icona Tipo Attività"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__credit_type__advance
+msgid "Advance on Invoices (Anticipo fatture)"
+msgstr "Anticipo Fatture"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
+msgid "Advances"
+msgstr "Anticipi"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Amortization"
+msgstr "Ammortamento"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__amortization_type
+msgid "Amortization Type"
+msgstr "Tipo Ammortamento"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/wizard/credit_line_movement_wizard.py:0
+msgid "Amount (%(amount)s) exceeds available credit (%(available)s)."
+msgstr "L'importo (%(amount)s) supera il credito disponibile (%(available)s)."
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/wizard/credit_line_movement_wizard.py:0
+msgid "Amount (%(amount)s) exceeds used amount (%(used)s)."
+msgstr "L'importo (%(amount)s) supera l'importo utilizzato (%(used)s)."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__disbursed_amount
+msgid "Amount actually disbursed (may differ from principal)"
+msgstr "Importo effettivamente erogato (può differire dal capitale)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__used_amount
+msgid "Amount currently used from this credit line"
+msgstr "Importo attualmente utilizzato da questa linea di credito"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/wizard/credit_line_movement_wizard.py:0
+msgid "Amount must be positive."
+msgstr "L'importo deve essere positivo."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__frequency__annual
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__installment_frequency__annual
+msgid "Annual"
+msgstr "Annuale"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__commission_rate
+msgid "Annual commission on unused amount"
+msgstr "Commissione annuale sull'importo non utilizzato"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
+msgid "Archived"
+msgstr "Archiviato"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Are you sure you want to cancel this instrument?"
+msgstr "Sei sicuro di voler annullare questo strumento?"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+msgid "Are you sure you want to close this credit line?"
+msgstr "Sei sicuro di voler chiudere questa linea di credito?"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Are you sure you want to close this instrument?"
+msgstr "Sei sicuro di voler chiudere questo strumento?"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+msgid "Are you sure you want to mark this credit line as expired?"
+msgstr "Sei sicuro di voler contrassegnare questa linea di credito come scaduta?"
+"Sei sicuro di voler contrassegnare questa linea di credito come scaduta?"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__message_attachment_count
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__message_attachment_count
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__message_attachment_count
+msgid "Attachment Count"
+msgstr "Conteggio Allegati"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__auto_compute_usage
+msgid "Auto-compute Usage"
+msgstr "Calcolo Automatico Utilizzo"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__available_amount
+msgid "Available Amount"
+msgstr "Importo Disponibile"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__available_balance
+msgid "Available Balance"
+msgstr "Saldo Disponibile"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__bic
+msgid "BIC/SWIFT"
+msgstr "BIC/SWIFT"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__bank_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__bank_id
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
+msgid "Bank"
+msgstr "Banca"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__bank_account_id
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_account__account_type__bank
+msgid "Bank Account"
+msgstr "Conto Bancario"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
+msgid "Bank Accounts"
+msgstr "Conti Bancari"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+msgid "Bank Details"
+msgstr "Dettagli Bancari"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__instrument_type__loan
+msgid "Bank Loan (Finanziamento)"
+msgstr "Finanziamento Bancario"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__partner_id
+msgid "Bank Partner"
+msgstr "Partner Banca"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Bank Payment - %(name)s"
+msgstr "Pagamento Banca - %(name)s"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__bank_account_id
+msgid "Bank account with IBAN details"
+msgstr "Conto bancario con dettagli IBAN"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__partner_id
+msgid "Bank as partner for accounting purposes"
+msgstr "Banca come partner per scopi contabili"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__partner_id
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_installment__partner_id
+msgid "Bank, leasing company, or partner"
+msgstr "Banca, società di leasing o partner"
+
+#. module: dub_treasury_base
+#: model:res.groups,comment:dub_treasury_base.group_treasury_user
+msgid "Basic treasury user: can view treasury data and update balances"
+msgstr "Utente tesoreria base: può visualizzare i dati e aggiornare i saldi"
+"Utente tesoreria base: può visualizzare i dati di tesoreria e aggiornare i "
+"saldi"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__installment_frequency__bimonthly
+msgid "Bi-Monthly"
+msgstr "Bimestrale"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
+msgid "Bill Discount"
+msgstr "Sconto Effetti"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__credit_type__discount
+msgid "Bills Discount (Sconto effetti)"
+msgstr "Sconto Effetti"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__instrument_type__bond
+msgid "Bond (Obbligazione)"
+msgstr "Obbligazione"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__amortization_type__bullet
+msgid "Bullet"
+msgstr "Bullet (capitale a scadenza)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__installment_frequency__bullet
+msgid "Bullet (Single payment)"
+msgstr "Bullet (Pagamento unico)"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__state__cancelled
+msgid "Cancelled"
+msgstr "Annullato"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Cannot close credit line with used amount. Current usage: %(amount)s"
+msgstr "Impossibile chiudere la linea di credito con importo utilizzato. Utilizzo attuale: %(amount)s"
+"Impossibile chiudere la linea di credito con importo utilizzato. Utilizzo "
+"attuale: %(amount)s"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid ""
+"Cannot close instrument with unpaid installments. Remaining: %(count)s "
+"installments"
+msgstr ""
+"Impossibile chiudere lo strumento con rate non pagate. Rimanenti: %(count)s "
+"rate"
+"Impossibile chiudere lo strumento con rate non pagate. Rimanenti: %(count)s "
+"rate"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_account__account_type__cash
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
+msgid "Cash"
+msgstr "Cassa"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__frequency
+msgid "Check Frequency"
+msgstr "Frequenza Controllo"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Close"
+msgstr "Chiudi"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__state__closed
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__state__closed
+msgid "Closed"
+msgstr "Chiuso"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__code
+msgid "Code"
+msgstr "Codice"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__commission_rate
+msgid "Commission (%)"
+msgstr "Commissione (%)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__company_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__company_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__company_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__company_id
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
+msgid "Company"
+msgstr "Azienda"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__comparison
+msgid "Comparison"
+msgstr "Confronto"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__is_compliant
+msgid "Compliant"
+msgstr "Conforme"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+msgid "Conditions"
+msgstr "Condizioni"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__guarantee_type__confidi
+msgid "Confidi"
+msgstr "Confidi"
+
+#. module: dub_treasury_base
+#: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_configuration
+msgid "Configuration"
+msgstr "Configurazione"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__contract_reference
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__reference
+msgid "Contract Reference"
+msgstr "Riferimento Contratto"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__partner_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__partner_id
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_search
+msgid "Counterpart"
+msgstr "Controparte"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__name
+msgid "Covenant Name"
+msgstr "Nome Covenant"
+
+#. module: dub_treasury_base
+#: model:ir.actions.act_window,name:dub_treasury_base.treasury_covenant_action
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__covenant_ids
+#: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_covenant_list
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+msgid "Covenants"
+msgstr "Covenant"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_installment.py:0
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_form
+msgid "Create Payment"
+msgstr "Crea Pagamento"
+
+#. module: dub_treasury_base
+#: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_credit_line_action
+msgid "Create your first credit line"
+msgstr "Crea la tua prima linea di credito"
+
+#. module: dub_treasury_base
+#: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_financial_instrument_action
+msgid "Create your first financial instrument"
+msgstr "Crea il tuo primo strumento finanziario"
+
+#. module: dub_treasury_base
+#: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_account_action
+msgid "Create your first treasury account"
+msgstr "Crea il tuo primo conto di tesoreria"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__create_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__create_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__create_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__create_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__create_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__create_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__create_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__create_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__total_credit_available
+msgid "Credit Available"
+msgstr "Fido Disponibile"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__limit_amount
+msgid "Credit Limit"
+msgstr "Importo Fido"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__credit_line_id
+msgid "Credit Line"
+msgstr "Linea di Credito"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Credit Line - %(name)s"
+msgstr "Linea di Credito - %(name)s"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Credit Line Account"
+msgstr "Conto Linea di Credito"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+msgid "Credit Line Name"
+msgstr "Nome Linea di Credito"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_account.py:0
+#: model:ir.actions.act_window,name:dub_treasury_base.treasury_credit_line_action
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__credit_line_ids
+#: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_credit_line_list
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+msgid "Credit Lines"
+msgstr "Linee di Credito"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__credit_type
+msgid "Credit Type"
+msgstr "Tipo di Credito"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__total_credit_used
+msgid "Credit Used"
+msgstr "Fido Utilizzato"
+
+#. module: dub_treasury_base
+#: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_credit_line_action
+msgid ""
+"Credit lines represent your banking facilities: overdrafts, invoice advances,\n"
+"                bill discounts, factoring, and other credit facilities."
+msgstr ""
+"Le linee di credito rappresentano le tue facilitazioni bancarie: scoperti, anticipi fatture,\n"
+"                sconto effetti, factoring e altre linee di credito."
+"Le linee di credito rappresentano le tue facilitazioni bancarie: scoperti, anticipi fatture,\n"
+"                sconti effetti, factoring e altre facilitazioni creditizie."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__currency_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__currency_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__currency_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__currency_id
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__current_balance
+msgid "Current Balance"
+msgstr "Saldo Attuale"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+msgid "Current Position"
+msgstr "Posizione Attuale"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__covenant_type__current_ratio
+msgid "Current Ratio"
+msgstr "Current Ratio (Indice di liquidità)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__current_value
+msgid "Current Value"
+msgstr "Valore Attuale"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__available_balance
+msgid "Current balance plus available credit lines"
+msgstr "Saldo attuale più linee di credito disponibili"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__amortization_type__custom
+msgid "Custom"
+msgstr "Personalizzato"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid "Custom amortization requires manual entry of installments."
+msgstr "L'ammortamento personalizzato richiede l'inserimento manuale delle rate."
+"L'ammortamento personalizzato richiede l'inserimento manuale delle rate."
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Dates"
+msgstr "Date"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__covenant_type__dscr
+msgid "Debt Service Coverage Ratio"
+msgstr "DSCR (Debt Service Coverage Ratio)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__covenant_type__debt_equity
+msgid "Debt/Equity Ratio"
+msgstr "Rapporto Debito/Patrimonio"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__disbursed_amount
+msgid "Disbursed Amount"
+msgstr "Importo Erogato"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid "Disbursement %(ref)s"
+msgstr "Erogazione %(ref)s"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid "Disbursement - %(name)s"
+msgstr "Erogazione - %(name)s"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid "Disbursement Account"
+msgstr "Conto Erogazione"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid "Disbursement Entry"
+msgstr "Scrittura Erogazione"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid "Disbursement entry already exists for %(name)s."
+msgstr "La scrittura di erogazione esiste già per %(name)s."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__display_name
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__display_name
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__display_name
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__display_name
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__display_name
+msgid "Display Name"
+msgstr "Nome Visualizzato"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__state__draft
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__state__draft
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_installment__state__draft
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
+msgid "Draft"
+msgstr "Bozza"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_installment__state__due
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_search
+msgid "Due"
+msgstr "Scaduta"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__date
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_search
+msgid "Due Date"
+msgstr "Data Scadenza"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__end_date
+msgid "End Date"
+msgstr "Data Fine"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__comparison__=
+msgid "Equal"
+msgstr "Uguale"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__reference_rate__euribor_12m
+msgid "Euribor 12M"
+msgstr "Euribor 12M"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__reference_rate__euribor_1m
+msgid "Euribor 1M"
+msgstr "Euribor 1M"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__reference_rate__euribor_3m
+msgid "Euribor 3M"
+msgstr "Euribor 3M"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__reference_rate__euribor_6m
+msgid "Euribor 6M"
+msgstr "Euribor 6M"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__state__expired
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
+msgid "Expired"
+msgstr "Scaduto"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
+msgid "Expiring Soon (30 days)"
+msgstr "In scadenza (30 giorni)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__expiry_date
+msgid "Expiry Date"
+msgstr "Data Scadenza"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__credit_type__factoring
+msgid "Factoring"
+msgstr "Factoring"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__instrument_type__factoring
+msgid "Factoring Agreement"
+msgstr "Contratto di Factoring"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__fees
+msgid "Fees"
+msgstr "Spese"
+
+#. module: dub_treasury_base
+#: model:ir.model,name:dub_treasury_base.model_treasury_covenant
+msgid "Financial Covenant"
+msgstr "Covenant Finanziario"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__instrument_id
+msgid "Financial Instrument"
+msgstr "Strumento Finanziario"
+
+#. module: dub_treasury_base
+#: model:ir.actions.act_window,name:dub_treasury_base.treasury_financial_instrument_action
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__financial_instrument_ids
+#: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_instruments
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+msgid "Financial Instruments"
+msgstr "Strumenti Finanziari"
+
+#. module: dub_treasury_base
+#: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_financial_instrument_action
+msgid ""
+"Financial instruments include loans, mortgages, leasing contracts,\n"
+"                bonds, and partner loans."
+msgstr ""
+"Gli strumenti finanziari includono finanziamenti, mutui, contratti di leasing,\n"
+"                obbligazioni e prestiti a partner."
+"Gli strumenti finanziari includono finanziamenti, mutui, contratti di leasing,\n"
+"                obbligazioni e prestiti soci."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__first_installment_date
+msgid "First Installment Date"
+msgstr "Data Prima Rata"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__rate_type__fixed
+msgid "Fixed Rate"
+msgstr "Tasso Fisso"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__flow_direction
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__flow_direction
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
+msgid "Flow Direction"
+msgstr "Direzione Flusso"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__message_follower_ids
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__message_follower_ids
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__message_follower_ids
+msgid "Followers"
+msgstr "Seguaci"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__message_partner_ids
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__message_partner_ids
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguaci (Partner)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__activity_type_icon
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__activity_type_icon
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icona Font Awesome es. fa-tasks"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__amortization_type__french
+msgid "French (Constant installment)"
+msgstr "Francese (Rata costante)"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Generate Installments"
+msgstr "Genera Piano Rate"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__comparison__>
+msgid "Greater Than"
+msgstr "Maggiore di"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__comparison__>=
+msgid "Greater or Equal"
+msgstr "Maggiore o uguale"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_search
+msgid "Group By"
+msgstr "Raggruppa per"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Guarantee"
+msgstr "Garanzia"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__guarantee_notes
+msgid "Guarantee Notes"
+msgstr "Note Garanzia"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__guarantee_type
+msgid "Guarantee Type"
+msgstr "Tipo Garanzia"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__has_message
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__has_message
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__has_message
+msgid "Has Message"
+msgstr "Ha Messaggi"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__iban
+msgid "IBAN"
+msgstr "IBAN"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__id
+msgid "ID"
+msgstr "ID"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__activity_exception_icon
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__activity_exception_icon
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__activity_exception_icon
+msgid "Icon"
+msgstr "Icona"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__activity_exception_icon
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__activity_exception_icon
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icona per indicare un'attività eccezionale."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__message_needaction
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__message_needaction
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Se selezionato, nuovi messaggi richiedono la tua attenzione."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__message_has_error
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__message_has_sms_error
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__message_has_error
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__message_has_sms_error
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__message_has_error
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Se selezionato, alcuni messaggi hanno un errore di consegna."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__auto_compute_usage
+msgid ""
+"If enabled, usage is computed from the journal balance (for overdraft) or "
+"must be updated via the Refresh button. Disable for manual entry."
+msgstr ""
+"Se abilitato, l'utilizzo è calcolato dal saldo del giornale (per scoperto) o "
+"deve essere aggiornato tramite il pulsante Aggiorna. Disabilitare per inserimento manuale."
+"Se abilitato, l'utilizzo viene calcolato dal saldo del giornale (per lo "
+"scoperto) o deve essere aggiornato tramite il pulsante Aggiorna. "
+"Disabilitare per l'inserimento manuale."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__flow_direction__inbound
+msgid "Inbound (Financing received)"
+msgstr "In Entrata (Finanziamento ricevuto)"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
+msgid "Inbound (Received)"
+msgstr "In Entrata (Ricevuto)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__flow_direction
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_installment__flow_direction
+msgid ""
+"Inbound: money received (loan from bank)\n"
+"Outbound: money granted (loan to partners)"
+msgstr ""
+"In entrata: denaro ricevuto (finanziamento dalla banca)\n"
+"In uscita: denaro erogato (prestito a partner)"
+"In entrata: denaro ricevuto (finanziamento dalla banca)\n"
+"In uscita: denaro concesso (prestito a partner)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__installment_frequency
+msgid "Installment Frequency"
+msgstr "Frequenza Rate"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+#: model:ir.actions.act_window,name:dub_treasury_base.treasury_installment_action
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__installment_ids
+#: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_installment_list
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_calendar
+msgid "Installments"
+msgstr "Rate"
+
+#. module: dub_treasury_base
+#: model:ir.actions.act_window,name:dub_treasury_base.treasury_installment_action_calendar
+#: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_installment_calendar
+msgid "Installments Calendar"
+msgstr "Calendario Rate"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid "Installments already exist. Delete them first to regenerate."
+msgstr "Le rate esistono già. Eliminarle prima di rigenerare."
+
+#. module: dub_treasury_base
+#: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_installment_action
+msgid "Installments are automatically generated from financial instruments."
+msgstr "Le rate vengono generate automaticamente dagli strumenti finanziari."
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_search
+msgid "Instrument"
+msgstr "Strumento"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Instrument Name"
+msgstr "Nome Strumento"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__instrument_type
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__instrument_type
+msgid "Instrument Type"
+msgstr "Tipo Strumento"
+
+#. module: dub_treasury_base
+#: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_instrument_list
+msgid "Instruments"
+msgstr "Strumenti"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__insurance
+msgid "Insurance"
+msgstr "Assicurazione"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__interest
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Interest"
+msgstr "Interessi"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Interest - %(name)s"
+msgstr "Interessi - %(name)s"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_installment.py:0
+msgid "Interest - Installment %(seq)s"
+msgstr "Interessi - Rata %(seq)s"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__covenant_type__interest_coverage
+msgid "Interest Coverage"
+msgstr "Interest Coverage (Copertura interessi)"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Interest Expense - %(name)s"
+msgstr "Interessi Passivi - %(name)s"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Interest Payment - %(name)s"
+msgstr "Pagamento Interessi - %(name)s"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__interest_rate
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__interest_rate
+msgid "Interest Rate (%)"
+msgstr "Tasso di Interesse (%)"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+#: code:addons/dub_treasury_base/models/treasury_installment.py:0
+msgid "Interest account not configured for %(name)s."
+msgstr "Conto interessi non configurato per %(name)s."
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
+msgid "Internal"
+msgstr "Interno"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_account__account_type__internal
+msgid "Internal Account"
+msgstr "Conto Interno"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__message_is_follower
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__message_is_follower
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__message_is_follower
+msgid "Is Follower"
+msgstr "È Seguace"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__amortization_type__italian
+msgid "Italian (Constant principal)"
+msgstr "Italiano (Capitale costante)"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid "Journal"
+msgstr "Giornale"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_account.py:0
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+#: code:addons/dub_treasury_base/models/treasury_installment.py:0
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+msgid "Journal Entries"
+msgstr "Scritture ContabiliRegistrazioni Contabili"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+#: code:addons/dub_treasury_base/models/treasury_installment.py:0
+#: code:addons/dub_treasury_base/wizard/credit_line_movement_wizard.py:0
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__move_id
+msgid "Journal Entry"
+msgstr "Scrittura ContabileRegistrazione Contabile"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__check_date
+msgid "Last Check Date"
+msgstr "Data Ultimo Controllo"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__write_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__write_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__write_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__write_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__write_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__write_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__write_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__write_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__instrument_type__leasing
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
+msgid "Leasing"
+msgstr "Leasing"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__comparison__<
+msgid "Less Than"
+msgstr "Minore di"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__comparison__<=
+msgid "Less or Equal"
+msgstr "Minore o uguale"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__covenant_type__leverage
+msgid "Leverage Ratio"
+msgstr "Leverage Ratio (Indice di leva)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__journal_id
+msgid "Link to the accounting journal for this treasury account"
+msgstr "Collegamento al giornale contabile per questo conto di tesoreria"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_installment__move_id
+msgid "Linked journal entry"
+msgstr "Registrazione contabile collegata"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_installment__payment_id
+msgid "Linked payment record"
+msgstr "Record di pagamento collegato"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid "Loan - %(name)s"
+msgstr "Finanziamento - %(name)s"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid "Loan granted - %(name)s"
+msgstr "Finanziamento erogato - %(name)s"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
+msgid "Loans"
+msgstr "Finanziamenti"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid "Long-term Account"
+msgstr "Conto Lungo Termine"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__guarantee_type__mcc
+msgid "MCC (Fondo di Garanzia)"
+msgstr "MCC (Fondo di Garanzia)"
+
+#. module: dub_treasury_base
+#: model:res.groups,name:dub_treasury_base.group_treasury_manager
+msgid "Manager"
+msgstr "Responsabile"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__manual_used_amount
+msgid "Manual Used Amount"
+msgstr "Importo Utilizzato (Manuale)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__manual_used_amount
+msgid "Manually entered used amount (when auto-compute is disabled)"
+msgstr "Importo utilizzato inserito manualmente (quando il calcolo automatico è disabilitato)"
+"Importo utilizzato inserito manualmente (quando il calcolo automatico è "
+"disabilitato)"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+msgid "Mark Expired"
+msgstr "Segna come Scaduto"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_form
+msgid "Mark Paid"
+msgstr "Segna come Pagata"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__message_has_error
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__message_has_error
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__message_has_error
+msgid "Message Delivery error"
+msgstr "Errore consegna messaggio"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__message_ids
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__message_ids
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__message_ids
+msgid "Messages"
+msgstr "Messaggi"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid ""
+"Missing accounting configuration for %(name)s:\n"
+"%(fields)s"
+msgstr ""
+"Configurazione contabile mancante per %(name)s:\n"
+"%(fields)s"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__rate_type__mixed
+msgid "Mixed"
+msgstr "Misto"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__frequency__monthly
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__installment_frequency__monthly
+msgid "Monthly"
+msgstr "Mensile"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__guarantee_type__mortgage
+msgid "Mortgage"
+msgstr "Ipoteca"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__instrument_type__mortgage
+msgid "Mortgage (Mutuo)"
+msgstr "Mutuo"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
+msgid "Mortgages"
+msgstr "Mutui"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__my_activity_date_deadline
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__my_activity_date_deadline
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Scadenza Mia Attività"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__name
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__name
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_search
+msgid "Next 30 Days"
+msgstr "Prossimi 30 Giorni"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__activity_calendar_event_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__activity_calendar_event_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Prossimo Evento Calendario Attività"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__activity_date_deadline
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__activity_date_deadline
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Scadenza Prossima Attività"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__activity_summary
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__activity_summary
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__activity_summary
+msgid "Next Activity Summary"
+msgstr "Riepilogo Prossima Attività"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__activity_type_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__activity_type_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tipo Prossima Attività"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__renewal_date
+msgid "Next Renewal"
+msgstr "Prossimo Rinnovo"
+
+#. module: dub_treasury_base
+#: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_covenant_action
+msgid "No covenants defined"
+msgstr "Nessun covenant definito"
+
+#. module: dub_treasury_base
+#: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_installment_action
+msgid "No installments found"
+msgstr "Nessuna rata trovata"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__guarantee_type__none
+msgid "None"
+msgstr "Nessuna"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__notes
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__notes
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__notes
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__notes
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__notes
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Notes"
+msgstr "Note"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__message_needaction_counter
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__message_needaction_counter
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Numero di Azioni"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__installment_count
+msgid "Number of Installments"
+msgstr "Numero di Rate"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__message_has_error_counter
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__message_has_error_counter
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__message_has_error_counter
+msgid "Number of errors"
+msgstr "Numero di errori"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__message_needaction_counter
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__message_needaction_counter
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Numero di messaggi che richiedono azione"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__message_has_error_counter
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__message_has_error_counter
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Numero di messaggi con errore di consegna"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__opening_balance
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+msgid "Opening Balance"
+msgstr "Saldo di Apertura"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__opening_date
+msgid "Opening Date"
+msgstr "Data di Apertura"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__covenant_type__other
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__credit_type__other
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__guarantee_type__other
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__instrument_type__other
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__reference_rate__other
+msgid "Other"
+msgstr "Altro"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__flow_direction__outbound
+msgid "Outbound (Financing granted)"
+msgstr "In Uscita (Finanziamento concesso)"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
+msgid "Outbound (Granted)"
+msgstr "In Uscita (Concesso)"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
+msgid "Overdraft"
+msgstr "Scoperto"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__credit_type__overdraft
+msgid "Overdraft (Scoperto di conto)"
+msgstr "Scoperto di Conto"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_installment__state__overdue
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_search
+msgid "Overdue"
+msgstr "In Ritardo"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_installment__state__paid
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_search
+msgid "Paid"
+msgstr "Pagata"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__instrument_type__partner_loan
+msgid "Partner Loan (Prestito soci)"
+msgstr "Prestito Soci"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
+msgid "Partner Loans"
+msgstr "Prestiti Soci"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__payment_id
+msgid "Payment"
+msgstr "Pagamento"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_installment.py:0
+msgid "Payment - %(name)s #%(seq)s"
+msgstr "Pagamento - %(name)s #%(seq)s"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__payment_date
+msgid "Payment Date"
+msgstr "Data Pagamento"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_installment.py:0
+msgid "Payment Entry"
+msgstr "Scrittura Pagamento"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_installment.py:0
+msgid "Payment entry already posted for installment %(seq)s."
+msgstr "La scrittura di pagamento è già stata registrata per la rata %(seq)s."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__guarantee_type__personal
+msgid "Personal Guarantee"
+msgstr "Fideiussione Personale"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid "Please set the total number of installments."
+msgstr "Impostare il numero totale delle rate."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__guarantee_type__pledge
+msgid "Pledge"
+msgstr "Pegno"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__principal
+msgid "Principal"
+msgstr "Capitale"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_installment.py:0
+msgid "Principal - Installment %(seq)s"
+msgstr "Capitale - Rata %(seq)s"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__principal_amount
+msgid "Principal Amount"
+msgstr "Capitale Iniziale"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__purpose
+msgid "Purpose"
+msgstr "Finalità"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__frequency__quarterly
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__installment_frequency__quarterly
+msgid "Quarterly"
+msgstr "Trimestrale"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__rate_type
+msgid "Rate Type"
+msgstr "Tipo Tasso"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_installment.py:0
+msgid "Receipt - %(name)s #%(seq)s"
+msgstr "Incasso - %(name)s #%(seq)s"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__reference_rate
+msgid "Reference Rate"
+msgstr "Tasso di Riferimento"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+msgid "Refresh Usage"
+msgstr "Aggiorna Utilizzo"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Repayment - %(name)s"
+msgstr "Rimborso - %(name)s"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__residual_after
+msgid "Residual After"
+msgstr "Residuo Dopo"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__residual_before
+msgid "Residual Before"
+msgstr "Residuo Prima"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__residual_principal
+msgid "Residual Principal"
+msgstr "Capitale Residuo"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_installment__residual_before
+msgid "Residual principal before this installment"
+msgstr "Capitale residuo prima di questa rata"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__activity_user_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__activity_user_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__activity_user_id
+msgid "Responsible User"
+msgstr "Utente Responsabile"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__message_has_sms_error
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__message_has_sms_error
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Errore consegna SMS"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__frequency__semi_annual
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__installment_frequency__semi_annual
+msgid "Semi-Annual"
+msgstr "Semestrale"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__sequence
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__sequence
+msgid "Sequence"
+msgstr "Sequenza"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_form
+msgid "Set Due"
+msgstr "Imposta Scaduta"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__bic
+msgid "Sometimes called BIC or Swift."
+msgstr "Chiamato anche BIC o Swift."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__spread
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__spread
+msgid "Spread (%)"
+msgstr "Spread (%)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__spread
+msgid "Spread over reference rate (Euribor, etc.)"
+msgstr "Spread sul tasso di riferimento (Euribor, ecc.)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__spread
+msgid "Spread over reference rate for variable rates"
+msgstr "Spread sul tasso di riferimento per tassi variabili"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__start_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__start_date
+msgid "Start Date"
+msgstr "Data Inizio"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
+msgid "Start date must be before end date."
+msgstr "La data di inizio deve essere precedente alla data di fine."
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Start date must be before expiry date."
+msgstr "La data di inizio deve essere precedente alla data di scadenza."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__state
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__state
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__state
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_search
+msgid "Status"
+msgstr "Stato"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__activity_state
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__activity_state
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__credit_type__sbf
+msgid "Subject to Collection (SBF)"
+msgstr "Salvo Buon Fine (SBF)"
+
+#. module: dub_treasury_base
+#: model:ir.model.constraint,message:dub_treasury_base.constraint_treasury_account_code_company_uniq
+msgid "The code must be unique per company!"
+msgstr "Il codice deve essere univoco per azienda!"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_account.py:0
+msgid "The journal must belong to the same company as the treasury account."
+msgstr "Il giornale deve appartenere alla stessa azienda del conto di tesoreria."
+"Il giornale deve appartenere alla stessa azienda del conto di tesoreria."
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_search
+msgid "This Month"
+msgstr "Questo Mese"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_installment.py:0
+msgid "This installment is already paid."
+msgstr "Questa rata è già stata pagata."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__threshold_value
+msgid "Threshold Value"
+msgstr "Valore Soglia"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__total
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_list
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_list
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_list
+msgid "Total"
+msgstr "Totale"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_list
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_list
+msgid "Total Available"
+msgstr "Totale Disponibile"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__total_credit_limit
+msgid "Total Credit Limit"
+msgstr "Fido Totale"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+msgid "Total Fees"
+msgstr "Spese Totali"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__total_interest
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_list
+msgid "Total Interest"
+msgstr "Interessi Totali"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_list
+msgid "Total Limit"
+msgstr "Limite Totale"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__total_installments
+msgid "Total Number of Installments"
+msgstr "Numero Totale Rate"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__total_paid
+msgid "Total Paid"
+msgstr "Totale Pagato"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_list
+msgid "Total Principal"
+msgstr "Capitale Totale"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_list
+msgid "Total Residual"
+msgstr "Residuo Totale"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_list
+msgid "Total Used"
+msgstr "Totale Utilizzato"
+
+#. module: dub_treasury_base
+#: model:ir.module.category,name:dub_treasury_base.module_category_treasury
+#: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_root
+msgid "Treasury"
+msgstr "Tesoreria"
+
+#. module: dub_treasury_base
+#: model:ir.model,name:dub_treasury_base.model_treasury_account
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__account_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__account_id
+msgid "Treasury Account"
+msgstr "Conto di Tesoreria"
+
+#. module: dub_treasury_base
+#: model:ir.actions.act_window,name:dub_treasury_base.treasury_account_action
+#: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_account_list
+msgid "Treasury Accounts"
+msgstr "Conti di Tesoreria"
+
+#. module: dub_treasury_base
+#: model:ir.model,name:dub_treasury_base.model_treasury_credit_line
+msgid "Treasury Credit Line"
+msgstr "Linea di Credito"
+
+#. module: dub_treasury_base
+#: model:ir.model,name:dub_treasury_base.model_treasury_financial_instrument
+msgid "Treasury Financial Instrument"
+msgstr "Strumento Finanziario"
+
+#. module: dub_treasury_base
+#: model:ir.model,name:dub_treasury_base.model_treasury_installment
+msgid "Treasury Installment"
+msgstr "Rata"
+
+#. module: dub_treasury_base
+#: model:ir.module.category,description:dub_treasury_base.module_category_treasury
+msgid "Treasury Management"
+msgstr "Gestione Tesoreria"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__account_id
+msgid "Treasury account linked to this instrument"
+msgstr "Conto di tesoreria collegato a questo strumento"
+
+#. module: dub_treasury_base
+#: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_account_action
+msgid ""
+"Treasury accounts represent your bank accounts, cash registers, and internal accounts\n"
+"                for treasury management."
+msgstr ""
+"I conti di tesoreria rappresentano i tuoi conti bancari, casse e conti interni\n"
+"                per la gestione della tesoreria."
+"I conti di tesoreria rappresentano i tuoi conti bancari, casse e conti interni\n"
+"                per la gestione della tesoreria."
+
+#. module: dub_treasury_base
+#: model:res.groups,comment:dub_treasury_base.group_treasury_manager
+msgid "Treasury manager: full access to treasury features"
+msgstr "Manager tesoreria: accesso completo alle funzionalità di tesoreria"
+"Responsabile tesoreria: accesso completo alle funzionalità di tesoreria"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__covenant_type
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
+msgid "Type"
+msgstr "Tipo"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__activity_exception_decoration
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__activity_exception_decoration
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo di attività eccezionale sul record."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__used_amount
+msgid "Used Amount"
+msgstr "Importo Utilizzato"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Used amount (%(used)s) cannot exceed credit limit (%(limit)s)."
+msgstr "L'importo utilizzato (%(used)s) non può superare il limite di credito (%(limit)s)."
+"L'importo utilizzato (%(used)s) non può superare il limite di credito "
+"(%(limit)s)."
+
+#. module: dub_treasury_base
+#: model:res.groups,name:dub_treasury_base.group_treasury_user
+msgid "User"
+msgstr "Utente"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Utilization - %(name)s"
+msgstr "Utilizzo - %(name)s"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__utilization_rate
+msgid "Utilization Rate (%)"
+msgstr "Tasso di Utilizzo (%)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__rate_type__variable
+msgid "Variable Rate"
+msgstr "Tasso Variabile"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__website_message_ids
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__website_message_ids
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__website_message_ids
+msgid "Website Messages"
+msgstr "Messaggi Sito Web"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__website_message_ids
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__website_message_ids
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__website_message_ids
+msgid "Website communication history"
+msgstr "Storico comunicazioni sito web"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__numerator_account_ids
+msgid "Numerator Accounts"
+msgstr "Conti Numeratore"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__denominator_account_ids
+msgid "Denominator Accounts"
+msgstr "Conti Denominatore"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__numerator_value
+msgid "Numerator"
+msgstr "Numeratore"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__denominator_value
+msgid "Denominator"
+msgstr "Denominatore"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
+msgid "Calculate Value"
+msgstr "Calcola Valore"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
+msgid "Account Configuration"
+msgstr "Configurazione Conti"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
+msgid "Configuration Guide:"
+msgstr "Guida alla Configurazione:"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
+msgid "Calculated Values"
+msgstr "Valori Calcolati"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
+msgid "Definition"
+msgstr "Definizione"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
+msgid "Threshold"
+msgstr "Soglia"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
+msgid "Current Status"
+msgstr "Stato Attuale"
+
+#. module: dub_treasury_base
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Covenant Violation: %s"
+msgstr "Violazione Covenant: %s"
+
+#. module: dub_treasury_base
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Please configure numerator and denominator accounts for \"%(name)s\"."
+msgstr "Configura i conti numeratore e denominatore per \"%(name)s\"."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__use_custom_formula
+msgid "Use Custom Formula"
+msgstr "Usa Formula Personalizzata"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__custom_formula
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
+msgid "Python Formula"
+msgstr "Formula Python"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
+msgid "Advanced Mode:"
+msgstr "Modalità Avanzata:"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
+msgid "Available Functions"
+msgstr "Funzioni Disponibili"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
+msgid "Other Functions"
+msgstr "Altre Funzioni"
+
+#. module: dub_treasury_base
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "No custom formula defined for \"%(name)s\"."
+msgstr "Nessuna formula personalizzata definita per \"%(name)s\"."
+
+#. module: dub_treasury_base
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Error evaluating formula for \"%(name)s\":\n%(error)s"
+msgstr "Errore nella valutazione della formula per \"%(name)s\":\n%(error)s"
+
+#. module: dub_treasury_base
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Please configure at least numerator (+) and denominator (+) accounts for \"%(name)s\"."
+msgstr "Configura almeno i conti numeratore (+) e denominatore (+) per \"%(name)s\"."
+

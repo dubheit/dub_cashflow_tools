@@ -1,6 +1,6 @@
 {
     'name': 'DUB Cashflow - Sale',
-    'version': '19.0.1.0.1',
+    'version': '18.0.1.0.1',
     'category': 'Accounting',
     'summary': 'Cashflow generation from Sale Orders',
     'description': """

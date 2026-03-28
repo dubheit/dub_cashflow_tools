@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit account.move form to add treasury fields -->
+    <record id="view_move_form_treasury" model="ir.ui.view">
+        <field name="name">account.move.form.treasury</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <!-- Add treasury fields in "Other Info" tab -->
+            <xpath expr="//page[@id='other_tab']//group[@name='accounting_info_group']" position="after">
+                <group string="Treasury" name="treasury_group"
+                       invisible="move_type not in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')">
+                    <field name="treasury_instrument_ids"
+                           widget="many2many_tags"
+                           options="{'no_create': True}"
+                           invisible="move_type not in ('in_invoice', 'in_refund')"/>
+                    <field name="credit_line_ids"
+                           widget="many2many_tags"
+                           options="{'no_create': True}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Add treasury_instrument_ids field to account.move -->
+    <!-- This is the reverse of vendor_bill_ids on treasury.financial.instrument -->
+
+</odoo>

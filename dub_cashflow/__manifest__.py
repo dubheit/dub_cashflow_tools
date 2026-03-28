@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
+
 {
     "name": "DUB Cashflow",
-    "version": "19.0.2.0.1",
+    "version": "18.0.2.0.1",
     "category": "Accounting",
     "summary": "Manage predictive cash flows",
     "description": """

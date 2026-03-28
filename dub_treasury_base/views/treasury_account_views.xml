@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Treasury Account Tree View -->
+    <record id="treasury_account_view_list" model="ir.ui.view">
+        <field name="name">treasury.account.list</field>
+        <field name="model">treasury.account</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="account_type" optional="show"/>
+                <field name="bank_id" optional="show"/>
+                <field name="iban" optional="show"/>
+                <field name="currency_id" optional="hide"/>
+                <field name="current_balance" sum="Total"/>
+                <field name="total_credit_available" optional="show"/>
+                <field name="available_balance" sum="Total Available"/>
+                <field name="company_id" optional="hide" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Treasury Account Form View -->
+    <record id="treasury_account_view_form" model="ir.ui.view">
+        <field name="name">treasury.account.form</field>
+        <field name="model">treasury.account</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_view_journal_entries"
+                            string="Journal Entries"
+                            type="object"
+                            class="oe_highlight"
+                            invisible="not journal_id"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_credit_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-credit-card">
+                            <field name="total_credit_limit" widget="statinfo" string="Credit Lines"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Account Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="main">
+                            <field name="code"/>
+                            <field name="account_type" widget="radio"/>
+                            <field name="journal_id"/>
+                            <field name="currency_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group name="bank" string="Bank Details" invisible="account_type != 'bank'">
+                            <field name="bank_id"/>
+                            <field name="bank_account_id" context="{'default_partner_id': company_id}"/>
+                            <field name="iban"/>
+                            <field name="bic"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group name="opening" string="Opening Balance">
+                            <field name="opening_date"/>
+                            <field name="opening_balance"/>
+                        </group>
+                        <group name="current" string="Current Position">
+                            <field name="current_balance"/>
+                            <field name="total_credit_available"/>
+                            <field name="available_balance"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Credit Lines" name="credit_lines">
+                            <field name="credit_line_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="credit_type"/>
+                                    <field name="limit_amount" sum="Total Limit"/>
+                                    <field name="used_amount" sum="Total Used"/>
+                                    <field name="available_amount" sum="Total Available"/>
+                                    <field name="expiry_date"/>
+                                    <field name="state" widget="badge"
+                                           decoration-success="state == 'active'"
+                                           decoration-warning="state == 'expired'"
+                                           decoration-muted="state in ('draft', 'closed')"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Financial Instruments" name="instruments">
+                            <field name="financial_instrument_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="instrument_type"/>
+                                    <field name="principal_amount" sum="Total"/>
+                                    <field name="residual_principal" sum="Total Residual"/>
+                                    <field name="end_date"/>
+                                    <field name="state" widget="badge"
+                                           decoration-success="state == 'active'"
+                                           decoration-muted="state in ('draft', 'closed', 'cancelled')"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Treasury Account Kanban View -->
+    <record id="treasury_account_view_kanban" model="ir.ui.view">
+        <field name="name">treasury.account.kanban</field>
+        <field name="model">treasury.account</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="account_type"/>
+                <field name="current_balance"/>
+                <field name="available_balance"/>
+                <field name="currency_id"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="row mb4">
+                            <div class="col-8">
+                                <strong><field name="name"/></strong>
+                            </div>
+                            <div class="col-4 text-end">
+                                <field name="account_type" widget="badge"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <span class="text-muted">Balance:</span>
+                                <field name="current_balance" widget="monetary"/>
+                            </div>
+                            <div class="col-6 text-end">
+                                <span class="text-muted">Available:</span>
+                                <field name="available_balance" widget="monetary"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Treasury Account Search View -->
+    <record id="treasury_account_view_search" model="ir.ui.view">
+        <field name="name">treasury.account.search</field>
+        <field name="model">treasury.account</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" filter_domain="['|', ('name', 'ilike', self), ('code', 'ilike', self)]"/>
+                <field name="bank_id"/>
+                <field name="iban"/>
+                <filter name="filter_bank" string="Bank Accounts" domain="[('account_type', '=', 'bank')]"/>
+                <filter name="filter_cash" string="Cash" domain="[('account_type', '=', 'cash')]"/>
+                <filter name="filter_internal" string="Internal" domain="[('account_type', '=', 'internal')]"/>
+                <separator/>
+                <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_type" string="Type" context="{'group_by': 'account_type'}"/>
+                    <filter name="group_bank" string="Bank" context="{'group_by': 'bank_id'}"/>
+                    <filter name="group_currency" string="Currency" context="{'group_by': 'currency_id'}"/>
+                    <filter name="group_company" string="Company" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="treasury_account_action" model="ir.actions.act_window">
+        <field name="name">Treasury Accounts</field>
+        <field name="res_model">treasury.account</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="search_view_id" ref="treasury_account_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first treasury account
+            </p>
+            <p>
+                Treasury accounts represent your bank accounts, cash registers, and internal accounts
+                for treasury management.
+            </p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,17 @@
+# Documentation (UAT, internal docs)
+docs/
+
+# Compiled Python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
