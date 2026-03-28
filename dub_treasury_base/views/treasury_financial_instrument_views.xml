@@ -170,9 +170,7 @@
         <field name="name">treasury.financial.instrument.search</field>
         <field name="model">treasury.financial.instrument</field>
         <field name="arch" type="xml">
-            <search>
-                <field name="name" filter_domain="['|', ('name', 'ilike', self), ('reference', 'ilike', self)]"/>
-                <field name="partner_id"/>
+            <search><field name="partner_id"/>
                 <field name="instrument_type"/>
                 <filter name="filter_active" string="Active" domain="[('state', '=', 'active')]"/>
                 <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
@@ -184,7 +182,7 @@
                 <separator/>
                 <filter name="filter_inbound" string="Inbound (Received)" domain="[('flow_direction', '=', 'inbound')]"/>
                 <filter name="filter_outbound" string="Outbound (Granted)" domain="[('flow_direction', '=', 'outbound')]"/>
-                <group expand="0" string="Group By">
+                <group name="group_by">
                     <filter name="group_type" string="Type" context="{'group_by': 'instrument_type'}"/>
                     <filter name="group_partner" string="Counterpart" context="{'group_by': 'partner_id'}"/>
                     <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
@@ -308,9 +306,7 @@
         <field name="name">treasury.installment.search</field>
         <field name="model">treasury.installment</field>
         <field name="arch" type="xml">
-            <search>
-                <field name="instrument_id"/>
-                <field name="partner_id"/>
+            <search><field name="partner_id"/>
                 <filter name="filter_due" string="Due" domain="[('state', '=', 'due')]"/>
                 <filter name="filter_overdue" string="Overdue" domain="[('state', '=', 'overdue')]"/>
                 <filter name="filter_paid" string="Paid" domain="[('state', '=', 'paid')]"/>
@@ -321,7 +317,7 @@
                 <filter name="filter_next_30_days" string="Next 30 Days"
                         domain="[('date', '&gt;=', context_today().strftime('%Y-%m-%d')),
                                  ('date', '&lt;=', (context_today() + relativedelta(days=30)).strftime('%Y-%m-%d'))]"/>
-                <group expand="0" string="Group By">
+                <group name="group_by">
                     <filter name="group_instrument" string="Instrument" context="{'group_by': 'instrument_id'}"/>
                     <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
                     <filter name="group_date" string="Due Date" context="{'group_by': 'date:month'}"/>
