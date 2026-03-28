@@ -1,6 +1,6 @@
 {
     "name": "DUB Treasury Base",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Accounting/Accounting",
     "summary": "Treasury management base: accounts, credit lines, financial instruments",
     "description": """
