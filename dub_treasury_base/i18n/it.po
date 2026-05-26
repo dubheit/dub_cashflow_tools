@@ -1410,7 +1410,7 @@ msgstr "Registro"
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__move_ids
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
 msgid "Journal Entries"
-msgstr "Scritture ContabiliRegistrazioni Contabili"
+msgstr "Registrazioni contabili"
 
 #. module: dub_treasury_base
 #: model:ir.model,name:dub_treasury_base.model_account_move
