@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="riba_issue_view_treasury" model="ir.ui.view">
+        <field name="name">riba.issue.wizard.treasury</field>
+        <field name="model">riba.issue</field>
+        <field name="inherit_id" ref="l10n_it_riba_oca.riba_issue_view"/>
+        <field name="arch" type="xml">
+            <field name="configuration_id" position="after">
+                <field name="castelletto_currency_id" invisible="1"/>
+                <field name="credit_line_id" invisible="not credit_line_id" readonly="1"/>
+                <field name="castelletto_state" invisible="not credit_line_id"/>
+                <field name="castelletto_limit" invisible="not credit_line_id"/>
+                <field name="castelletto_used" invisible="not credit_line_id"/>
+                <field name="castelletto_available" invisible="not credit_line_id"/>
+                <field name="castelletto_expiry" invisible="not credit_line_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>

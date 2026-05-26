@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_riba_configuration_form_treasury" model="ir.ui.view">
+        <field name="name">riba.configuration.form.treasury</field>
+        <field name="model">riba.configuration</field>
+        <field name="inherit_id" ref="l10n_it_riba_oca.view_riba_configuration_form"/>
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="credit_line_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>
