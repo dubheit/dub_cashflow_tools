@@ -2,7 +2,7 @@
 
 {
     "name": "DUB Cashflow",
-    "version": "18.0.2.0.1",
+    "version": "18.0.2.1.0",
     "category": "Accounting",
     "summary": "Manage predictive cash flows",
     "description": """
