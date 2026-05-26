@@ -5,15 +5,46 @@
         <field name="model">riba.issue</field>
         <field name="inherit_id" ref="l10n_it_riba_oca.riba_issue_view"/>
         <field name="arch" type="xml">
+            <!-- Campi tecnici a supporto dei banner / del blocco -->
             <field name="configuration_id" position="after">
                 <field name="castelletto_currency_id" invisible="1"/>
-                <field name="credit_line_id" invisible="not credit_line_id" readonly="1"/>
-                <field name="castelletto_state" invisible="not credit_line_id"/>
-                <field name="castelletto_limit" invisible="not credit_line_id"/>
-                <field name="castelletto_used" invisible="not credit_line_id"/>
-                <field name="castelletto_available" invisible="not credit_line_id"/>
-                <field name="castelletto_expiry" invisible="not credit_line_id"/>
+                <field name="castelletto_over" invisible="1"/>
             </field>
+
+            <!-- Banner castelletto: verde se entro plafond, rosso se superato -->
+            <xpath expr="//group" position="after">
+                <div class="alert alert-success" role="status"
+                     invisible="not credit_line_id or castelletto_over">
+                    <strong>Castelletto entro il plafond.</strong>
+                    L'emissione rientra nel residuo disponibile.
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     invisible="not credit_line_id or not castelletto_over">
+                    <strong>Plafond del castelletto superato.</strong>
+                    L'importo da presentare supera il residuo disponibile:
+                    non è possibile procedere. Riduci le scadenze selezionate
+                    oppure presenta su un'altra banca/configurazione.
+                </div>
+                <group invisible="not credit_line_id" col="2">
+                    <group>
+                        <field name="credit_line_id" readonly="1"/>
+                        <field name="castelletto_state"/>
+                        <field name="castelletto_expiry"/>
+                    </group>
+                    <group>
+                        <field name="castelletto_limit"/>
+                        <field name="castelletto_used"/>
+                        <field name="castelletto_available"/>
+                        <field name="issue_amount"/>
+                        <field name="castelletto_after"/>
+                    </group>
+                </group>
+            </xpath>
+
+            <!-- Pulsante Crea nascosto quando il plafond è superato -->
+            <xpath expr="//footer/button[@name='create_list']" position="attributes">
+                <attribute name="invisible">castelletto_over</attribute>
+            </xpath>
         </field>
     </record>
 </odoo>
