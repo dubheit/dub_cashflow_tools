@@ -39,3 +39,22 @@ def pre_init_hook(env):
     _logger.info("Deleted old module entry")
 
     _logger.info(f"Migration {OLD_MODULE} -> {NEW_MODULE} completed")
+
+
+def post_init_hook(env):
+    """Attach the base scenario to pre-existing configurations.
+
+    The default on ``cashflow.config.scenario_ids`` only applies to newly
+    created records, so configurations already present before this upgrade
+    would otherwise have no scenario and disappear from the base-scenario
+    filter of the analysis. Backfill them with the base scenario.
+    """
+    base = env.ref('dub_cashflow.cashflow_scenario_base', raise_if_not_found=False)
+    if not base:
+        return
+    configs = env['cashflow.config'].with_context(active_test=False).search([
+        ('scenario_ids', '=', False),
+    ])
+    if configs:
+        configs.write({'scenario_ids': [(4, base.id)]})
+        _logger.info("Backfilled base scenario on %s configuration(s)", len(configs))

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0-20251222\n"
+"Project-Id-Version: Odoo Server 18.0+e-20260409\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-11 08:05+0000\n"
-"PO-Revision-Date: 2026-02-11 08:05+0000\n"
+"POT-Creation-Date: 2026-05-26 14:55+0000\n"
+"PO-Revision-Date: 2026-05-26 14:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -97,7 +97,21 @@ msgid "<strong>Python Code Examples:</strong>"
 msgstr "<strong>Esempi di codice Python:</strong>"
 
 #. module: dub_cashflow
+#: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_scenario
+msgid ""
+"A scenario groups cashflow configurations. The same configuration\n"
+"                can belong to several scenarios (e.g. both Base and Pessimistic),\n"
+"                letting you compare alternative forecasts side by side."
+msgstr ""
+
+#. module: dub_cashflow
+#: model:ir.model.constraint,message:dub_cashflow.constraint_cashflow_scenario_name_uniq
+msgid "A scenario with this name already exists."
+msgstr "Esiste già uno scenario con questo nome."
+
+#. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__active
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__active
 msgid "Active"
 msgstr "Attivo"
 
@@ -145,6 +159,17 @@ msgid "Bank journal for this cashflow entry"
 msgstr "Registro bancario per questo movimento di cashflow"
 
 #. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_scenario_form
+msgid "Base"
+msgstr ""
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__is_default
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Base Scenario"
+msgstr "Scenario base"
+
+#. module: dub_cashflow
 #: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_entry__state__cancelled
 msgid "Cancelled"
 msgstr "Annullato"
@@ -166,7 +191,7 @@ msgstr "Uscita"
 #. module: dub_cashflow
 #: model:ir.ui.menu,name:dub_cashflow.menu_cashflow_root
 msgid "Cashflow"
-msgstr "Cashflow"
+msgstr ""
 
 #. module: dub_cashflow
 #: model:ir.actions.act_window,name:dub_cashflow.action_cashflow_analysis
@@ -221,6 +246,22 @@ msgid "Cashflow Items"
 msgstr "Voci cashflow"
 
 #. module: dub_cashflow
+#: model:ir.model,name:dub_cashflow.model_cashflow_scenario
+msgid "Cashflow Scenario"
+msgstr "Scenario di cashflow"
+
+#. module: dub_cashflow
+#: model:ir.actions.act_window,name:dub_cashflow.action_cashflow_scenario
+#: model:ir.ui.menu,name:dub_cashflow.menu_cashflow_scenario
+msgid "Cashflow Scenarios"
+msgstr "Scenari di cashflow"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_scenario__config_ids
+msgid "Cashflow configurations that contribute to this scenario."
+msgstr "Configurazioni di cashflow che contribuiscono a questo scenario."
+
+#. module: dub_cashflow
 #: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_analysis
 #: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_entry
 msgid ""
@@ -230,11 +271,27 @@ msgstr ""
 "configurazioni."
 
 #. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__color
+msgid "Color Index"
+msgstr "Indice colore"
+
+#. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__config_id
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__config_id
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
 msgid "Configuration"
 msgstr "Configurazione"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__config_ids
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_scenario_form
+msgid "Configurations"
+msgstr "Configurazioni"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__config_count
+msgid "Configurations Count"
+msgstr "Numero configurazioni"
 
 #. module: dub_cashflow
 #: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_config
@@ -257,10 +314,16 @@ msgid "Create your first cashflow configuration"
 msgstr "Crea la tua prima configurazione cashflow"
 
 #. module: dub_cashflow
+#: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_scenario
+msgid "Create your first cashflow scenario"
+msgstr "Crea il tuo primo scenario di cashflow"
+
+#. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__create_uid
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__create_uid
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__create_uid
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__create_uid
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__create_uid
 msgid "Created by"
 msgstr ""
 
@@ -269,6 +332,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__create_date
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__create_date
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__create_date
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__create_date
 msgid "Created on"
 msgstr ""
 
@@ -306,6 +370,7 @@ msgstr "Elimina il cashflow quando un record viene cancellato"
 
 #. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__description
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__description
 #: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__description
 msgid "Description"
 msgstr "Descrizione"
@@ -315,13 +380,15 @@ msgstr "Descrizione"
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__display_name
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__display_name
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__display_name
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: dub_cashflow
 #: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__filter_domain
 msgid "Domain to filter which records should generate cashflow entries"
-msgstr "Dominio per filtrare quali record devono generare movimenti di cashflow"
+msgstr ""
+"Dominio per filtrare quali record devono generare movimenti di cashflow"
 
 #. module: dub_cashflow
 #: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_entry__state__draft
@@ -394,8 +461,8 @@ msgid ""
 "Field name containing the total amount to split (e.g., amount_total, "
 "amount_residual)"
 msgstr ""
-"Nome del campo contenente l'importo totale da suddividere (es. "
-"amount_total, amount_residual)"
+"Nome del campo contenente l'importo totale da suddividere (es. amount_total,"
+" amount_residual)"
 
 #. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__filter_domain
@@ -438,7 +505,8 @@ msgstr "Genera il cashflow quando un record viene duplicato"
 #. module: dub_cashflow
 #: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__use_payment_terms
 msgid "Generate multiple cashflow items based on payment terms installments"
-msgstr "Genera voci di cashflow multiple in base alle rate dei termini di pagamento"
+msgstr ""
+"Genera voci di cashflow multiple in base alle rate dei termini di pagamento"
 
 #. module: dub_cashflow
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
@@ -450,6 +518,7 @@ msgstr "Raggruppa per"
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__id
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__id
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__id
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__id
 msgid "ID"
 msgstr ""
 
@@ -473,6 +542,7 @@ msgstr "Movimento contabile"
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__write_uid
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__write_uid
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__write_uid
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__write_uid
 msgid "Last Updated by"
 msgstr ""
 
@@ -481,6 +551,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__write_date
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__write_date
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__write_date
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -506,6 +577,7 @@ msgstr "Nome modello"
 #. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__name
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__name
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__name
 msgid "Name"
 msgstr "Nome"
 
@@ -564,7 +636,7 @@ msgstr "Riconciliazione parziale"
 #: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__partner_id
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
 msgid "Partner"
-msgstr "Partner"
+msgstr ""
 
 #. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__payment_term_field
@@ -620,7 +692,39 @@ msgid "Reference"
 msgstr "Riferimento"
 
 #. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Scenario"
+msgstr "Scenario"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__scenario_ids
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__scenario_ids
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__scenario_ids
+msgid "Scenarios"
+msgstr "Scenari"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_config__scenario_ids
+msgid ""
+"Scenarios this configuration contributes to. A configuration can belong to "
+"several scenarios (e.g. both Base and Pessimistic)."
+msgstr "Scenari a cui contribuisce questa configurazione. Una configurazione può appartenere a più scenari (es. sia Base che Pessimistico)."
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_entry__scenario_ids
+msgid "Scenarios this entry belongs to, inherited from its configuration."
+msgstr "Scenari a cui appartiene questa voce, ereditati dalla sua configurazione."
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_item__scenario_ids
+msgid ""
+"Scenarios this item belongs to. Stored so it can be used as a dimension in "
+"the cashflow analysis pivot/graph."
+msgstr "Scenari a cui appartiene questa voce. Memorizzato per poter essere usato come dimensione nel pivot/grafico di analisi del cashflow."
+
+#. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config_line__sequence
+#: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__sequence
 msgid "Sequence"
 msgstr "Sequenza"
 
@@ -665,6 +769,13 @@ msgstr "Tipo di origine"
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
 msgid "Status"
 msgstr "Stato"
+
+#. module: dub_cashflow
+#: model:ir.model.fields,help:dub_cashflow.field_cashflow_scenario__is_default
+msgid ""
+"The base scenario, shown by default in the cashflow analysis. Only one "
+"scenario can be the base one."
+msgstr "Lo scenario base, mostrato di default nell'analisi del cashflow. Solo uno scenario può essere quello base."
 
 #. module: dub_cashflow
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
@@ -749,6 +860,11 @@ msgstr "Usa termini di pagamento"
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
 msgid "e.g. Invoice Cashflow"
 msgstr "es. Cashflow fatture"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_scenario_form
+msgid "e.g. Pessimistic"
+msgstr "es. Pessimistico"
 
 #. module: dub_cashflow
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form

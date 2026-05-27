@@ -56,6 +56,16 @@ class CashflowEntry(models.Model):
         ondelete='cascade',
         index=True,
     )
+    scenario_ids = fields.Many2many(
+        'cashflow.scenario',
+        'cashflow_entry_scenario_rel',
+        'entry_id',
+        'scenario_id',
+        string='Scenarios',
+        compute='_compute_scenario_ids',
+        store=True,
+        help='Scenarios this entry belongs to, inherited from its configuration.',
+    )
     item_ids = fields.One2many('cashflow.item', 'entry_id', string='Cashflow Items')
     total_in = fields.Monetary(
         compute='_compute_totals',
@@ -71,6 +81,11 @@ class CashflowEntry(models.Model):
         'res.currency',
         default=lambda self: self.env.company.currency_id,
     )
+
+    @api.depends('config_id.scenario_ids')
+    def _compute_scenario_ids(self):
+        for entry in self:
+            entry.scenario_ids = entry.config_id.scenario_ids
 
     @api.depends('model')
     def _compute_model_id(self):

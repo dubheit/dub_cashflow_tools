@@ -1,4 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cashflow_scenario,access_cashflow_scenario,model_cashflow_scenario,account.group_account_manager,1,1,1,1
+access_cashflow_scenario_user,access_cashflow_scenario_user,model_cashflow_scenario,account.group_account_user,1,0,0,0
+access_cashflow_scenario_readonly,access_cashflow_scenario_readonly,model_cashflow_scenario,account.group_account_readonly,1,0,0,0
 access_cashflow_config,access_cashflow_config,model_cashflow_config,account.group_account_manager,1,1,1,1
 access_cashflow_config_line,access_cashflow_config_line,model_cashflow_config_line,account.group_account_manager,1,1,1,1
 access_cashflow_entry,access_cashflow_entry,model_cashflow_entry,account.group_account_user,1,1,1,1

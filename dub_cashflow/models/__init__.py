@@ -1,3 +1,4 @@
+from . import cashflow_scenario
 from . import cashflow_config
 from . import cashflow_config_line
 from . import cashflow_entry

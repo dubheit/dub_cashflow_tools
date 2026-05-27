@@ -21,6 +21,17 @@ class CashflowItem(models.Model):
     state = fields.Selection(related='entry_id.state', string='Status', store=True)
     model_id = fields.Many2one(related='entry_id.model_id', string='Source Model', store=True)
     journal_id = fields.Many2one(related='entry_id.journal_id', string='Bank', store=True)
+    scenario_ids = fields.Many2many(
+        'cashflow.scenario',
+        'cashflow_item_scenario_rel',
+        'item_id',
+        'scenario_id',
+        string='Scenarios',
+        compute='_compute_scenario_ids',
+        store=True,
+        help='Scenarios this item belongs to. Stored so it can be used as a '
+             'dimension in the cashflow analysis pivot/graph.',
+    )
 
     # Computed fields for reporting
     amount_in = fields.Monetary(
@@ -42,6 +53,11 @@ class CashflowItem(models.Model):
         currency_field='currency_id',
         help='Positive for Cash In, negative for Cash Out',
     )
+
+    @api.depends('entry_id.scenario_ids')
+    def _compute_scenario_ids(self):
+        for item in self:
+            item.scenario_ids = item.entry_id.scenario_ids
 
     @api.depends('amount', 'type')
     def _compute_amounts(self):

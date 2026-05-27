@@ -24,6 +24,7 @@
             <list>
                 <field name="name"/>
                 <field name="model_id"/>
+                <field name="scenario_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                 <field name="active"/>
             </list>
         </field>
@@ -50,6 +51,8 @@
                         </group>
                         <group>
                             <field name="filter_domain" widget="domain" options="{'model': 'model_name'}"/>
+                            <field name="scenario_ids" widget="many2many_tags"
+                                   options="{'color_field': 'color', 'no_quick_create': True}"/>
                         </group>
                     </group>
                     <group>

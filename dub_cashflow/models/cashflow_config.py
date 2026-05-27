@@ -12,6 +12,16 @@ class CashflowConfig(models.Model):
 
     name = fields.Char(required=True)
     active = fields.Boolean(default=True)
+    scenario_ids = fields.Many2many(
+        'cashflow.scenario',
+        'cashflow_config_scenario_rel',
+        'config_id',
+        'scenario_id',
+        string='Scenarios',
+        default=lambda self: self._default_scenario_ids(),
+        help='Scenarios this configuration contributes to. A configuration '
+             'can belong to several scenarios (e.g. both Base and Pessimistic).',
+    )
     model_id = fields.Many2one(
         'ir.model',
         string='Model',
@@ -108,6 +118,12 @@ Example:
         default='date',
         help='Field name containing the base date for payment term calculation (e.g., date, date_order, invoice_date)',
     )
+
+    @api.model
+    def _default_scenario_ids(self):
+        """Default a new configuration to the base scenario, if it exists."""
+        base = self.env.ref('dub_cashflow.cashflow_scenario_base', raise_if_not_found=False)
+        return [(4, base.id)] if base else False
 
     @api.model
     def get_configs_for_model(self, model_name):

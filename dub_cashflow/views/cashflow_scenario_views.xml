@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Scenario List -->
+    <record id="view_cashflow_scenario_tree" model="ir.ui.view">
+        <field name="name">cashflow.scenario.list</field>
+        <field name="model">cashflow.scenario</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="is_default"/>
+                <field name="config_count"/>
+                <field name="description"/>
+                <field name="active" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Scenario Form -->
+    <record id="view_cashflow_scenario_form" model="ir.ui.view">
+        <field name="name">cashflow.scenario.form</field>
+        <field name="model">cashflow.scenario</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_configs" type="object"
+                                class="oe_stat_button" icon="fa-cogs">
+                            <field name="config_count" widget="statinfo" string="Configurations"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Base" bg_color="text-bg-success"
+                            invisible="not is_default"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Pessimistic"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="is_default"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                    <notebook>
+                        <page string="Configurations" name="configs">
+                            <field name="config_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="model_id"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Scenario Action -->
+    <record id="action_cashflow_scenario" model="ir.actions.act_window">
+        <field name="name">Cashflow Scenarios</field>
+        <field name="res_model">cashflow.scenario</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first cashflow scenario
+            </p>
+            <p>
+                A scenario groups cashflow configurations. The same configuration
+                can belong to several scenarios (e.g. both Base and Pessimistic),
+                letting you compare alternative forecasts side by side.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_cashflow_scenario"
+              name="Cashflow Scenarios"
+              action="action_cashflow_scenario"
+              parent="account.menu_finance_configuration"
+              sequence="89"
+              groups="account.group_account_manager"/>
+</odoo>

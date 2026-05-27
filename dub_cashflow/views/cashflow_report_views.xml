@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <pivot string="Cashflow Analysis">
                 <field name="date" type="row" interval="month"/>
+                <field name="scenario_ids" type="col"/>
                 <field name="amount_in" type="measure"/>
                 <field name="amount_out" type="measure"/>
                 <field name="amount_signed" type="measure"/>
@@ -21,7 +22,7 @@
         <field name="arch" type="xml">
             <graph string="Cashflow Analysis" type="line" stacked="0">
                 <field name="date" interval="month"/>
-                <field name="entry_type"/>
+                <field name="scenario_ids"/>
                 <field name="amount_signed" type="measure"/>
             </graph>
         </field>
@@ -50,6 +51,10 @@
                 <field name="journal_id"/>
                 <field name="partner_id"/>
                 <field name="model_id"/>
+                <field name="scenario_ids"/>
+                <separator/>
+                <filter name="filter_scenario_base" string="Base Scenario"
+                        domain="[('scenario_ids.is_default', '=', True)]"/>
                 <separator/>
                 <filter name="filter_cash_in" string="Cash In" domain="[('type', '=', 'in')]"/>
                 <filter name="filter_cash_out" string="Cash Out" domain="[('type', '=', 'out')]"/>
@@ -73,6 +78,7 @@
                         domain="[('date', '&gt;=', (context_today() - relativedelta(month=1, day=1)).strftime('%Y-%m-%d')),
                                  ('date', '&lt;', (context_today() + relativedelta(years=1, month=1, day=1)).strftime('%Y-%m-%d'))]"/>
                 <separator/>
+                <filter name="group_scenario" string="Scenario" context="{'group_by': 'scenario_ids'}"/>
                 <filter name="group_journal" string="Bank" context="{'group_by': 'journal_id'}"/>
                 <filter name="group_date_month" string="Date" context="{'group_by': 'date:month'}"/>
                 <filter name="group_type" string="Type" context="{'group_by': 'type'}"/>
@@ -90,7 +96,7 @@
         <field name="res_model">cashflow.item</field>
         <field name="view_mode">graph,pivot,list</field>
         <field name="search_view_id" ref="view_cashflow_item_search_analysis"/>
-        <field name="context">{}</field>
+        <field name="context">{'search_default_filter_scenario_base': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 No cashflow data to analyze
