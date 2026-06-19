@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- The Odoo Accounting app provides a dedicated "Accounting" menu
+         (accountant.menu_accounting). When it is installed, move the Treasury
+         menu there instead of leaving it under Invoicing (account.menu_finance). -->
+    <record id="dub_treasury_base.menu_treasury_root" model="ir.ui.menu">
+        <field name="parent_id" ref="accountant.menu_accounting"/>
+    </record>
+
+</odoo>
