@@ -37,6 +37,6 @@ Integrates with Odoo's native accounting and banking features.
         "data/treasury_demo.xml",
     ],
     "installable": True,
-    "application": True,
+    "application": False,
     "auto_install": False,
 }
