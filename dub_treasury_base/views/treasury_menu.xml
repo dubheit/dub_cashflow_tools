@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Main Treasury Menu -->
+    <!-- Treasury section under Accounting (account.menu_finance is shared by CE and EE) -->
     <menuitem id="menu_treasury_root"
               name="Treasury"
-              web_icon="dub_treasury_base,static/description/icon.png"
-              sequence="25"/>
+              parent="account.menu_finance"
+              sequence="60"/>
 
     <!-- Treasury Accounts Menu -->
     <menuitem id="menu_treasury_accounts"
