@@ -94,6 +94,17 @@ class TreasuryAccount(models.Model):
         tracking=True,
     )
 
+    # Cash reserve associated with this account, available on top of the credit
+    # lines when projecting liquidity (minimum cash reserve / float / petty
+    # cash). Generic; the tenant sets it per account. Default 0.
+    cash_buffer = fields.Monetary(
+        string='Cash Buffer',
+        currency_field='currency_id',
+        tracking=True,
+        help='Cash reserve available in addition to the credit lines when '
+             'projecting treasury liquidity. Leave 0 if not used.',
+    )
+
     # Computed balances
     current_balance = fields.Monetary(
         string='Current Balance',

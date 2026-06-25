@@ -71,6 +71,7 @@
                         <group name="opening" string="Opening Balance">
                             <field name="opening_date"/>
                             <field name="opening_balance"/>
+                            <field name="cash_buffer"/>
                         </group>
                         <group name="current" string="Current Position">
                             <field name="current_balance"/>
