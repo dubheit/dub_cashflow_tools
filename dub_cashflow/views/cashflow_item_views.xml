@@ -9,6 +9,7 @@
                 <field name="source_model"/>
                 <field name="date"/>
                 <field name="journal_id"/>
+                <field name="category_id" optional="show"/>
                 <field name="type"/>
                 <field name="amount"/>
                 <field name="currency_id"/>
@@ -28,6 +29,7 @@
                         <field name="entry_id"/>
                         <field name="date"/>
                         <field name="journal_id"/>
+                        <field name="category_id"/>
                         <field name="type"/>
                         <field name="amount"/>
                         <field name="currency_id"/>

@@ -28,9 +28,14 @@ class CashflowConfigLine(models.Model):
             ('state', 'Status'),
             ('entry_type', 'Entry Type (forecast/actual)'),
             ('journal_id', 'Bank'),
+            ('category_code', 'Category (by code)'),
         ],
         string='Cashflow Field',
         required=True,
+        help="Target cashflow field to fill. 'Category (by code)' is special: "
+             "the evaluated value is treated as a cashflow.category code and "
+             "resolved to the matching category (a warning is logged and the "
+             "category is left empty when no category matches).",
     )
     source_type = fields.Selection(
         selection=[

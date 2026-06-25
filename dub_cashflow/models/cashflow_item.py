@@ -21,6 +21,7 @@ class CashflowItem(models.Model):
     state = fields.Selection(related='entry_id.state', string='Status', store=True)
     model_id = fields.Many2one(related='entry_id.model_id', string='Source Model', store=True)
     journal_id = fields.Many2one(related='entry_id.journal_id', string='Bank', store=True)
+    category_id = fields.Many2one(related='entry_id.category_id', string='Category', store=True)
     scenario_ids = fields.Many2many(
         'cashflow.scenario',
         'cashflow_item_scenario_rel',

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Cashflow Category List -->
+    <record id="view_cashflow_category_tree" model="ir.ui.view">
+        <field name="name">cashflow.category.list</field>
+        <field name="model">cashflow.category</field>
+        <field name="arch" type="xml">
+            <list default_order="sequence">
+                <field name="sequence" widget="handle"/>
+                <field name="complete_name" string="Category"/>
+                <field name="code" optional="show"/>
+                <field name="parent_id" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Cashflow Category Form -->
+    <record id="view_cashflow_category_form" model="ir.ui.view">
+        <field name="name">cashflow.category.form</field>
+        <field name="model">cashflow.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Category Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="parent_id"/>
+                        </group>
+                        <group>
+                            <field name="color" widget="color_picker"/>
+                            <field name="sequence"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Sub-categories" name="children">
+                            <field name="child_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Cashflow Category Search -->
+    <record id="view_cashflow_category_search" model="ir.ui.view">
+        <field name="name">cashflow.category.search</field>
+        <field name="model">cashflow.category</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="parent_id"/>
+                <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_parent" string="Parent Category" context="{'group_by': 'parent_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_cashflow_category" model="ir.actions.act_window">
+        <field name="name">Cashflow Categories</field>
+        <field name="res_model">cashflow.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_cashflow_category_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first cashflow category
+            </p>
+            <p>
+                Categories group cashflow entries by nature (customer collections,
+                vendor payments, salaries, taxes, etc.) for pivots and dashboards.
+                The taxonomy is entirely up to you.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_cashflow_category"
+              name="Categories"
+              action="action_cashflow_category"
+              parent="dub_cashflow.menu_cashflow_root"
+              sequence="30"
+              groups="account.group_account_manager"/>
+</odoo>

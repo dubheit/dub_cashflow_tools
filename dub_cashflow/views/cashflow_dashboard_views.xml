@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Multi-bank treasury dashboard. Reuses cashflow.item: rows are the date
+        (granularity switchable from the pivot), columns are the bank journals.
+        Columns are fully dynamic - one per active journal - so it scales from
+        1 to N banks without any hardcoded limit (R5.3).
+
+        Cumulative running balance and projected credit-line usage/availability
+        are intentionally left to the optional Owl widget (R5.5): they are not
+        expressible as plain pivot measures.
+    -->
+    <record id="view_cashflow_dashboard_pivot" model="ir.ui.view">
+        <field name="name">cashflow.item.dashboard.pivot</field>
+        <field name="model">cashflow.item</field>
+        <field name="arch" type="xml">
+            <pivot string="Treasury Dashboard">
+                <field name="date" type="row" interval="week"/>
+                <field name="journal_id" type="col"/>
+                <field name="amount_in" type="measure"/>
+                <field name="amount_out" type="measure"/>
+                <field name="amount_signed" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_cashflow_dashboard_graph" model="ir.ui.view">
+        <field name="name">cashflow.item.dashboard.graph</field>
+        <field name="model">cashflow.item</field>
+        <field name="arch" type="xml">
+            <graph string="Treasury Dashboard" type="bar" stacked="1">
+                <field name="date" interval="week"/>
+                <field name="journal_id"/>
+                <field name="amount_signed" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_cashflow_dashboard_search" model="ir.ui.view">
+        <field name="name">cashflow.item.dashboard.search</field>
+        <field name="model">cashflow.item</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="journal_id"/>
+                <field name="category_id"/>
+                <field name="scenario_ids"/>
+                <separator/>
+                <filter name="filter_forecast" string="Forecast" domain="[('entry_type', '=', 'forecast')]"/>
+                <filter name="filter_actual" string="Actual" domain="[('entry_type', '=', 'actual')]"/>
+                <separator/>
+                <filter name="filter_next_30" string="Next 30 days"
+                        domain="[('date', '&gt;=', context_today().strftime('%Y-%m-%d')),
+                                 ('date', '&lt;', (context_today() + relativedelta(days=30)).strftime('%Y-%m-%d'))]"/>
+                <filter name="filter_next_60" string="Next 60 days"
+                        domain="[('date', '&gt;=', context_today().strftime('%Y-%m-%d')),
+                                 ('date', '&lt;', (context_today() + relativedelta(days=60)).strftime('%Y-%m-%d'))]"/>
+                <filter name="filter_next_90" string="Next 90 days"
+                        domain="[('date', '&gt;=', context_today().strftime('%Y-%m-%d')),
+                                 ('date', '&lt;', (context_today() + relativedelta(days=90)).strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter name="group_journal" string="Bank" context="{'group_by': 'journal_id'}"/>
+                <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
+                <filter name="group_scenario" string="Scenario" context="{'group_by': 'scenario_ids'}"/>
+                <filter name="group_date_week" string="Week" context="{'group_by': 'date:week'}"/>
+                <filter name="group_date_month" string="Month" context="{'group_by': 'date:month'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_cashflow_dashboard" model="ir.actions.act_window">
+        <field name="name">Treasury Dashboard</field>
+        <field name="res_model">cashflow.item</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="search_view_id" ref="view_cashflow_dashboard_search"/>
+        <field name="context">{
+            'search_default_filter_next_90': 1,
+            'search_default_filter_forecast': 1,
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No cashflow data to display
+            </p>
+            <p>
+                The treasury dashboard shows projected cashflow across all your
+                bank journals side by side. One column per bank, scaling to any
+                number of banks.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_cashflow_dashboard"
+              name="Treasury Dashboard"
+              action="action_cashflow_dashboard"
+              parent="dub_cashflow.menu_cashflow_root"
+              sequence="5"
+              groups="account.group_account_readonly"/>
+</odoo>

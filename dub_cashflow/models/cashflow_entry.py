@@ -30,6 +30,14 @@ class CashflowEntry(models.Model):
              'Actual: real cashflow (bank transactions, confirmed payments)',
     )
     reference = fields.Char()
+    category_id = fields.Many2one(
+        'cashflow.category',
+        string='Category',
+        index=True,
+        ondelete='set null',
+        help='Cashflow category used to group flows by nature for pivots and '
+             'dashboards.',
+    )
     journal_id = fields.Many2one(
         'account.journal',
         string='Bank',
@@ -56,6 +64,13 @@ class CashflowEntry(models.Model):
         ondelete='cascade',
         index=True,
     )
+    recurring_id = fields.Many2one(
+        'cashflow.recurring',
+        string='Recurring Source',
+        ondelete='cascade',
+        index=True,
+        help='Recurring cashflow definition that generated this entry.',
+    )
     scenario_ids = fields.Many2many(
         'cashflow.scenario',
         'cashflow_entry_scenario_rel',
@@ -64,7 +79,8 @@ class CashflowEntry(models.Model):
         string='Scenarios',
         compute='_compute_scenario_ids',
         store=True,
-        help='Scenarios this entry belongs to, inherited from its configuration.',
+        help='Scenarios this entry belongs to, inherited from its '
+             'configuration or recurring source.',
     )
     item_ids = fields.One2many('cashflow.item', 'entry_id', string='Cashflow Items')
     total_in = fields.Monetary(
@@ -82,10 +98,10 @@ class CashflowEntry(models.Model):
         default=lambda self: self.env.company.currency_id,
     )
 
-    @api.depends('config_id.scenario_ids')
+    @api.depends('config_id.scenario_ids', 'recurring_id.scenario_ids')
     def _compute_scenario_ids(self):
         for entry in self:
-            entry.scenario_ids = entry.config_id.scenario_ids
+            entry.scenario_ids = entry.config_id.scenario_ids | entry.recurring_id.scenario_ids
 
     @api.depends('model')
     def _compute_model_id(self):

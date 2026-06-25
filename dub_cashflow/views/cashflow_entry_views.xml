@@ -9,6 +9,7 @@
                 <field name="name"/>
                 <field name="date"/>
                 <field name="journal_id" optional="show"/>
+                <field name="category_id" optional="show"/>
                 <field name="model_label" widget="badge"/>
                 <field name="reference"/>
                 <field name="entry_type" widget="badge" decoration-info="entry_type == 'forecast'" decoration-success="entry_type == 'actual'"/>
@@ -48,6 +49,7 @@
                         <group>
                             <field name="date"/>
                             <field name="journal_id"/>
+                            <field name="category_id"/>
                             <field name="reference"/>
                             <field name="entry_type"/>
                             <field name="config_id" readonly="1"/>
@@ -96,6 +98,7 @@
                 <field name="name"/>
                 <field name="reference"/>
                 <field name="journal_id"/>
+                <field name="category_id"/>
                 <field name="config_id"/>
                 <field name="model_id"/>
                 <separator/>
@@ -105,6 +108,7 @@
                 <filter name="filter_this_month" string="This Month" domain="[('date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
                 <group expand="0" string="Group By">
                     <filter name="group_journal" string="Bank" context="{'group_by': 'journal_id'}"/>
+                    <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
                     <filter name="group_entry_type" string="Entry Type" context="{'group_by': 'entry_type'}"/>
                     <filter name="group_model" string="Source" context="{'group_by': 'model_id'}"/>
                     <filter name="group_config" string="Configuration" context="{'group_by': 'config_id'}"/>

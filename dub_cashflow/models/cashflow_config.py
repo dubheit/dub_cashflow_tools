@@ -172,11 +172,15 @@ Example:
         for line in self.line_ids:
             try:
                 value = line._evaluate(record, eval_context)
-                if value is not None:
-                    if line.cashflow_field in self.ENTRY_FIELDS:
-                        entry_vals[line.cashflow_field] = value
-                    else:
-                        item_vals[line.cashflow_field] = value
+                if value is None:
+                    continue
+                if line.cashflow_field == 'category_code':
+                    # Special target: resolve the evaluated code to a category.
+                    entry_vals['category_id'] = self._resolve_category(record, value)
+                elif line.cashflow_field in self.ENTRY_FIELDS:
+                    entry_vals[line.cashflow_field] = value
+                else:
+                    item_vals[line.cashflow_field] = value
             except Exception as e:
                 _logger.warning(
                     "Error evaluating field %s for record %s: %s",
@@ -184,6 +188,27 @@ Example:
                 )
 
         return entry_vals, item_vals
+
+    def _resolve_category(self, record, code):
+        """Resolve a classifier code to a cashflow.category id.
+
+        Returns False (and logs a warning) when the code does not match any
+        category, so a misconfigured classifier never raises nor creates
+        categories on the fly (R1.5).
+        """
+        self.ensure_one()
+        company = self.env.company
+        if 'company_id' in record._fields and record.company_id:
+            company = record.company_id[:1]
+        category = self.env['cashflow.category']._resolve_code(str(code), company)
+        if not category:
+            _logger.warning(
+                "CASHFLOW: category code %r (config %s, record %s) does not match "
+                "any cashflow.category; leaving category empty.",
+                code, self.name, record,
+            )
+            return False
+        return category.id
 
     def generate_cashflow(self, records):
         """Generate cashflow entries for the given records."""

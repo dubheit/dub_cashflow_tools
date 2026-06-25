@@ -49,6 +49,7 @@
             <search>
                 <field name="entry_id"/>
                 <field name="journal_id"/>
+                <field name="category_id"/>
                 <field name="partner_id"/>
                 <field name="model_id"/>
                 <field name="scenario_ids"/>
@@ -80,6 +81,7 @@
                 <separator/>
                 <filter name="group_scenario" string="Scenario" context="{'group_by': 'scenario_ids'}"/>
                 <filter name="group_journal" string="Bank" context="{'group_by': 'journal_id'}"/>
+                <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
                 <filter name="group_date_month" string="Date" context="{'group_by': 'date:month'}"/>
                 <filter name="group_type" string="Type" context="{'group_by': 'type'}"/>
                 <filter name="group_entry_type" string="Entry Type" context="{'group_by': 'entry_type'}"/>

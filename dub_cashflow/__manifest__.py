@@ -1,6 +1,6 @@
 {
     "name": "DUB Cashflow",
-    "version": "18.0.3.0.0",
+    "version": "18.0.4.0.0",
     "category": "Accounting",
     "summary": "Manage predictive cash flows",
     "description": """
@@ -22,12 +22,19 @@ Features:
     "data": [
         "security/ir.model.access.csv",
         "data/cashflow_scenario_data.xml",
+        "data/cashflow_recurring_cron.xml",
         "views/cashflow_scenario_views.xml",
         "views/cashflow_config_views.xml",
         "views/cashflow_entry_views.xml",
+        "views/cashflow_category_views.xml",
+        "views/cashflow_recurring_views.xml",
         "views/cashflow_report_views.xml",
+        "views/cashflow_dashboard_views.xml",
         "views/cashflow_item_views.xml",
         "data/demo.xml",
+    ],
+    "demo": [
+        "data/cashflow_category_demo.xml",
     ],
     "pre_init_hook": "pre_init_hook",
     "post_init_hook": "post_init_hook",

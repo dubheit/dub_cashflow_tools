@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+            Generic example categories. These are provided as demo data only:
+            each tenant is expected to define its own taxonomy and may freely
+            delete or modify these records.
+        -->
+        <record id="cashflow_category_demo_collections" model="cashflow.category">
+            <field name="name">Customer Collections</field>
+            <field name="code">collections</field>
+            <field name="sequence">10</field>
+        </record>
+        <record id="cashflow_category_demo_payments" model="cashflow.category">
+            <field name="name">Vendor Payments</field>
+            <field name="code">payments</field>
+            <field name="sequence">20</field>
+        </record>
+        <record id="cashflow_category_demo_salaries" model="cashflow.category">
+            <field name="name">Salaries</field>
+            <field name="code">salaries</field>
+            <field name="sequence">30</field>
+        </record>
+        <record id="cashflow_category_demo_taxes" model="cashflow.category">
+            <field name="name">Taxes</field>
+            <field name="code">taxes</field>
+            <field name="sequence">40</field>
+        </record>
+        <record id="cashflow_category_demo_financing" model="cashflow.category">
+            <field name="name">Financing</field>
+            <field name="code">financing</field>
+            <field name="sequence">50</field>
+        </record>
+    </data>
+</odoo>
