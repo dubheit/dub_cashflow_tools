@@ -7,9 +7,16 @@ from datetime import date
 class TreasuryCreditLine(models.Model):
     _name = 'treasury.credit.line'
     _description = 'Treasury Credit Line'
-    _order = 'account_id, name'
+    _order = 'sequence, account_id, name'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    sequence = fields.Integer(
+        string='Priority',
+        default=10,
+        help='Usage priority for this credit line. Lower values come first '
+             '(e.g. preferred bank). Informational ordering only; it does not '
+             'drive any automatic cascade consumption of the facilities.',
+    )
     name = fields.Char(
         string='Name',
         required=True,
@@ -154,6 +161,15 @@ class TreasuryCreditLine(models.Model):
         'treasury.covenant',
         'credit_line_id',
         string='Covenants',
+    )
+
+    # Tiered interest rates (R6)
+    rate_tier_ids = fields.One2many(
+        'treasury.credit.line.rate.tier',
+        'credit_line_id',
+        string='Rate Tiers',
+        help='Optional interest-rate tiers by utilization threshold. When set, '
+             'they override the flat interest rate above.',
     )
 
     # Notes
@@ -310,6 +326,99 @@ class TreasuryCreditLine(models.Model):
                 line.utilization_rate = (line.used_amount / line.limit_amount) * 100
             else:
                 line.utilization_rate = 0.0
+
+    # ------------------------------------------------------------------
+    # Projected availability at a given date (R4)
+    #
+    # The snapshot fields above (used_amount / available_amount) keep their
+    # "as of today" meaning. The methods below answer the forward-looking
+    # question: "at date D, how much of this facility will be left given the
+    # expected flow until that day?".
+    # ------------------------------------------------------------------
+    def _projected_used_at_date(self, target_date, items_by_journal=None,
+                                invoices=None):
+        """Return the projected used amount at ``target_date`` for one line.
+
+        - overdraft: derived from the projected bank balance, i.e. the sum of
+          cashflow items (forecast + actual) on the line's journal up to
+          ``target_date``; a negative balance means the overdraft is drawn.
+        - advance/discount/sbf/factoring: sum of the residual of linked
+          invoices whose due date is on or before ``target_date`` and that are
+          not yet paid/reversed.
+        - other: falls back to the current snapshot usage (no time profile is
+          known for generic facilities).
+
+        ``items_by_journal`` / ``invoices`` are optional pre-fetched caches used
+        by the batch helper to avoid repeated searches.
+        """
+        self.ensure_one()
+        if self.credit_type == 'overdraft':
+            journal = self.account_id.journal_id
+            if not journal:
+                return 0.0
+            if items_by_journal is not None:
+                items = items_by_journal.get(journal.id, self.env['cashflow.item'])
+            else:
+                items = self.env['cashflow.item'].search([
+                    ('journal_id', '=', journal.id),
+                    ('state', '!=', 'cancelled'),
+                ])
+            balance = sum(
+                item.amount_signed for item in items if item.date <= target_date
+            )
+            return abs(balance) if balance < 0 else 0.0
+
+        if self.credit_type in ('advance', 'discount', 'sbf', 'factoring'):
+            lines = invoices if invoices is not None else self.linked_invoice_ids
+            total = 0.0
+            for invoice in lines:
+                if invoice.state != 'posted':
+                    continue
+                if invoice.payment_state in ('paid', 'reversed'):
+                    continue
+                due = invoice.invoice_date_due or invoice.date
+                if due and due <= target_date:
+                    total += abs(invoice.amount_residual)
+            return total
+
+        # 'other' and any future type: no time profile, keep the snapshot.
+        return self.used_amount
+
+    def get_available_at_date(self, target_date):
+        """Return ``(used_at_date, available_at_date)`` for ``target_date``."""
+        self.ensure_one()
+        target_date = fields.Date.to_date(target_date)
+        used = self._projected_used_at_date(target_date)
+        return used, self.limit_amount - used
+
+    def get_available_at_dates(self, date_list):
+        """Batch version of :meth:`get_available_at_date`.
+
+        Returns ``{date: (used_at_date, available_at_date)}``. Pre-fetches the
+        cashflow items / linked invoices once so the per-date loop issues no
+        extra queries.
+        """
+        self.ensure_one()
+        dates = sorted({fields.Date.to_date(d) for d in date_list})
+
+        items_by_journal = None
+        invoices = None
+        if self.credit_type == 'overdraft' and self.account_id.journal_id:
+            items = self.env['cashflow.item'].search([
+                ('journal_id', '=', self.account_id.journal_id.id),
+                ('state', '!=', 'cancelled'),
+            ])
+            items_by_journal = {self.account_id.journal_id.id: items}
+        elif self.credit_type in ('advance', 'discount', 'sbf', 'factoring'):
+            invoices = self.linked_invoice_ids
+
+        result = {}
+        for target_date in dates:
+            used = self._projected_used_at_date(
+                target_date, items_by_journal=items_by_journal, invoices=invoices,
+            )
+            result[target_date] = (used, self.limit_amount - used)
+        return result
 
     @api.constrains('used_amount', 'limit_amount')
     def _check_used_amount(self):
@@ -525,6 +634,83 @@ class TreasuryCreditLine(models.Model):
             'view_mode': 'list,form',
             'domain': [('id', 'in', self.linked_invoice_ids.ids)],
         }
+
+    def get_applicable_rate(self, used_amount, date=None):
+        """Return the interest rate applicable for ``used_amount`` at ``date``.
+
+        Falls back to the flat ``interest_rate`` when no tier is configured or
+        none matches, preserving backward compatibility (R6.3).
+        """
+        self.ensure_one()
+        if not self.rate_tier_ids:
+            return self.interest_rate
+
+        check_date = fields.Date.to_date(date) if date else None
+        for tier in self.rate_tier_ids:
+            if check_date:
+                if tier.valid_from and check_date < tier.valid_from:
+                    continue
+                if tier.valid_to and check_date > tier.valid_to:
+                    continue
+            if used_amount < tier.min_amount:
+                continue
+            if tier.max_amount and used_amount > tier.max_amount:
+                continue
+            return tier.interest_rate
+        return self.interest_rate
+
+
+class TreasuryCreditLineRateTier(models.Model):
+    _name = 'treasury.credit.line.rate.tier'
+    _description = 'Credit Line Interest Rate Tier'
+    _order = 'credit_line_id, min_amount'
+
+    credit_line_id = fields.Many2one(
+        'treasury.credit.line',
+        string='Credit Line',
+        required=True,
+        ondelete='cascade',
+    )
+    company_id = fields.Many2one(
+        related='credit_line_id.company_id',
+        store=True,
+        readonly=True,
+    )
+    currency_id = fields.Many2one(
+        related='credit_line_id.currency_id',
+        store=True,
+        readonly=True,
+    )
+    min_amount = fields.Monetary(
+        string='From Amount',
+        currency_field='currency_id',
+        help='Lower utilization bound (inclusive).',
+    )
+    max_amount = fields.Monetary(
+        string='To Amount',
+        currency_field='currency_id',
+        help='Upper utilization bound (inclusive). Leave 0 for no upper bound.',
+    )
+    interest_rate = fields.Float(
+        string='Interest Rate (%)',
+        digits=(5, 2),
+    )
+    valid_from = fields.Date(string='Valid From')
+    valid_to = fields.Date(string='Valid To')
+
+    @api.constrains('min_amount', 'max_amount')
+    def _check_amounts(self):
+        for tier in self:
+            if tier.max_amount and tier.max_amount < tier.min_amount:
+                raise ValidationError(
+                    _('Tier "To Amount" must be greater than "From Amount".')
+                )
+
+    @api.constrains('valid_from', 'valid_to')
+    def _check_validity(self):
+        for tier in self:
+            if tier.valid_from and tier.valid_to and tier.valid_to < tier.valid_from:
+                raise ValidationError(_('Tier "Valid To" must be after "Valid From".'))
 
 
 class TreasuryCovenant(models.Model):

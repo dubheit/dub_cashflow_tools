@@ -6,7 +6,8 @@
         <field name="name">treasury.credit.line.list</field>
         <field name="model">treasury.credit.line</field>
         <field name="arch" type="xml">
-            <list decoration-muted="state in ('closed', 'expired')" decoration-warning="state == 'expired'">
+            <list decoration-muted="state in ('closed', 'expired')" decoration-warning="state == 'expired'" default_order="sequence">
+                <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="account_id"/>
                 <field name="credit_type"/>
@@ -113,6 +114,22 @@
                                     <field name="is_compliant" widget="boolean_toggle"/>
                                     <field name="frequency"/>
                                     <field name="check_date"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Rate Tiers" name="rate_tiers">
+                            <div class="alert alert-info" role="alert">
+                                When tiers are defined, they override the flat interest
+                                rate based on the utilization threshold.
+                            </div>
+                            <field name="rate_tier_ids">
+                                <list editable="bottom">
+                                    <field name="min_amount"/>
+                                    <field name="max_amount"/>
+                                    <field name="interest_rate"/>
+                                    <field name="valid_from" optional="show"/>
+                                    <field name="valid_to" optional="show"/>
+                                    <field name="currency_id" column_invisible="1"/>
                                 </list>
                             </field>
                         </page>

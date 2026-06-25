@@ -1,6 +1,6 @@
 {
     "name": "DUB Treasury Base",
-    "version": "18.0.1.1.1",
+    "version": "18.0.2.0.0",
     "category": "Accounting/Accounting",
     "summary": "Treasury management base: accounts, credit lines, financial instruments",
     "description": """
@@ -32,6 +32,7 @@ Integrates with Odoo's native accounting and banking features.
         "views/treasury_credit_line_views.xml",
         "views/treasury_financial_instrument_views.xml",
         "views/treasury_menu.xml",
+        "wizard/treasury_availability_wizard_views.xml",
     ],
     "demo": [
         "data/treasury_demo.xml",

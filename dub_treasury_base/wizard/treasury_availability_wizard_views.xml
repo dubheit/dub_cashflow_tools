@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Wizard form -->
+    <record id="treasury_availability_wizard_view_form" model="ir.ui.view">
+        <field name="name">treasury.availability.wizard.form</field>
+        <field name="model">treasury.availability.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Credit Line Availability">
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="granularity"/>
+                    </group>
+                    <group>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="credit_line_ids" widget="many2many_tags"
+                               options="{'no_create': True}"
+                               placeholder="All active credit lines..."/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_compute" type="object" string="Compute"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="treasury_availability_wizard_action" model="ir.actions.act_window">
+        <field name="name">Credit Line Availability</field>
+        <field name="res_model">treasury.availability.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Report pivot -->
+    <record id="treasury_availability_report_view_pivot" model="ir.ui.view">
+        <field name="name">treasury.availability.report.pivot</field>
+        <field name="model">treasury.availability.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Credit Line Availability">
+                <field name="date" type="row" interval="day"/>
+                <field name="credit_line_id" type="col"/>
+                <field name="available_at_date" type="measure"/>
+                <field name="used_at_date" type="measure"/>
+                <field name="limit_amount" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="treasury_availability_report_view_list" model="ir.ui.view">
+        <field name="name">treasury.availability.report.list</field>
+        <field name="model">treasury.availability.report</field>
+        <field name="arch" type="xml">
+            <list string="Credit Line Availability">
+                <field name="date"/>
+                <field name="bank_id"/>
+                <field name="credit_line_id"/>
+                <field name="limit_amount" sum="Limit"/>
+                <field name="used_at_date" sum="Used"/>
+                <field name="available_at_date" sum="Available"/>
+                <field name="utilization_rate_at_date" widget="progressbar"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="treasury_availability_report_view_search" model="ir.ui.view">
+        <field name="name">treasury.availability.report.search</field>
+        <field name="model">treasury.availability.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="credit_line_id"/>
+                <field name="bank_id"/>
+                <field name="date"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_bank" string="Bank" context="{'group_by': 'bank_id'}"/>
+                    <filter name="group_credit_line" string="Credit Line" context="{'group_by': 'credit_line_id'}"/>
+                    <filter name="group_date" string="Date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <menuitem id="menu_treasury_availability"
+              name="Availability Projection"
+              parent="menu_treasury_accounts"
+              action="treasury_availability_wizard_action"
+              sequence="30"/>
+</odoo>
