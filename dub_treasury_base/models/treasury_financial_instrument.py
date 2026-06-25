@@ -521,6 +521,7 @@ class TreasuryFinancialInstrument(models.Model):
             'instrument_id': self.id,
             'sequence': 1,
             'date': self.end_date,
+            'residual_before': self.principal_amount,
             'principal': self.principal_amount,
             'interest': self._calculate_total_interest(),
         })
@@ -561,6 +562,7 @@ class TreasuryFinancialInstrument(models.Model):
                 'instrument_id': self.id,
                 'sequence': seq,
                 'date': current_date,
+                'residual_before': remaining,
                 'principal': principal,
                 'interest': interest,
             })
@@ -591,6 +593,7 @@ class TreasuryFinancialInstrument(models.Model):
                 'instrument_id': self.id,
                 'sequence': seq,
                 'date': current_date,
+                'residual_before': remaining,
                 'principal': principal,
                 'interest': interest,
             })
