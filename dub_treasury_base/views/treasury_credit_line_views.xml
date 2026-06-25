@@ -92,8 +92,10 @@
                     </group>
                     <group>
                         <group name="conditions" string="Conditions">
+                            <field name="reference_rate"/>
                             <field name="interest_rate"/>
                             <field name="spread"/>
+                            <field name="rate_label"/>
                             <field name="commission_rate"/>
                         </group>
                         <group name="dates" string="Dates">

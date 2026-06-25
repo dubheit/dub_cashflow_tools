@@ -167,6 +167,22 @@ class TestTreasuryCreditLine(TransactionCase):
         covenant.current_value = 2.5
         self.assertFalse(covenant.is_compliant)
 
+    def test_rate_label(self):
+        """rate_label combines the reference rate and the spread."""
+        credit_line = self.CreditLine.create({
+            'name': 'Test Rate Label',
+            'account_id': self.treasury_account.id,
+            'credit_type': 'sbf',
+            'limit_amount': 450000.00,
+            'reference_rate': 'euribor_3m',
+            'spread': 0.35,
+        })
+        self.assertEqual(credit_line.rate_label, 'Euribor 3M + 0.35%')
+
+        credit_line.reference_rate = False
+        credit_line.interest_rate = 2.4
+        self.assertEqual(credit_line.rate_label, '2.4%')
+
     def test_manual_vs_auto_usage(self):
         """Test switching between manual and auto usage computation."""
         credit_line = self.CreditLine.create({

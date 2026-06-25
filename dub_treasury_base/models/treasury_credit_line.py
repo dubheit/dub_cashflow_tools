@@ -95,6 +95,19 @@ class TreasuryCreditLine(models.Model):
     )
 
     # Conditions
+    reference_rate = fields.Selection(
+        selection=[
+            ('euribor_1w', 'Euribor 1W'),
+            ('euribor_1m', 'Euribor 1M'),
+            ('euribor_3m', 'Euribor 3M'),
+            ('euribor_6m', 'Euribor 6M'),
+            ('euribor_12m', 'Euribor 12M'),
+            ('other', 'Other'),
+        ],
+        string='Reference Rate',
+        tracking=True,
+        help='Reference index over which the spread is applied (e.g. Euribor 3M).',
+    )
     interest_rate = fields.Float(
         string='Interest Rate (%)',
         digits=(5, 2),
@@ -105,6 +118,11 @@ class TreasuryCreditLine(models.Model):
         digits=(5, 2),
         tracking=True,
         help='Spread over reference rate (Euribor, etc.)',
+    )
+    rate_label = fields.Char(
+        string='Rate',
+        compute='_compute_rate_label',
+        help='Human-readable rate, e.g. "Euribor 3M + 0.35%".',
     )
     commission_rate = fields.Float(
         string='Commission (%)',
@@ -238,6 +256,24 @@ class TreasuryCreditLine(models.Model):
     def _compute_linked_invoice_count(self):
         for line in self:
             line.linked_invoice_count = len(line.linked_invoice_ids)
+
+    @api.depends('reference_rate', 'spread', 'interest_rate')
+    def _compute_rate_label(self):
+        ref_labels = dict(
+            self._fields['reference_rate']._description_selection(self.env)
+        )
+        for line in self:
+            if line.reference_rate:
+                base = ref_labels.get(line.reference_rate, line.reference_rate)
+                if line.spread:
+                    sign = '+' if line.spread >= 0 else '-'
+                    line.rate_label = '%s %s %s%%' % (base, sign, abs(line.spread))
+                else:
+                    line.rate_label = base
+            elif line.interest_rate:
+                line.rate_label = '%s%%' % line.interest_rate
+            else:
+                line.rate_label = ''
 
     @api.depends('auto_compute_usage', 'manual_used_amount', 'credit_type',
                  'account_id.journal_id', 'account_id.journal_id.default_account_id',
