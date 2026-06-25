@@ -16,6 +16,7 @@ class TestTreasuryCreditLine(TransactionCase):
         # Create a treasury account for credit lines
         cls.treasury_account = cls.TreasuryAccount.create({
             'name': 'Test Bank for Credit Lines',
+            'code': 'TCL',
             'account_type': 'bank',
         })
 
@@ -179,6 +180,7 @@ class TestTreasuryCreditLine(TransactionCase):
 
         self.assertEqual(credit_line.used_amount, 30000.00)
 
-        # For non-overdraft types with auto_compute, it still uses manual_used_amount
+        # With auto_compute enabled, an advance facility recomputes the usage
+        # from its linked invoices. With none linked, the usage is 0.
         credit_line.auto_compute_usage = True
-        self.assertEqual(credit_line.used_amount, 30000.00)
+        self.assertEqual(credit_line.used_amount, 0.0)

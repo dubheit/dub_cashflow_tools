@@ -28,6 +28,7 @@ class TestTreasuryAccount(TransactionCase):
         """Test creating a bank treasury account."""
         account = self.TreasuryAccount.create({
             'name': 'Test Bank Account',
+            'code': 'TBANK',
             'account_type': 'bank',
             'journal_id': self.bank_journal.id,
         })
@@ -41,6 +42,7 @@ class TestTreasuryAccount(TransactionCase):
         """Test creating a cash treasury account."""
         account = self.TreasuryAccount.create({
             'name': 'Test Cash Account',
+            'code': 'TCASH',
             'account_type': 'cash',
         })
 
@@ -50,6 +52,7 @@ class TestTreasuryAccount(TransactionCase):
         """Test creating an internal treasury account."""
         account = self.TreasuryAccount.create({
             'name': 'Test Internal Account',
+            'code': 'TINT',
             'account_type': 'internal',
         })
 
@@ -59,6 +62,7 @@ class TestTreasuryAccount(TransactionCase):
         """Test archiving a treasury account."""
         account = self.TreasuryAccount.create({
             'name': 'Test Account to Archive',
+            'code': 'TARCH',
             'account_type': 'bank',
         })
 
@@ -67,11 +71,20 @@ class TestTreasuryAccount(TransactionCase):
         self.assertFalse(account.active)
 
     def test_account_with_iban(self):
-        """Test treasury account with IBAN."""
+        """Test treasury account IBAN read from its bank account.
+
+        ``iban`` is a related field on ``bank_account_id.acc_number``, so it is
+        populated through the linked res.partner.bank, not written directly.
+        """
+        bank_account = self.env['res.partner.bank'].create({
+            'acc_number': 'IT60X0542811101000000123456',
+            'partner_id': self.company.partner_id.id,
+        })
         account = self.TreasuryAccount.create({
             'name': 'Test Account with IBAN',
+            'code': 'TIBAN',
             'account_type': 'bank',
-            'iban': 'IT60X0542811101000000123456',
+            'bank_account_id': bank_account.id,
         })
 
         self.assertEqual(account.iban, 'IT60X0542811101000000123456')
@@ -80,6 +93,7 @@ class TestTreasuryAccount(TransactionCase):
         """Test that company_id is correctly set from journal."""
         account = self.TreasuryAccount.create({
             'name': 'Test Company Relation',
+            'code': 'TREL',
             'account_type': 'bank',
             'journal_id': self.bank_journal.id,
         })

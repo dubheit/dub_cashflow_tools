@@ -131,6 +131,7 @@ class TestTreasuryFinancialInstrument(TransactionCase):
         """Test French amortization schedule generation."""
         instrument = self.Instrument.create({
             'name': 'Test French Amortization',
+            'total_installments': 12,
             'instrument_type': 'loan',
             'flow_direction': 'inbound',
             'principal_amount': 12000.00,
@@ -149,7 +150,7 @@ class TestTreasuryFinancialInstrument(TransactionCase):
         self.assertTrue(all(i.state == 'draft' for i in instrument.installment_ids))
 
         # French amortization: constant total payment
-        payments = instrument.installment_ids.mapped('total_amount')
+        payments = instrument.installment_ids.mapped('total')
         # Allow small rounding differences
         self.assertTrue(max(payments) - min(payments) < 1)
 
@@ -157,6 +158,7 @@ class TestTreasuryFinancialInstrument(TransactionCase):
         """Test Italian amortization schedule generation."""
         instrument = self.Instrument.create({
             'name': 'Test Italian Amortization',
+            'total_installments': 12,
             'instrument_type': 'loan',
             'flow_direction': 'inbound',
             'principal_amount': 12000.00,
@@ -174,7 +176,7 @@ class TestTreasuryFinancialInstrument(TransactionCase):
         self.assertEqual(len(instrument.installment_ids), 12)
 
         # Italian amortization: constant principal
-        principals = instrument.installment_ids.mapped('principal_amount')
+        principals = instrument.installment_ids.mapped('principal')
         # Each principal payment should be 1000 (12000/12)
         self.assertTrue(all(abs(p - 1000) < 1 for p in principals))
 
@@ -182,6 +184,7 @@ class TestTreasuryFinancialInstrument(TransactionCase):
         """Test bullet amortization (interest only, principal at end)."""
         instrument = self.Instrument.create({
             'name': 'Test Bullet',
+            'total_installments': 8,
             'instrument_type': 'loan',
             'flow_direction': 'inbound',
             'principal_amount': 100000.00,
@@ -196,19 +199,15 @@ class TestTreasuryFinancialInstrument(TransactionCase):
 
         instrument.action_generate_installments()
 
-        self.assertEqual(len(instrument.installment_ids), 8)  # 2 years * 4 quarters
-
-        # All but last installment should have zero principal
-        all_but_last = instrument.installment_ids.sorted('due_date')[:-1]
-        last = instrument.installment_ids.sorted('due_date')[-1]
-
-        self.assertTrue(all(i.principal_amount == 0 for i in all_but_last))
-        self.assertEqual(last.principal_amount, 100000.00)
+        # Bullet: a single payment carrying the full principal at the end.
+        self.assertEqual(len(instrument.installment_ids), 1)
+        self.assertEqual(instrument.installment_ids.principal, 100000.00)
 
     def test_quarterly_frequency(self):
         """Test quarterly payment frequency."""
         instrument = self.Instrument.create({
             'name': 'Test Quarterly',
+            'total_installments': 8,
             'instrument_type': 'loan',
             'flow_direction': 'inbound',
             'principal_amount': 40000.00,
@@ -229,6 +228,7 @@ class TestTreasuryFinancialInstrument(TransactionCase):
         """Test semi-annual payment frequency."""
         instrument = self.Instrument.create({
             'name': 'Test Semi-Annual',
+            'total_installments': 6,
             'instrument_type': 'loan',
             'flow_direction': 'inbound',
             'principal_amount': 60000.00,
@@ -249,6 +249,7 @@ class TestTreasuryFinancialInstrument(TransactionCase):
         """Test residual amount calculation after payments."""
         instrument = self.Instrument.create({
             'name': 'Test Residual',
+            'total_installments': 12,
             'instrument_type': 'loan',
             'flow_direction': 'inbound',
             'principal_amount': 12000.00,
@@ -263,13 +264,13 @@ class TestTreasuryFinancialInstrument(TransactionCase):
 
         instrument.action_generate_installments()
 
-        installments = instrument.installment_ids.sorted('due_date')
+        installments = instrument.installment_ids.sorted('date')
 
         # First installment residual should be 12000 - 1000 = 11000
-        self.assertAlmostEqual(installments[0].residual_amount, 11000.00, places=2)
+        self.assertAlmostEqual(installments[0].residual_after, 11000.00, places=2)
 
         # Last installment residual should be 0
-        self.assertAlmostEqual(installments[-1].residual_amount, 0.00, places=2)
+        self.assertAlmostEqual(installments[-1].residual_after, 0.00, places=2)
 
     def test_date_validation(self):
         """Test that start date must be before end date."""
@@ -292,6 +293,7 @@ class TestTreasuryFinancialInstrument(TransactionCase):
         """Test closing a paid instrument."""
         instrument = self.Instrument.create({
             'name': 'Test Close',
+            'total_installments': 12,
             'instrument_type': 'loan',
             'flow_direction': 'inbound',
             'principal_amount': 10000.00,
@@ -311,7 +313,7 @@ class TestTreasuryFinancialInstrument(TransactionCase):
         for installment in instrument.installment_ids:
             installment.write({
                 'state': 'paid',
-                'payment_date': installment.due_date,
+                'payment_date': installment.date,
             })
 
         instrument.action_close()
@@ -321,6 +323,7 @@ class TestTreasuryFinancialInstrument(TransactionCase):
         """Test installment state transitions."""
         instrument = self.Instrument.create({
             'name': 'Test Installment Workflow',
+            'total_installments': 3,
             'instrument_type': 'loan',
             'flow_direction': 'inbound',
             'principal_amount': 3000.00,
