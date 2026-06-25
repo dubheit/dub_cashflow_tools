@@ -6,11 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0+e-20260409\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-19 13:35+0000\n"
-"PO-Revision-Date: 2026-05-26 11:40+0000\n"
+"POT-Creation-Date: 2026-06-25 06:47+0000\n"
+"PO-Revision-Date: 2026-06-25 06:47+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -21,15 +20,7 @@ msgstr ""
 msgid ""
 "# Example: Debt/Equity Ratio\n"
 "abs(balance('2%')) / abs(balance('3%'))"
-msgstr ""
-"# Esempio: Indice Debiti/Patrimonio\n"
-"abs(balance('2%')) / abs(balance('3%'))"
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_installment.py:0
-msgid "%(name)s - Installment %(seq)s"
-msgstr ""
+msgstr "# Esempio: Indice Debiti/Patrimonio\nabs(balance('2%')) / abs(balance('3%'))"
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
@@ -79,9 +70,9 @@ msgstr "<b>balance(code_pattern)</b>"
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
 msgid ""
-"<code>(abs(balance('7%')) - abs(balance('6%'))) / abs(balance('661%'))</code>"
-msgstr ""
-"<code>(abs(balance('7%')) - abs(balance('6%'))) / abs(balance('661%'))</code>"
+"<code>(abs(balance('7%')) - abs(balance('6%'))) / "
+"abs(balance('661%'))</code>"
+msgstr "<code>(abs(balance('7%')) - abs(balance('6%'))) / abs(balance('661%'))</code>"
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
@@ -90,9 +81,9 @@ msgstr "<code>abs(balance('2%')) / abs(balance('3%'))</code>"
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
-msgid "<code>abs(balance('21%') + balance('22%')) / abs(balance('41%'))</code>"
-msgstr ""
+msgid ""
 "<code>abs(balance('21%') + balance('22%')) / abs(balance('41%'))</code>"
+msgstr "<code>abs(balance('21%') + balance('22%')) / abs(balance('41%'))</code>"
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
@@ -138,15 +129,8 @@ msgstr "<span class=\"o_stat_text\">Registrazioni</span>"
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
 msgid ""
 "<span class=\"text-muted\" invisible=\"not auto_compute_usage\">Auto</span>\n"
-"                                <span class=\"text-muted\" "
-"invisible=\"auto_compute_usage\">Manual</span>"
-msgstr ""
-"<span class=\"text-muted\" invisible=\"not auto_compute_usage\">Auto</span>\n"
-"                                <span class=\"text-muted\" "
-"invisible=\"auto_compute_usage\">Manuale</span><span class=\"text-muted\" "
-"invisible=\"not auto_compute_usage\">Auto</span>\n"
-"                                <span class=\"text-muted\" "
-"invisible=\"auto_compute_usage\">Manuale</span>"
+"                                <span class=\"text-muted\" invisible=\"auto_compute_usage\">Manual</span>"
+msgstr "<span class=\"text-muted\" invisible=\"not auto_compute_usage\">Auto</span>\n                                <span class=\"text-muted\" invisible=\"auto_compute_usage\">Manuale</span>"
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_kanban
@@ -163,27 +147,14 @@ msgstr "<span class=\"text-muted\">Saldo:</span>"
 msgid ""
 "<strong>Formula:</strong> Valore = (Numeratore + − Numeratore −) / "
 "(Denominatore + − Denominatore −)"
-msgstr ""
-"<strong>Formula:</strong> Valore = (Numeratore + − Numeratore −) / "
-"(Denominatore + − Denominatore −)"
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid ""
-"<strong>⚠️ Covenant Violation Alert</strong><br/><b>%(name)s</b> is non-"
-"compliant:<br/>Current value: <b>%(current)s</b><br/>Required: %"
-"(comparison)s <b>%(threshold)s</b>"
-msgstr ""
+msgstr "<strong>Formula:</strong> Valore = (Numeratore + − Numeratore −) / (Denominatore + − Denominatore −)"
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
 msgid ""
-"<strong>⚡ Advanced Mode:</strong> Write a Python expression that returns "
-"the covenant value."
-msgstr ""
-"<strong>⚡ Modalità avanzata:</strong> Scrivi un'espressione Python che "
-"restituisce il valore del covenant."
+"<strong>⚡ Advanced Mode:</strong> Write a Python expression that returns the"
+" covenant value."
+msgstr "<strong>⚡ Modalità avanzata:</strong> Scrivi un'espressione Python che restituisce il valore del covenant."
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
@@ -229,12 +200,7 @@ msgid ""
 "- Debt/Equity: Equity accounts\n"
 "- Current Ratio: Current liability accounts\n"
 "- Interest Coverage: Interest expense accounts"
-msgstr ""
-"Conti da AGGIUNGERE per il denominatore.\n"
-"Esempi:\n"
-"- Debiti/Patrimonio: Conti patrimonio netto\n"
-"- Indice di liquidità corrente: Conti passività correnti\n"
-"- Copertura interessi: Conti interessi passivi"
+msgstr "Conti da AGGIUNGERE per il denominatore.\nEsempi:\n- Debiti/Patrimonio: Conti patrimonio netto\n- Indice di liquidità corrente: Conti passività correnti\n- Copertura interessi: Conti interessi passivi"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_covenant__numerator_add_account_ids
@@ -244,12 +210,7 @@ msgid ""
 "- Debt/Equity: Liability accounts\n"
 "- Current Ratio: Current asset accounts\n"
 "- Interest Coverage: Revenue accounts"
-msgstr ""
-"Conti da AGGIUNGERE per il numeratore.\n"
-"Esempi:\n"
-"- Debiti/Patrimonio: Conti passività\n"
-"- Indice di liquidità corrente: Conti attività correnti\n"
-"- Copertura interessi: Conti ricavi"
+msgstr "Conti da AGGIUNGERE per il numeratore.\nEsempi:\n- Debiti/Patrimonio: Conti passività\n- Indice di liquidità corrente: Conti attività correnti\n- Copertura interessi: Conti ricavi"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_covenant__denominator_subtract_account_ids
@@ -263,11 +224,7 @@ msgid ""
 "Examples:\n"
 "- Interest Coverage: Operating expense accounts (to get EBIT)\n"
 "- Leverage: Depreciation accounts (to get EBITDA)"
-msgstr ""
-"Conti da SOTTRARRE per il numeratore.\n"
-"Esempi:\n"
-"- Copertura interessi: Conti costi operativi (per ottenere l'EBIT)\n"
-"- Leva: Conti ammortamento (per ottenere l'EBITDA)"
+msgstr "Conti da SOTTRARRE per il numeratore.\nEsempi:\n- Copertura interessi: Conti costi operativi (per ottenere l'EBIT)\n- Leva: Conti ammortamento (per ottenere l'EBITDA)"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__message_needaction
@@ -335,6 +292,11 @@ msgid "Advances"
 msgstr "Anticipi"
 
 #. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_availability_wizard_view_form
+msgid "All active credit lines..."
+msgstr "Tutte le linee di credito attive..."
+
+#. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
 msgid "Amortization"
 msgstr "Ammortamento"
@@ -351,18 +313,6 @@ msgid "Amount"
 msgstr "Importo"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/wizard/credit_line_movement_wizard.py:0
-msgid "Amount (%(amount)s) exceeds available credit (%(available)s)."
-msgstr ""
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/wizard/credit_line_movement_wizard.py:0
-msgid "Amount (%(amount)s) exceeds used amount (%(used)s)."
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__disbursed_amount
 msgid "Amount actually disbursed (may differ from principal)"
 msgstr "Importo effettivamente erogato (può differire dal capitale)"
@@ -372,12 +322,6 @@ msgstr "Importo effettivamente erogato (può differire dal capitale)"
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__used_amount
 msgid "Amount currently used from this credit line"
 msgstr "Importo attualmente utilizzato da questa linea di credito"
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/wizard/credit_line_movement_wizard.py:0
-msgid "Amount must be positive."
-msgstr ""
 
 #. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__frequency__annual
@@ -414,9 +358,7 @@ msgstr "Sei sicuro di voler chiudere questo strumento?"
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
 msgid "Are you sure you want to mark this credit line as expired?"
-msgstr ""
-"Sei sicuro di voler contrassegnare questa linea di credito come scaduta?Sei "
-"sicuro di voler contrassegnare questa linea di credito come scaduta?"
+msgstr "Sei sicuro di voler contrassegnare questa linea di credito come scaduta?"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__message_attachment_count
@@ -436,7 +378,13 @@ msgid "Automatically post the journal entry after creation"
 msgstr "Conferma automaticamente la registrazione contabile dopo la creazione"
 
 #. module: dub_treasury_base
+#: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_availability
+msgid "Availability Projection"
+msgstr "Proiezione Disponibilità"
+
+#. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.credit_line_movement_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_availability_report_view_list
 msgid "Available"
 msgstr "Disponibile"
 
@@ -445,6 +393,11 @@ msgstr "Disponibile"
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__available_amount
 msgid "Available Amount"
 msgstr "Importo Disponibile"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__available_at_date
+msgid "Available At Date"
+msgstr "Disponibile alla Data"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__available_balance
@@ -463,15 +416,15 @@ msgstr "BIC/SWIFT"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__bank_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__bank_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__bank_id
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_availability_report_view_search
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
 msgid "Bank"
 msgstr "Banca"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__bank_account_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__bank_account_id
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_account__account_type__bank
@@ -497,12 +450,6 @@ msgstr "Finanziamento Bancario"
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__partner_id
 msgid "Bank Partner"
 msgstr "Partner Banca"
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid "Bank Payment - %(name)s"
-msgstr ""
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__disbursement_account_id
@@ -578,6 +525,7 @@ msgstr "Valore calcolato: SOMMA(+) - SOMMA(-)"
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.credit_line_movement_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_availability_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
 msgid "Cancel"
 msgstr "Annulla"
@@ -588,24 +536,22 @@ msgid "Cancelled"
 msgstr "Annullato"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid "Cannot close credit line with used amount. Current usage: %(amount)s"
-msgstr ""
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
-msgid ""
-"Cannot close instrument with unpaid installments. Remaining: %(count)s "
-"installments"
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_account__account_type__cash
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
 msgid "Cash"
 msgstr "Cassa"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__cash_buffer
+msgid "Cash Buffer"
+msgstr "Riserva di Cassa"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__cash_buffer
+msgid ""
+"Cash reserve available in addition to the credit lines when projecting "
+"treasury liquidity. Leave 0 if not used."
+msgstr "Riserva di cassa disponibile in aggiunta alle linee di credito nella proiezione della liquidità di tesoreria. Lasciare 0 se non utilizzata."
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__frequency
@@ -637,8 +583,11 @@ msgstr "Commissione (%)"
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_credit_line_movement_wizard__company_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__company_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__company_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_wizard__company_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__company_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__company_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__company_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__company_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__company_id
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
@@ -654,6 +603,11 @@ msgstr "Confronto"
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__is_compliant
 msgid "Compliant"
 msgstr "Conforme"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_availability_wizard_view_form
+msgid "Compute"
+msgstr "Calcola"
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
@@ -698,12 +652,6 @@ msgid "Covenant Name"
 msgstr "Nome Covenant"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid "Covenant Violation: %s"
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.actions.act_window,name:dub_treasury_base.treasury_covenant_action
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__covenant_ids
 #: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_covenant_list
@@ -715,16 +663,10 @@ msgstr "Covenant"
 #: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_covenant_action
 msgid ""
 "Covenants are financial conditions required by banks.\n"
-"                Configure accounts to automatically calculate covenant "
-"values."
-msgstr ""
-"I covenant sono condizioni finanziarie richieste dalle banche.\n"
-"                Configura i conti per calcolare automaticamente i valori dei "
-"covenant."
+"                Configure accounts to automatically calculate covenant values."
+msgstr "I covenant sono condizioni finanziarie richieste dalle banche.\n                Configura i conti per calcolare automaticamente i valori dei covenant."
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_installment.py:0
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_form
 msgid "Create Payment"
 msgstr "Crea Pagamento"
@@ -747,8 +689,11 @@ msgstr "Crea il tuo primo conto di tesoreria"
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_credit_line_movement_wizard__create_uid
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__create_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__create_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_wizard__create_uid
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__create_uid
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__create_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__create_uid
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__create_uid
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__create_uid
 msgid "Created by"
@@ -757,8 +702,11 @@ msgstr "Creato da"
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_credit_line_movement_wizard__create_date
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__create_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__create_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_wizard__create_date
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__create_date
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__create_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__create_date
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__create_date
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__create_date
 msgid "Created on"
@@ -778,22 +726,40 @@ msgstr "Importo Fido"
 #: model:ir.model.fields,field_description:dub_treasury_base.field_account_bank_statement_line__credit_line_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_account_move__credit_line_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_credit_line_movement_wizard__credit_line_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__credit_line_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__credit_line_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__credit_line_id
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_availability_report_view_search
 msgid "Credit Line"
 msgstr "Linea di Credito"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid "Credit Line - %(name)s"
-msgstr ""
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__credit_account_id
 msgid "Credit Line Account"
 msgstr "Conto linea di credito"
+
+#. module: dub_treasury_base
+#: model:ir.actions.act_window,name:dub_treasury_base.treasury_availability_wizard_action
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_availability_report_view_list
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_availability_report_view_pivot
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_availability_wizard_view_form
+msgid "Credit Line Availability"
+msgstr "Disponibilità Linea di Credito"
+
+#. module: dub_treasury_base
+#: model:ir.model,name:dub_treasury_base.model_treasury_availability_report
+msgid "Credit Line Availability (projected)"
+msgstr "Disponibilità Linea di Credito (proiettata)"
+
+#. module: dub_treasury_base
+#: model:ir.model,name:dub_treasury_base.model_treasury_availability_wizard
+msgid "Credit Line Availability Wizard"
+msgstr "Procedura Disponibilità Linea di Credito"
+
+#. module: dub_treasury_base
+#: model:ir.model,name:dub_treasury_base.model_treasury_credit_line_rate_tier
+msgid "Credit Line Interest Rate Tier"
+msgstr "Scaglione Tasso di Interesse Linea di Credito"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_account_bank_statement_line__credit_line_movement_type
@@ -812,12 +778,11 @@ msgid "Credit Line Name"
 msgstr "Nome Linea di Credito"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_account.py:0
 #: model:ir.actions.act_window,name:dub_treasury_base.treasury_credit_line_action
 #: model:ir.model.fields,field_description:dub_treasury_base.field_account_bank_statement_line__credit_line_ids
 #: model:ir.model.fields,field_description:dub_treasury_base.field_account_move__credit_line_ids
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__credit_line_ids
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_wizard__credit_line_ids
 #: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_credit_line_list
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
 msgid "Credit Lines"
@@ -837,30 +802,23 @@ msgstr "Fido Utilizzato"
 #: model:ir.model.fields,help:dub_treasury_base.field_account_bank_statement_line__credit_line_ids
 #: model:ir.model.fields,help:dub_treasury_base.field_account_move__credit_line_ids
 msgid ""
-"Credit lines linked to this invoice (customer invoices for advance/SBF/"
-"factoring, vendor bills for costs)"
-msgstr ""
-"Linee di credito collegate a questa fattura (fatture cliente per anticipo/"
-"SBF/factoring, fatture fornitore per costi)"
+"Credit lines linked to this invoice (customer invoices for "
+"advance/SBF/factoring, vendor bills for costs)"
+msgstr "Linee di credito collegate a questa fattura (fatture cliente per anticipo/SBF/factoring, fatture fornitore per costi)"
 
 #. module: dub_treasury_base
 #: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_credit_line_action
 msgid ""
-"Credit lines represent your banking facilities: overdrafts, invoice "
-"advances,\n"
+"Credit lines represent your banking facilities: overdrafts, invoice advances,\n"
 "                bill discounts, factoring, and other credit facilities."
-msgstr ""
-"Le linee di credito rappresentano le tue facilitazioni bancarie: scoperti, "
-"anticipi fatture,\n"
-"                sconto effetti, factoring e altre linee di credito.Le linee "
-"di credito rappresentano le tue facilitazioni bancarie: scoperti, anticipi "
-"fatture,\n"
-"                sconti effetti, factoring e altre facilitazioni creditizie."
+msgstr "Le linee di credito rappresentano le tue facilitazioni bancarie: scoperti, anticipi fatture,\n                sconto effetti, factoring e altre linee di credito."
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_credit_line_movement_wizard__currency_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__currency_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__currency_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__currency_id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__currency_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__currency_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__currency_id
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
@@ -903,24 +861,33 @@ msgid "Custom"
 msgstr "Personalizzato"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
-msgid "Custom amortization requires manual entry of installments."
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__linked_invoice_ids
 msgid ""
 "Customer invoices (for advance, SBF, factoring) and vendor bills (for "
 "interest charges, fees) linked to this credit line"
-msgstr ""
-"Fatture cliente (per anticipo, SBF, factoring) e fatture fornitore (per "
-"addebiti interessi, commissioni) collegate a questa linea di credito"
+msgstr "Fatture cliente (per anticipo, SBF, factoring) e fatture fornitore (per addebiti interessi, commissioni) collegate a questa linea di credito"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_availability_wizard__granularity__day
+msgid "Daily"
+msgstr "Giornaliera"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_credit_line_movement_wizard__date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__date
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_availability_report_view_search
 msgid "Date"
 msgstr "Data"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_wizard__date_from
+msgid "Date From"
+msgstr "Data Da"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_wizard__date_to
+msgid "Date To"
+msgstr "Data A"
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
@@ -989,42 +956,23 @@ msgid "Disbursed Amount"
 msgstr "Importo Erogato"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
-msgid "Disbursement %(ref)s"
-msgstr ""
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
-msgid "Disbursement - %(name)s"
-msgstr ""
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__disbursement_account_id
 msgid "Disbursement Account"
 msgstr "Conto erogazione"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__disbursement_move_id
 msgid "Disbursement Entry"
 msgstr "Registrazione erogazione"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
-msgid "Disbursement entry already exists for %(name)s."
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_credit_line_movement_wizard__display_name
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__display_name
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__display_name
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_wizard__display_name
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__display_name
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__display_name
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__display_name
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__display_name
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__display_name
 msgid "Display Name"
@@ -1060,9 +1008,7 @@ msgstr "Abilita riclassifica lungo/breve termine"
 msgid ""
 "Enable to use a custom Python formula instead of standard account "
 "configuration."
-msgstr ""
-"Abilita per usare una formula Python personalizzata invece della "
-"configurazione standard dei conti."
+msgstr "Abilita per usare una formula Python personalizzata invece della configurazione standard dei conti."
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__end_date
@@ -1085,29 +1031,30 @@ msgid "Equal"
 msgstr "Uguale"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid ""
-"Error evaluating formula for \"%(name)s\":\n"
-"%(error)s"
-msgstr ""
-
-#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__reference_rate__euribor_12m
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__reference_rate__euribor_12m
 msgid "Euribor 12M"
 msgstr "Euribor 12M"
 
 #. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__reference_rate__euribor_1m
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__reference_rate__euribor_1m
 msgid "Euribor 1M"
 msgstr "Euribor 1M"
 
 #. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__reference_rate__euribor_1w
+msgid "Euribor 1W"
+msgstr "Euribor 1W"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__reference_rate__euribor_3m
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__reference_rate__euribor_3m
 msgid "Euribor 3M"
 msgstr "Euribor 3M"
 
 #. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__reference_rate__euribor_6m
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__reference_rate__euribor_6m
 msgid "Euribor 6M"
 msgstr "Euribor 6M"
@@ -1173,12 +1120,7 @@ msgstr "Strumenti Finanziari"
 msgid ""
 "Financial instruments include loans, mortgages, leasing contracts,\n"
 "                bonds, and partner loans."
-msgstr ""
-"Gli strumenti finanziari includono finanziamenti, mutui, contratti di "
-"leasing,\n"
-"                obbligazioni e prestiti a partner.Gli strumenti finanziari "
-"includono finanziamenti, mutui, contratti di leasing,\n"
-"                obbligazioni e prestiti soci."
+msgstr "Gli strumenti finanziari includono finanziamenti, mutui, contratti di leasing,\n                obbligazioni e prestiti soci."
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,help:dub_treasury_base.field_account_bank_statement_line__treasury_instrument_ids
@@ -1230,6 +1172,11 @@ msgid "French (Constant installment)"
 msgstr "Francese (Rata costante)"
 
 #. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__min_amount
+msgid "From Amount"
+msgstr "Da Importo"
+
+#. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
 msgid "Generate Disbursement Entry"
 msgstr "Genera registrazione erogazione"
@@ -1257,6 +1204,11 @@ msgid "Generating Installment"
 msgstr "Rata generante"
 
 #. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_wizard__granularity
+msgid "Granularity"
+msgstr "Granularità"
+
+#. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__comparison__>
 msgid "Greater Than"
 msgstr "Maggiore di"
@@ -1268,6 +1220,7 @@ msgstr "Maggiore o uguale"
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_search
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_availability_report_view_search
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_search
@@ -1297,6 +1250,11 @@ msgid "Has Message"
 msgstr "Ha Messaggi"
 
 #. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__rate_label
+msgid "Human-readable rate, e.g. \"Euribor 3M + 0.35%\"."
+msgstr "Tasso in formato leggibile, es. \"Euribor 3M + 0,35%\"."
+
+#. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__iban
 msgid "IBAN"
 msgstr "IBAN"
@@ -1304,8 +1262,11 @@ msgstr "IBAN"
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_credit_line_movement_wizard__id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_wizard__id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__id
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__id
 msgid "ID"
@@ -1347,21 +1308,14 @@ msgstr "Se selezionato, alcuni messaggi hanno un errore di consegna."
 msgid ""
 "If enabled, generate monthly reclassification entries from long-term to "
 "short-term for installments due within 12 months"
-msgstr ""
-"Se abilitato, genera registrazioni mensili di riclassifica da lungo a breve "
-"termine per le rate in scadenza entro 12 mesi"
+msgstr "Se abilitato, genera registrazioni mensili di riclassifica da lungo a breve termine per le rate in scadenza entro 12 mesi"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__auto_compute_usage
 msgid ""
 "If enabled, usage is computed from the journal balance (for overdraft) or "
 "must be updated via the Refresh button. Disable for manual entry."
-msgstr ""
-"Se abilitato, l'utilizzo è calcolato dal saldo del giornale (per scoperto) o "
-"deve essere aggiornato tramite il pulsante Aggiorna. Disabilitare per "
-"inserimento manuale.Se abilitato, l'utilizzo viene calcolato dal saldo del "
-"giornale (per lo scoperto) o deve essere aggiornato tramite il pulsante "
-"Aggiorna. Disabilitare per l'inserimento manuale."
+msgstr "Se abilitato, l'utilizzo è calcolato dal saldo del giornale (per scoperto) o deve essere aggiornato tramite il pulsante Aggiorna. Disabilitare per inserimento manuale."
 
 #. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__flow_direction__inbound
@@ -1379,11 +1333,7 @@ msgstr "In Entrata (Ricevuto)"
 msgid ""
 "Inbound: money received (loan from bank)\n"
 "Outbound: money granted (loan to partners)"
-msgstr ""
-"In entrata: denaro ricevuto (finanziamento dalla banca)\n"
-"In uscita: denaro erogato (prestito a partner)In entrata: denaro ricevuto "
-"(finanziamento dalla banca)\n"
-"In uscita: denaro concesso (prestito a partner)"
+msgstr "In entrata: denaro ricevuto (finanziamento dalla banca)\nIn uscita: denaro erogato (prestito a partner)"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__installment_frequency
@@ -1391,8 +1341,6 @@ msgid "Installment Frequency"
 msgstr "Frequenza Rate"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
 #: model:ir.actions.act_window,name:dub_treasury_base.treasury_installment_action
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__installment_ids
 #: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_installment_list
@@ -1406,12 +1354,6 @@ msgstr "Rate"
 #: model:ir.ui.menu,name:dub_treasury_base.menu_treasury_installment_calendar
 msgid "Installments Calendar"
 msgstr "Calendario Rate"
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
-msgid "Installments already exist. Delete them first to regenerate."
-msgstr ""
 
 #. module: dub_treasury_base
 #: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_installment_action
@@ -1451,18 +1393,6 @@ msgid "Interest"
 msgstr "Interessi"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid "Interest - %(name)s"
-msgstr ""
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_installment.py:0
-msgid "Interest - Installment %(seq)s"
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__interest_account_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__interest_account_id
 msgid "Interest Account"
@@ -1480,29 +1410,11 @@ msgid "Interest Coverage"
 msgstr "Interest Coverage (Copertura interessi)"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid "Interest Expense - %(name)s"
-msgstr ""
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid "Interest Payment - %(name)s"
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__interest_rate
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__interest_rate
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__interest_rate
 msgid "Interest Rate (%)"
 msgstr "Tasso di Interesse (%)"
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-#: code:addons/dub_treasury_base/models/treasury_installment.py:0
-msgid "Interest account not configured for %(name)s."
-msgstr ""
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__interest_account_id
@@ -1525,19 +1437,11 @@ msgid "Internal Account"
 msgstr "Conto Interno"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid "Invoice"
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__linked_invoice_count
 msgid "Invoice Count"
 msgstr "Numero fatture"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
 msgid "Invoices"
 msgstr "Fatture"
@@ -1561,31 +1465,18 @@ msgid "Italian (Constant principal)"
 msgstr "Italiano (Capitale costante)"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__journal_id
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__journal_id
 msgid "Journal"
 msgstr "Registro"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_account.py:0
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
-#: code:addons/dub_treasury_base/models/treasury_installment.py:0
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__move_ids
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_account_view_form
 msgid "Journal Entries"
 msgstr "Registrazioni contabili"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
-#: code:addons/dub_treasury_base/models/treasury_installment.py:0
-#: code:addons/dub_treasury_base/wizard/credit_line_movement_wizard.py:0
 #: model:ir.model,name:dub_treasury_base.model_account_move
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__move_id
 msgid "Journal Entry"
@@ -1614,8 +1505,11 @@ msgstr "Data Ultimo Controllo"
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_credit_line_movement_wizard__write_uid
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__write_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__write_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_wizard__write_uid
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__write_uid
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__write_uid
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__write_uid
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__write_uid
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__write_uid
 msgid "Last Updated by"
@@ -1624,8 +1518,11 @@ msgstr "Ultimo aggiornamento di"
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_credit_line_movement_wizard__write_date
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__write_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__write_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_wizard__write_date
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__write_date
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__write_date
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__write_date
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__write_date
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__write_date
 msgid "Last Updated on"
@@ -1636,6 +1533,11 @@ msgstr "Ultimo aggiornamento il"
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
 msgid "Leasing"
 msgstr "Leasing"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_availability_wizard__credit_line_ids
+msgid "Leave empty to include all active credit lines."
+msgstr "Lasciare vuoto per includere tutte le linee di credito attive."
 
 #. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__comparison__<
@@ -1668,6 +1570,21 @@ msgstr "Conto passività (entrata) o attività (uscita) per scadenze > 12 mesi"
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__credit_account_id
 msgid "Liability account for the credit line balance"
 msgstr "Conto passività per il saldo della linea di credito"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_availability_report_view_list
+msgid "Limit"
+msgstr "Limite"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__limit_amount
+msgid "Limit Amount"
+msgstr "Importo Limite"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_wizard__line_ids
+msgid "Line"
+msgstr "Riga"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_account__journal_id
@@ -1705,28 +1622,19 @@ msgid "Linked vendor bill for this installment"
 msgstr "Fattura fornitore collegata a questa rata"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
-msgid "Loan - %(name)s"
-msgstr ""
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
-msgid "Loan granted - %(name)s"
-msgstr ""
-
-#. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_search
 msgid "Loans"
 msgstr "Finanziamenti"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__long_term_account_id
 msgid "Long-term Account"
 msgstr "Conto lungo termine"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line_rate_tier__min_amount
+msgid "Lower utilization bound (inclusive)."
+msgstr "Limite inferiore di utilizzo (incluso)."
 
 #. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__guarantee_type__mcc
@@ -1741,10 +1649,7 @@ msgstr "Importo Utilizzato (Manuale)"
 #. module: dub_treasury_base
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__manual_used_amount
 msgid "Manually entered used amount (when auto-compute is disabled)"
-msgstr ""
-"Importo utilizzato inserito manualmente (quando il calcolo automatico è "
-"disabilitato)Importo utilizzato inserito manualmente (quando il calcolo "
-"automatico è disabilitato)"
+msgstr "Importo utilizzato inserito manualmente (quando il calcolo automatico è disabilitato)"
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
@@ -1776,20 +1681,12 @@ msgid "Messages"
 msgstr "Messaggi"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
-msgid ""
-"Missing accounting configuration for %(name)s:\n"
-"%(fields)s"
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__rate_type__mixed
 msgid "Mixed"
 msgstr "Misto"
 
 #. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_availability_wizard__granularity__month
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__frequency__monthly
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__installment_frequency__monthly
 msgid "Monthly"
@@ -1882,12 +1779,6 @@ msgstr "Prossimo Rinnovo"
 #: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_covenant_action
 msgid "No covenants defined"
 msgstr "Nessun covenant definito"
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid "No custom formula defined for \"%(name)s\"."
-msgstr ""
 
 #. module: dub_treasury_base
 #: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_installment_action
@@ -1992,6 +1883,13 @@ msgid "Opening Date"
 msgstr "Data di Apertura"
 
 #. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__rate_tier_ids
+msgid ""
+"Optional interest-rate tiers by utilization threshold. When set, they "
+"override the flat interest rate above."
+msgstr "Scaglioni opzionali di tasso di interesse per soglia di utilizzo. Se impostati, prevalgono sul tasso di interesse fisso sopra indicato."
+
+#. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_financial_instrument_view_form
 msgid "Options"
 msgstr "Opzioni"
@@ -1999,6 +1897,7 @@ msgstr "Opzioni"
 #. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__covenant_type__other
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__credit_type__other
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__reference_rate__other
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__guarantee_type__other
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__instrument_type__other
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__reference_rate__other
@@ -2053,21 +1952,9 @@ msgid "Payment"
 msgstr "Pagamento"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_installment.py:0
-msgid "Payment - %(name)s #%(seq)s"
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__payment_date
 msgid "Payment Date"
 msgstr "Data Pagamento"
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_installment.py:0
-msgid "Payment Entry"
-msgstr ""
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__is_payment_move_posted
@@ -2075,29 +1962,9 @@ msgid "Payment Entry Posted"
 msgstr "Registrazione pagamento confermata"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_installment.py:0
-msgid "Payment entry already posted for installment %(seq)s."
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__guarantee_type__personal
 msgid "Personal Guarantee"
 msgstr "Fideiussione Personale"
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid ""
-"Please configure at least numerator (+) and denominator (+) accounts for \"%"
-"(name)s\"."
-msgstr ""
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
-msgid "Please set the total number of installments."
-msgstr ""
 
 #. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__guarantee_type__pledge
@@ -2115,15 +1982,14 @@ msgid "Principal"
 msgstr "Capitale"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_installment.py:0
-msgid "Principal - Installment %(seq)s"
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__principal_amount
 msgid "Principal Amount"
 msgstr "Capitale Iniziale"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__sequence
+msgid "Priority"
+msgstr "Priorità"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__purpose
@@ -2142,10 +2008,8 @@ msgid ""
 "Python expression that returns the covenant value.\n"
 "\n"
 "Available variables:\n"
-"- balance(account_codes): Returns the sum of balances for the given account "
-"codes\n"
-"  Example: balance('12%') returns total balance of accounts starting with "
-"12\n"
+"- balance(account_codes): Returns the sum of balances for the given account codes\n"
+"  Example: balance('12%') returns total balance of accounts starting with 12\n"
 "- abs(x): Absolute value\n"
 "- round(x, n): Round to n decimals\n"
 "- min(a, b), max(a, b): Minimum/maximum\n"
@@ -2161,16 +2025,13 @@ msgid ""
 "(abs(balance('7%')) - abs(balance('6%'))) / abs(balance('661%'))\n"
 "\n"
 "# DSCR (Cash Flow / Debt Service)\n"
-"(abs(balance('7%')) - abs(balance('6%')) + abs(balance('68%'))) / "
-"(abs(balance('164%')) + abs(balance('661%')))\n"
+"(abs(balance('7%')) - abs(balance('6%')) + abs(balance('68%'))) / (abs(balance('164%')) + abs(balance('661%')))\n"
 msgstr ""
 "Espressione Python che restituisce il valore del covenant.\n"
 "\n"
 "Variabili disponibili:\n"
-"- balance(account_codes): Restituisce la somma dei saldi per i codici conto "
-"indicati\n"
-"  Esempio: balance('12%') restituisce il saldo totale dei conti che iniziano "
-"con 12\n"
+"- balance(account_codes): Restituisce la somma dei saldi per i codici conto indicati\n"
+"  Esempio: balance('12%') restituisce il saldo totale dei conti che iniziano con 12\n"
 "- abs(x): Valore assoluto\n"
 "- round(x, n): Arrotonda a n decimali\n"
 "- min(a, b), max(a, b): Minimo/massimo\n"
@@ -2186,14 +2047,24 @@ msgstr ""
 "(abs(balance('7%')) - abs(balance('6%'))) / abs(balance('661%'))\n"
 "\n"
 "# DSCR (Cash Flow / Servizio del debito)\n"
-"(abs(balance('7%')) - abs(balance('6%')) + abs(balance('68%'))) / "
-"(abs(balance('164%')) + abs(balance('661%')))\n"
+"(abs(balance('7%')) - abs(balance('6%')) + abs(balance('68%'))) / (abs(balance('164%')) + abs(balance('661%')))\n"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_covenant__frequency__quarterly
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__installment_frequency__quarterly
 msgid "Quarterly"
 msgstr "Trimestrale"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__rate_label
+msgid "Rate"
+msgstr "Tasso"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__rate_tier_ids
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+msgid "Rate Tiers"
+msgstr "Scaglioni Tasso"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__rate_type
@@ -2208,12 +2079,6 @@ msgid "Ratings"
 msgstr "Rating"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_installment.py:0
-msgid "Receipt - %(name)s #%(seq)s"
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.actions.act_window,name:dub_treasury_base.credit_line_movement_wizard_action
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.credit_line_movement_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
@@ -2221,9 +2086,15 @@ msgid "Record Movement"
 msgstr "Registra movimento"
 
 #. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__reference_rate
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__reference_rate
 msgid "Reference Rate"
 msgstr "Tasso di Riferimento"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__reference_rate
+msgid "Reference index over which the spread is applied (e.g. Euribor 3M)."
+msgstr "Indice di riferimento su cui viene applicato lo spread (es. Euribor 3M)."
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
@@ -2235,12 +2106,6 @@ msgstr "Aggiorna Utilizzo"
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__credit_line_movement_wizard__movement_type__repayment
 msgid "Repayment"
 msgstr "Rimborso"
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid "Repayment - %(name)s"
-msgstr ""
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__residual_after
@@ -2274,9 +2139,7 @@ msgstr "Utente Responsabile"
 msgid ""
 "Returns the sum of balances for accounts matching the pattern.\n"
 "                                    Use '%' as wildcard."
-msgstr ""
-"Restituisce la somma dei saldi per i conti corrispondenti al pattern.\n"
-"                                    Usa '%' come carattere jolly."
+msgstr "Restituisce la somma dei saldi per i conti corrispondenti al pattern.\n                                    Usa '%' come carattere jolly."
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__message_has_sms_error
@@ -2345,18 +2208,6 @@ msgid "Start Date"
 msgstr "Data Inizio"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_financial_instrument.py:0
-msgid "Start date must be before end date."
-msgstr ""
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid "Start date must be before expiry date."
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__state
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_financial_instrument__state
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__state
@@ -2375,11 +2226,7 @@ msgid ""
 "Overdue: Due date is already passed\n"
 "Today: Activity date is today\n"
 "Planned: Future activities."
-msgstr ""
-"Stato basato sulle attività\n"
-"Scaduto: la data di scadenza è già passata\n"
-"Oggi: la data attività è oggi\n"
-"Pianificato: attività future."
+msgstr "Stato basato sulle attività\nScaduto: la data di scadenza è già passata\nOggi: la data attività è oggi\nPianificato: attività future."
 
 #. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__credit_type__sbf
@@ -2392,29 +2239,9 @@ msgid "The code must be unique per company!"
 msgstr "Il codice deve essere univoco per azienda!"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid ""
-"The covenant \"%(name)s\" is not compliant.\n"
-"Current: %(current)s, Required: %(comparison)s %(threshold)s"
-msgstr ""
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_account.py:0
-msgid "The journal must belong to the same company as the treasury account."
-msgstr ""
-
-#. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_search
 msgid "This Month"
 msgstr "Questo Mese"
-
-#. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_installment.py:0
-msgid "This installment is already paid."
-msgstr ""
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_covenant_view_form
@@ -2425,6 +2252,11 @@ msgstr "Soglia"
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__threshold_value
 msgid "Threshold Value"
 msgstr "Valore Soglia"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__max_amount
+msgid "To Amount"
+msgstr "A Importo"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_installment__total
@@ -2542,15 +2374,9 @@ msgstr "Conto di tesoreria collegato a questo strumento"
 #. module: dub_treasury_base
 #: model_terms:ir.actions.act_window,help:dub_treasury_base.treasury_account_action
 msgid ""
-"Treasury accounts represent your bank accounts, cash registers, and internal "
-"accounts\n"
+"Treasury accounts represent your bank accounts, cash registers, and internal accounts\n"
 "                for treasury management."
-msgstr ""
-"I conti di tesoreria rappresentano i tuoi conti bancari, casse e conti "
-"interni\n"
-"                per la gestione della tesoreria.I conti di tesoreria "
-"rappresentano i tuoi conti bancari, casse e conti interni\n"
-"                per la gestione della tesoreria."
+msgstr "I conti di tesoreria rappresentano i tuoi conti bancari, casse e conti interni\n                per la gestione della tesoreria."
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,help:dub_treasury_base.field_account_bank_statement_line__is_treasury_payment_move
@@ -2558,9 +2384,7 @@ msgstr ""
 msgid ""
 "True for principal+interest payment entries, False for reclassification "
 "entries"
-msgstr ""
-"Vero per registrazioni di pagamento capitale+interessi, Falso per "
-"registrazioni di riclassifica"
+msgstr "Vero per registrazioni di pagamento capitale+interessi, Falso per registrazioni di riclassifica"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__covenant_type
@@ -2579,12 +2403,26 @@ msgid "Type of the exception activity on record."
 msgstr "Tipo di attività eccezionale sul record."
 
 #. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line_rate_tier__max_amount
+msgid "Upper utilization bound (inclusive). Leave 0 for no upper bound."
+msgstr "Limite superiore di utilizzo (incluso). Lasciare 0 per nessun limite superiore."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__sequence
+msgid ""
+"Usage priority for this credit line. Lower values come first (e.g. preferred"
+" bank). Informational ordering only; it does not drive any automatic cascade"
+" consumption of the facilities."
+msgstr "Priorità di utilizzo per questa linea di credito. I valori più bassi vengono prima (es. banca preferita). Ordinamento solo informativo; non determina alcun consumo a cascata automatico delle linee."
+
+#. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_covenant__use_custom_formula
 msgid "Use Custom Formula"
 msgstr "Usa Formula Personalizzata"
 
 #. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.credit_line_movement_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_availability_report_view_list
 msgid "Used"
 msgstr "Utilizzato"
 
@@ -2595,10 +2433,14 @@ msgid "Used Amount"
 msgstr "Importo Utilizzato"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid "Used amount (%(used)s) cannot exceed credit limit (%(limit)s)."
-msgstr ""
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__used_at_date
+msgid "Used At Date"
+msgstr "Utilizzato alla Data"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__utilization_rate_at_date
+msgid "Utilization (%)"
+msgstr "Utilizzo (%)"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__account_move__credit_line_movement_type__utilization
@@ -2607,15 +2449,19 @@ msgid "Utilization (Drawing)"
 msgstr "Utilizzo (Prelievo)"
 
 #. module: dub_treasury_base
-#. odoo-python
-#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
-msgid "Utilization - %(name)s"
-msgstr ""
-
-#. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__utilization_rate
 msgid "Utilization Rate (%)"
 msgstr "Tasso di Utilizzo (%)"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__valid_from
+msgid "Valid From"
+msgstr "Valido Dal"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line_rate_tier__valid_to
+msgid "Valid To"
+msgstr "Valido Al"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__rate_type__variable
@@ -2645,3 +2491,20 @@ msgstr "Messaggi Sito Web"
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__website_message_ids
 msgid "Website communication history"
 msgstr "Storico comunicazioni sito web"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_availability_wizard__granularity__week
+msgid "Weekly"
+msgstr "Settimanale"
+
+#. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+msgid ""
+"When tiers are defined, they override the flat interest\n"
+"                                rate based on the utilization threshold."
+msgstr "Quando gli scaglioni sono definiti, prevalgono sul tasso di interesse\n                                fisso in base alla soglia di utilizzo."
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__wizard_id
+msgid "Wizard"
+msgstr "Procedura"
