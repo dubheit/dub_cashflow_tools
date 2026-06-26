@@ -1,6 +1,6 @@
 {
     "name": "DUB Cashflow",
-    "version": "18.0.4.1.0",
+    "version": "18.0.4.1.1",
     "category": "Accounting",
     "summary": "Manage predictive cash flows",
     "description": """
@@ -29,7 +29,6 @@ Features:
         "views/cashflow_category_views.xml",
         "views/cashflow_recurring_views.xml",
         "views/cashflow_report_views.xml",
-        "views/cashflow_dashboard_views.xml",
         "views/cashflow_item_views.xml",
         "data/demo.xml",
     ],
