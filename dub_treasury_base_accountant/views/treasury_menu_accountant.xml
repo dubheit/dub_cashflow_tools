@@ -6,6 +6,9 @@
          menu there instead of leaving it under Invoicing (account.menu_finance). -->
     <record id="dub_treasury_base.menu_treasury_root" model="ir.ui.menu">
         <field name="parent_id" ref="accountant.menu_accounting"/>
+        <!-- Place Treasury before Reporting (account.menu_finance_reports,
+             sequence 20) under the Accounting menu. -->
+        <field name="sequence">15</field>
     </record>
 
 </odoo>

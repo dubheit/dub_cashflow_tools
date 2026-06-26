@@ -1,6 +1,6 @@
 {
     "name": "DUB Treasury Base - Accounting",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Accounting/Accounting",
     "summary": "Glue module: move the Treasury menu under Accounting when Odoo Accounting is installed",
     "description": """
