@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Cashflow configuration for Purchase Orders (cash outflow) -->
+        <record id="cashflow_config_purchase_order" model="cashflow.config">
+            <field name="name">Purchase Orders Cashflow</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="filter_domain">[('state', 'not in', ['cancel']), ('invoice_status', '!=', 'invoiced')]</field>
+            <field name="name_code">record.name</field>
+            <field name="active">True</field>
+            <!-- Payment terms support -->
+            <field name="use_payment_terms">True</field>
+            <field name="payment_term_field">payment_term_id</field>
+            <field name="amount_field">amount_total</field>
+            <field name="date_field">date_order</field>
+        </record>
+
+        <!-- Field mappings for purchase.order -->
+
+        <!-- Entry state mapping: draft/sent/to approve -> draft, purchase/done -> confirmed, cancel -> cancelled -->
+        <record id="cashflow_config_line_po_state" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_purchase_order"/>
+            <field name="sequence">5</field>
+            <field name="cashflow_field">state</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">{'draft': 'draft', 'sent': 'draft', 'to approve': 'draft', 'purchase': 'confirmed', 'done': 'confirmed', 'cancel': 'cancelled'}.get(record.state, 'draft')</field>
+        </record>
+
+        <!-- Entry type: purchase orders are forecast -->
+        <record id="cashflow_config_line_po_entry_type" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_purchase_order"/>
+            <field name="sequence">6</field>
+            <field name="cashflow_field">entry_type</field>
+            <field name="source_type">fixed_value</field>
+            <field name="fixed_value">forecast</field>
+        </record>
+
+        <!-- Date: use the planned receipt date, fall back to the order date -->
+        <record id="cashflow_config_line_po_date" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_purchase_order"/>
+            <field name="sequence">10</field>
+            <field name="cashflow_field">date</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">(record.date_planned or record.date_order).date() if (record.date_planned or record.date_order) else date.today()</field>
+        </record>
+
+        <!-- Amount: total amount -->
+        <record id="cashflow_config_line_po_amount" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_purchase_order"/>
+            <field name="sequence">20</field>
+            <field name="cashflow_field">amount</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.amount_total</field>
+        </record>
+
+        <!-- Type: purchase orders are always outflow -->
+        <record id="cashflow_config_line_po_type" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_purchase_order"/>
+            <field name="sequence">30</field>
+            <field name="cashflow_field">type</field>
+            <field name="source_type">fixed_value</field>
+            <field name="fixed_value">out</field>
+        </record>
+
+        <!-- Currency -->
+        <record id="cashflow_config_line_po_currency" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_purchase_order"/>
+            <field name="sequence">40</field>
+            <field name="cashflow_field">currency_id</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.currency_id.id or record.company_id.currency_id.id</field>
+        </record>
+
+        <!-- Partner -->
+        <record id="cashflow_config_line_po_partner" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_purchase_order"/>
+            <field name="sequence">50</field>
+            <field name="cashflow_field">partner_id</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.partner_id.id</field>
+        </record>
+
+        <!-- Description -->
+        <record id="cashflow_config_line_po_description" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_purchase_order"/>
+            <field name="sequence">60</field>
+            <field name="cashflow_field">description</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">record.name or ''</field>
+        </record>
+
+        <!-- Bank journal (default) -->
+        <record id="cashflow_config_line_po_journal" model="cashflow.config.line">
+            <field name="config_id" ref="cashflow_config_purchase_order"/>
+            <field name="sequence">70</field>
+            <field name="cashflow_field">journal_id</field>
+            <field name="source_type">python_code</field>
+            <field name="python_code">env['account.journal'].search([('type', '=', 'bank'), ('company_id', '=', record.company_id.id)], limit=1).id</field>
+        </record>
+    </data>
+</odoo>
