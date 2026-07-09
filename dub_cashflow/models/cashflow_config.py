@@ -446,7 +446,12 @@ Example:
             return
 
         model_name = records._name
-        configs = self.get_configs_for_model(model_name)
+        # Cashflow projection is a system side-effect: it must run regardless
+        # of the triggering user's accounting rights (e.g. a salesperson
+        # creating a quotation). Elevate config and records so the cashflow
+        # models' ACLs are never required from the acting user.
+        configs = self.sudo().get_configs_for_model(model_name)
+        records = records.sudo()
 
         for config in configs:
             try:
