@@ -54,7 +54,7 @@ class CashflowEntry(models.Model):
     )
     model_label = fields.Char(
         string='Source',
-        related='model_id.name',
+        compute='_compute_model_label',
         store=True,
     )
     res_id = fields.Integer(string='Source Record ID', index=True)
@@ -111,6 +111,14 @@ class CashflowEntry(models.Model):
                 entry.model_id = IrModel.sudo().search([('model', '=', entry.model)], limit=1)
             else:
                 entry.model_id = False
+
+    @api.depends('model_id')
+    def _compute_model_label(self):
+        # Plain (non-translated) label: storing a translated related field
+        # (ir.model.name) generates a malformed jsonb flush query and breaks
+        # writes on the source records. Store the current-language name instead.
+        for entry in self:
+            entry.model_label = entry.model_id.sudo().name if entry.model_id else False
 
     @api.depends('item_ids.amount', 'item_ids.type')
     def _compute_totals(self):
