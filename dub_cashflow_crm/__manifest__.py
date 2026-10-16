@@ -14,7 +14,7 @@
     """,
     'author': 'Dubhe Srls',
     'website': 'https://www.dubhe.it',
-    'license': 'OPL-1',
+    'license': 'LGPL-3',
     'depends': [
         'dub_cashflow',
         'crm',
