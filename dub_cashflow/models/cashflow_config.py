@@ -438,10 +438,42 @@ Example:
 
     @api.model
     def process_records(self, records, operation='write'):
-        """Process records based on cashflow configurations.
+        """Queue records for the cashflow configurations.
 
-        This method should be called from model overrides.
+        This method should be called from model overrides. The work runs at
+        the end of the transaction (cursor precommit), not here: recomputing a
+        cashflow deletes its items, and every ``unlink()`` clears the whole ORM
+        cache, which inside a write wipes the in-memory records of whatever
+        operation is running (the bank reconciliation widget lost the batch
+        payment line it was validating). Queuing also collapses the many
+        writes of a single operation into one recomputation per record.
         """
+        if not records:
+            return
+        precommit = self.env.cr.precommit
+        pending = precommit.data.get('dub_cashflow.pending')
+        if pending is None:
+            pending = precommit.data['dub_cashflow.pending'] = {}
+            precommit.add(self._process_pending)
+        # dict keys keep the order and drop duplicate ids
+        pending.setdefault((records._name, operation), {}).update(
+            dict.fromkeys(records.ids))
+
+    def _process_pending(self):
+        """Run the configurations on the records queued by process_records.
+
+        Records deleted in the meantime are skipped, except for ``unlink``
+        whose configurations only need the ids (see ``delete_cashflow``).
+        """
+        pending = self.env.cr.precommit.data.pop('dub_cashflow.pending', {})
+        for (model_name, operation), ids in pending.items():
+            records = self.env[model_name].browse(list(ids))
+            if operation != 'unlink':
+                records = records.exists()
+            self._run_configs(records, operation)
+
+    @api.model
+    def _run_configs(self, records, operation):
         if not records:
             return
 
