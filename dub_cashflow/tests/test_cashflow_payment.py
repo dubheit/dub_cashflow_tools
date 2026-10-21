@@ -57,6 +57,9 @@ class TestCashflowPayment(TransactionCase):
 
     def _get_invoice_cashflow_entry(self, invoice):
         """Get cashflow entry for invoice's receivable line."""
+        # Cashflow is recomputed at the end of the transaction: flush the
+        # cursor as a commit would.
+        self.env.cr.flush()
         receivable_line = invoice.line_ids.filtered(
             lambda l: l.account_id.account_type == 'asset_receivable'
         )
@@ -67,6 +70,7 @@ class TestCashflowPayment(TransactionCase):
 
     def _get_payment_cashflow_entry(self, payment):
         """Get cashflow entry for payment."""
+        self.env.cr.flush()
         return self.env['cashflow.entry'].search([
             ('model', '=', 'account.payment'),
             ('res_id', '=', payment.id),
