@@ -7,25 +7,18 @@ class AccountMove(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         moves = super().create(vals_list)
-        self._delete_sale_order_cashflow(moves)
+        self._refresh_sale_order_cashflow(moves)
         return moves
 
-    def _delete_sale_order_cashflow(self, moves):
-        """Delete cashflow entries for sale orders linked to these invoices."""
-        # Get sale orders linked to these invoices
-        sale_orders = self.env['sale.order']
-        for move in moves:
-            if move.move_type in ('out_invoice', 'out_refund'):
-                # Get sale orders from invoice lines
-                for line in move.invoice_line_ids:
-                    if line.sale_line_ids:
-                        sale_orders |= line.sale_line_ids.mapped('order_id')
+    def _refresh_sale_order_cashflow(self, moves):
+        """Have the sale orders of these invoices recomputed.
 
-        if sale_orders:
-            # Delete cashflow entries for these sale orders
-            entries = self.env['cashflow.entry'].search([
-                ('model', '=', 'sale.order'),
-                ('res_id', 'in', sale_orders.ids),
-            ])
-            if entries:
-                entries.unlink()
+        The invoice now carries the forecast: the sale order config filter
+        drops an order that has an invoice, so its entries go away when the
+        queued recomputation runs. Deleting them here cleared the whole ORM
+        cache in the middle of the invoice creation.
+        """
+        sale_orders = moves.filtered(
+            lambda move: move.move_type in ('out_invoice', 'out_refund')
+        ).invoice_line_ids.sale_line_ids.order_id
+        self.env['cashflow.config'].process_records(sale_orders, 'write')

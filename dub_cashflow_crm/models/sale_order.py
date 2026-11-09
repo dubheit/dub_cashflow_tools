@@ -1,7 +1,4 @@
-import logging
 from odoo import models, api
-
-_logger = logging.getLogger(__name__)
 
 
 class SaleOrder(models.Model):
@@ -10,31 +7,23 @@ class SaleOrder(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
-        # Delete cashflow entries for linked opportunities
-        self._delete_opportunity_cashflow(records)
+        records._refresh_opportunity_cashflow()
         return records
 
     def write(self, vals):
+        # A quotation moved to another opportunity, or cancelled, gives the
+        # forecast back to the opportunity it leaves.
+        old_opportunities = self.opportunity_id
         result = super().write(vals)
-        # If opportunity_id is set, delete its cashflow
-        if 'opportunity_id' in vals:
-            self._delete_opportunity_cashflow(self)
+        if 'opportunity_id' in vals or 'state' in vals:
+            (old_opportunities | self.opportunity_id)._refresh_cashflow()
         return result
 
-    def _delete_opportunity_cashflow(self, orders):
-        """Delete cashflow entries linked to opportunities when sale order is created."""
-        opportunity_ids = orders.mapped('opportunity_id').ids
-        if not opportunity_ids:
-            return
+    def _refresh_opportunity_cashflow(self):
+        """Have the opportunities of these orders recomputed.
 
-        # Find and delete cashflow entries linked to these opportunities
-        entries = self.env['cashflow.entry'].search([
-            ('model', '=', 'crm.lead'),
-            ('res_id', 'in', opportunity_ids),
-        ])
-        if entries:
-            _logger.info(
-                "Deleting %s cashflow entries for opportunities %s (sale orders created)",
-                len(entries), opportunity_ids
-            )
-            entries.unlink()
+        The quotation now carries the forecast: the opportunity config filter
+        drops an opportunity with a live quotation, so its entries go away
+        when the queued recomputation runs.
+        """
+        self.opportunity_id._refresh_cashflow()

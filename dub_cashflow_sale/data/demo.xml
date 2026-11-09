@@ -5,7 +5,7 @@
         <record id="cashflow_config_sale_order" model="cashflow.config">
             <field name="name">Sale Orders Cashflow</field>
             <field name="model_id" ref="sale.model_sale_order"/>
-            <field name="filter_domain">[('state', 'not in', ['cancel']), ('invoice_status', '!=', 'invoiced')]</field>
+            <field name="filter_domain">[('state', 'not in', ['cancel']), ('invoice_status', '!=', 'invoiced'), ('invoice_ids', 'not any', [('state', '!=', 'cancel')])]</field>
             <field name="name_code">record.name</field>
             <field name="active">True</field>
             <!-- Payment terms support -->

@@ -31,3 +31,6 @@ class CrmLead(models.Model):
         # When lost, delete the cashflow entry
         self.env['cashflow.config'].process_records(self, 'cancel')
         return result
+
+    def _refresh_cashflow(self):
+        self.env['cashflow.config'].process_records(self, 'write')
