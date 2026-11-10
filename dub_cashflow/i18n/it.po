@@ -561,6 +561,11 @@ msgid "Entries"
 msgstr "Movimenti"
 
 #. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
+msgid "Entries without a source document, recurring cashflows included"
+msgstr "Movimenti senza documento d'origine, ricorrenti compresi"
+
+#. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__entry_id
 msgid "Entry"
 msgstr "Movimento"
@@ -668,6 +673,18 @@ msgid "Friday"
 msgstr "Venerdì"
 
 #. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "From Confirmed Documents"
+msgstr "Da documenti confermati"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "From Draft Documents"
+msgstr "Da documenti in bozza"
+
+#. module: dub_cashflow
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_recurring_form
 msgid "Generate Entries"
 msgstr "Genera movimenti"
@@ -727,6 +744,11 @@ msgid "Items"
 msgstr "Voci"
 
 #. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Items without a source document, recurring cashflows included"
+msgstr "Voci senza documento d'origine, ricorrenti comprese"
+
+#. module: dub_cashflow
 #: model:ir.model,name:dub_cashflow.model_account_move
 msgid "Journal Entry"
 msgstr "Registrazione contabile"
@@ -771,6 +793,12 @@ msgid ""
 msgstr ""
 "Lasciare vuoto per usare il comportamento predefinito (genera alla "
 "creazione/modifica, elimina alla cancellazione)."
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
+msgid "Manual"
+msgstr "Manuali"
 
 #. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__model_id
@@ -1130,6 +1158,7 @@ msgstr "Data inizio"
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__state
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__state
 #: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__state
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
 msgid "Status"
 msgstr "Stato"

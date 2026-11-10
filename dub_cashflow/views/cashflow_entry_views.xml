@@ -105,12 +105,21 @@
                 <filter name="filter_forecast" string="Forecast" domain="[('entry_type', '=', 'forecast')]"/>
                 <filter name="filter_actual" string="Actual" domain="[('entry_type', '=', 'actual')]"/>
                 <separator/>
+                <filter name="filter_origin_document_confirmed" string="From Confirmed Documents"
+                        domain="[('model', '!=', False), ('model', '!=', 'cashflow.recurring'), ('state', '=', 'confirmed')]"/>
+                <filter name="filter_origin_document_draft" string="From Draft Documents"
+                        domain="[('model', '!=', False), ('model', '!=', 'cashflow.recurring'), ('state', '=', 'draft')]"/>
+                <filter name="filter_origin_manual" string="Manual"
+                        domain="['|', ('model', '=', False), ('model', '=', 'cashflow.recurring')]"
+                        help="Entries without a source document, recurring cashflows included"/>
+                <separator/>
                 <filter name="filter_this_month" string="This Month" domain="[('date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
                 <group expand="0" string="Group By">
                     <filter name="group_journal" string="Bank" context="{'group_by': 'journal_id'}"/>
                     <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
                     <filter name="group_entry_type" string="Entry Type" context="{'group_by': 'entry_type'}"/>
                     <filter name="group_model" string="Source" context="{'group_by': 'model_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
                     <filter name="group_config" string="Configuration" context="{'group_by': 'config_id'}"/>
                     <filter name="group_date" string="Date" context="{'group_by': 'date:month'}"/>
                 </group>
