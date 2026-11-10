@@ -2,3 +2,4 @@ from . import test_cashflow_payment
 from . import test_cashflow_category
 from . import test_cashflow_recurring
 from . import test_cashflow_deferred
+from . import test_cashflow_origin_filters

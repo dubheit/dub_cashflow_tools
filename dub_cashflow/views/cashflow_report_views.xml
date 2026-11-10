@@ -66,6 +66,14 @@
                 <filter name="filter_confirmed" string="Confirmed" domain="[('state', '=', 'confirmed')]"/>
                 <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
                 <separator/>
+                <filter name="filter_origin_document_confirmed" string="From Confirmed Documents"
+                        domain="[('entry_id.model', '!=', False), ('entry_id.model', '!=', 'cashflow.recurring'), ('state', '=', 'confirmed')]"/>
+                <filter name="filter_origin_document_draft" string="From Draft Documents"
+                        domain="[('entry_id.model', '!=', False), ('entry_id.model', '!=', 'cashflow.recurring'), ('state', '=', 'draft')]"/>
+                <filter name="filter_origin_manual" string="Manual"
+                        domain="['|', ('entry_id.model', '=', False), ('entry_id.model', '=', 'cashflow.recurring')]"
+                        help="Items without a source document, recurring cashflows included"/>
+                <separator/>
                 <filter name="filter_this_month" string="This Month"
                         domain="[('date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d')),
                                  ('date', '&lt;', (context_today() + relativedelta(months=1, day=1)).strftime('%Y-%m-%d'))]"/>
