@@ -13,7 +13,7 @@ MODULE = 'dub_cashflow_purchase'
 
 VALUES = {
     'cashflow_config_purchase_order': {
-        'filter_domain': "[('state', '!=', 'cancel'), ('invoice_status', '!=', 'invoiced')]",
+        'filter_domain': "[('state', '!=', 'cancel'), '|', ('invoice_status', '!=', 'invoiced'), ('order_line.invoice_lines.parent_state', '=', 'draft')]",
     },
     'cashflow_config_line_po_amount': {
         'python_code': "record._cashflow_amount_to_invoice() if record.state == 'purchase' else record.amount_total",

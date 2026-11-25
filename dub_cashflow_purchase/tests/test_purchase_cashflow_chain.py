@@ -86,3 +86,12 @@ class TestPurchaseCashflowChain(TransactionCase):
         order = self._order()
         order.payment_mode_id = mode
         self.assertEqual(set(self._entries(order).mapped('journal_id')), {journal})
+
+    def test_full_draft_bill_keeps_order_remainder(self):
+        order = self._order()
+        order.button_confirm()
+        bill = self._bill(order, 10)
+        self.assertEqual(sum(self._entries(order).mapped('total_out')), 1000.0)
+        bill.invoice_date = bill.date = '2026-01-10'
+        bill.action_post()
+        self.assertFalse(self._entries(order))

@@ -88,3 +88,11 @@ class TestSaleCashflowChain(TransactionCase):
         order = self._order(self.service)
         order.payment_mode_id = mode
         self.assertEqual(set(self._entries(order).mapped('journal_id')), {journal})
+
+    def test_full_draft_invoice_keeps_order_remainder(self):
+        order = self._order(self.service)
+        order.action_confirm()
+        invoice = order._create_invoices()
+        self.assertEqual(sum(self._entries(order).mapped('total_in')), 1000.0)
+        invoice.action_post()
+        self.assertFalse(self._entries(order))
