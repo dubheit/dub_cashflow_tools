@@ -11,6 +11,38 @@ _logger = logging.getLogger(__name__)
 
 MODULE = 'dub_cashflow'
 
+RECONCILE_ACTION_CODE = '''
+# _logger is available from eval_context
+# Process each reconcile record (handles both single record and recordset)
+for rec in records:
+    _logger.info("CASHFLOW RECONCILE: Processing partial_reconcile id=%s, operation=%s", rec.id, operation)
+
+    # Get the debit and credit move lines
+    lines = env['account.move.line']
+    if rec.debit_move_id:
+        lines |= rec.debit_move_id
+    if rec.credit_move_id:
+        lines |= rec.credit_move_id
+
+    # Filter to invoice receivable/payable lines
+    invoice_lines = lines.filtered(
+        lambda l: l.account_id.account_type in ('asset_receivable', 'liability_payable')
+        and l.move_id.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')
+    )
+
+    if invoice_lines:
+        # Update invoice cashflow (recalculate amount based on linked payments)
+        _logger.info("CASHFLOW RECONCILE: Updating cashflow for invoice_lines=%s", invoice_lines.ids)
+        env['cashflow.config'].process_records(invoice_lines, 'write')
+
+    # Payments whose journal entry lines were reconciled (e.g. with a bank
+    # statement line) are not written to: reprocess them so the forecast of a
+    # matched payment drops out.
+    payments = lines.move_id.origin_payment_id
+    if payments:
+        env['cashflow.config'].process_records(payments, 'write')
+            '''
+
 VALUES = {
     'cashflow_config_move_line': {
         'filter_domain': "[('account_id.account_type', 'in', ['asset_receivable', 'liability_payable']), ('move_id.move_type', 'in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')), ('move_id.state', 'in', ('draft', 'posted')), ('reconciled', '=', False)]",
@@ -28,7 +60,10 @@ VALUES = {
         'python_code': "fixed_bank_journal(record)",
     },
     'cashflow_config_payment': {
-        'filter_domain': "[('state', 'in', ('in_process', 'paid')), ('is_matched', '=', False)]",
+        'filter_domain': "[('state', 'in', ('in_process', 'paid')), ('is_matched', '=', False), '|', ('move_id', '!=', False), ('invoice_ids', '=', False)]",
+    },
+    'cashflow_config_reconcile': {
+        'action_code': RECONCILE_ACTION_CODE,
     },
     'cashflow_config_payment_state': {
         'python_code': "{'draft': 'draft', 'in_process': 'confirmed', 'paid': 'confirmed'}.get(record.state, 'cancelled')",

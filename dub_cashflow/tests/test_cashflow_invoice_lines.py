@@ -14,14 +14,16 @@ class TestCashflowInvoiceLines(TransactionCase):
         cls.bank_journal = cls._create_bank_journal('Cashflow Test Bank', 'CFTB')
 
     @classmethod
-    def _create_bank_journal(cls, name, code):
-        """Bank journal with outstanding accounts, so payments get journal entries."""
+    def _create_bank_journal(cls, name, code, outstanding_account=True):
+        """Bank journal, by default with outstanding accounts (payments get moves)."""
         journal = cls.env['account.journal'].create({
             'name': name,
             'type': 'bank',
             'code': code,
             'company_id': cls.company.id,
         })
+        if not outstanding_account:
+            return journal
         outstanding = cls.env['account.account'].create({
             'name': 'Outstanding %s' % code,
             'code': 'OUT%s' % code,
@@ -58,11 +60,11 @@ class TestCashflowInvoiceLines(TransactionCase):
         return self.env['cashflow.entry'].search([
             ('model', '=', model), ('res_id', 'in', ids)])
 
-    def _pay(self, move, amount):
+    def _pay(self, move, amount, journal=None):
         wizard = self.env['account.payment.register'].with_context(
             active_model='account.move', active_ids=move.ids,
         ).create({
-            'journal_id': self.bank_journal.id,
+            'journal_id': (journal or self.bank_journal).id,
             'amount': amount,
             'communication': 'unrelated memo',
             'payment_date': fields.Date.today(),
@@ -129,3 +131,42 @@ class TestCashflowInvoiceLines(TransactionCase):
         self.assertEqual(entry.state, 'confirmed')
         self.assertEqual(entry.item_ids.type, 'out')
         self.assertEqual(entry.item_ids.journal_id, journal)
+
+    def test_moveless_payment_is_left_to_the_invoice_forecast(self):
+        journal = self._create_bank_journal('Cashflow No Outstanding', 'CFNO', outstanding_account=False)
+        invoice = self._invoice(amount=700.0)
+        self._pay(invoice, 700.0, journal=journal)
+        payment = self.env['account.payment'].search([('partner_id', '=', self.partner.id)])
+        self.assertEqual(payment.state, 'in_process')
+        self.assertFalse(payment.move_id)
+        self.assertFalse(self._entries('account.payment', payment.ids))
+        entry = self._entries('account.move.line', self._term_line(invoice).ids)
+        self.assertEqual(len(entry), 1)
+        self.assertAlmostEqual(entry.item_ids.amount, 700.0)
+
+    def test_payment_entry_leaves_when_matched_with_the_bank(self):
+        journal = self._create_bank_journal('Cashflow Matched Bank', 'CFMB')
+        payment = self.env['account.payment'].create({
+            'payment_type': 'outbound',
+            'partner_type': 'supplier',
+            'partner_id': self.partner.id,
+            'amount': 500.0,
+            'journal_id': journal.id,
+            'date': fields.Date.today(),
+        })
+        payment.action_post()
+        entry = self._entries('account.payment', payment.ids)
+        self.assertEqual(entry.state, 'confirmed')
+        statement_line = self.env['account.bank.statement.line'].create({
+            'journal_id': journal.id,
+            'amount': -500.0,
+            'date': fields.Date.today(),
+            'payment_ref': 'Bank match',
+        })
+        _liquidity, suspense, _other = statement_line._seek_for_lines()
+        outstanding_line = payment.move_id.line_ids.filtered(
+            lambda l: l.account_id == payment.outstanding_account_id)
+        suspense.account_id = payment.outstanding_account_id
+        (suspense + outstanding_line).reconcile()
+        self.assertTrue(payment.is_matched)
+        self.assertFalse(self._entries('account.payment', payment.ids))

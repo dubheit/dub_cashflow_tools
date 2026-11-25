@@ -108,7 +108,7 @@
         <record id="cashflow_config_payment" model="cashflow.config">
             <field name="name">Payments Cashflow</field>
             <field name="model_id" ref="account.model_account_payment"/>
-            <field name="filter_domain">[('state', 'in', ('in_process', 'paid')), ('is_matched', '=', False)]</field>
+            <field name="filter_domain">[('state', 'in', ('in_process', 'paid')), ('is_matched', '=', False), '|', ('move_id', '!=', False), ('invoice_ids', '=', False)]</field>
             <field name="name_code">record.name or record.display_name</field>
             <field name="active">True</field>
             <field name="action_code">
@@ -261,6 +261,13 @@ for rec in records:
         # Update invoice cashflow (recalculate amount based on linked payments)
         _logger.info("CASHFLOW RECONCILE: Updating cashflow for invoice_lines=%s", invoice_lines.ids)
         env['cashflow.config'].process_records(invoice_lines, 'write')
+
+    # Payments whose journal entry lines were reconciled (e.g. with a bank
+    # statement line) are not written to: reprocess them so the forecast of a
+    # matched payment drops out.
+    payments = lines.move_id.origin_payment_id
+    if payments:
+        env['cashflow.config'].process_records(payments, 'write')
             </field>
         </record>
 
