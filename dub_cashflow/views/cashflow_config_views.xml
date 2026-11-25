@@ -38,7 +38,7 @@
             <form>
                 <header>
                     <button name="action_regenerate" type="object" string="Regenerate"
-                            groups="account.group_account_manager"
+                            groups="account.group_account_manager" invisible="action_code"
                             help="Rebuild all cashflow entries of this configuration from the source records."/>
                 </header>
                 <sheet>
