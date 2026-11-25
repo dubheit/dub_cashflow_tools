@@ -334,20 +334,19 @@ Example:
 
         Runs synchronously over every matching record of every company, then
         removes the entries whose source record no longer matches. Reserved
-        to the users who can change the configurations. Configurations with
-        an action code are skipped: they only reprocess the records of other
-        configurations and own no entries.
+        to the users who can change the configurations. Each record goes
+        through the configuration's action as on a write, so an action code
+        decides what to generate (a configuration that only reprocesses the
+        records of other configurations creates no entries of its own).
         """
         self.check_access('write')
         Entry = self.env['cashflow.entry'].sudo()
         for config in self.sudo():
-            if config.action_code:
-                continue
             Model = self.env[config.model_name].sudo()
             domain = safe_eval(config.filter_domain or '[]')
             matched_ids = set(Model.search(domain).ids)
             for ids in split_every(500, list(matched_ids)):
-                config.generate_cashflow(Model.browse(ids))
+                config._execute_action(Model.browse(ids), 'write')
             # The stale entries are found in Python: a 'not in' over every
             # matched id would send a huge query on a real database.
             entries = Entry.search_fetch([
