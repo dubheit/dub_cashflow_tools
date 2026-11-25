@@ -3,3 +3,4 @@ from . import test_cashflow_category
 from . import test_cashflow_recurring
 from . import test_cashflow_deferred
 from . import test_cashflow_origin_filters
+from . import test_cashflow_chain_hooks
