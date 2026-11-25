@@ -15,4 +15,9 @@ class RibaSlipLine(models.Model):
             if credit_lines:
                 credit_lines._compute_used_amount()
                 credit_lines._compute_available_amount()
+            # The forecast moves between the invoice installments and the
+            # effetto as it is presented or bounces.
+            cashflow = self.env["cashflow.config"]
+            cashflow.process_records(self, "write")
+            cashflow.process_records(self.move_line_ids.move_line_id, "write")
         return res
