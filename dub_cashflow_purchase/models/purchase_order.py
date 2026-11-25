@@ -1,4 +1,4 @@
-from odoo import models, api
+from odoo import api, fields, models
 
 
 class PurchaseOrder(models.Model):
@@ -33,3 +33,87 @@ class PurchaseOrder(models.Model):
         result = super().button_draft()
         self.env['cashflow.config'].process_records(self, 'draft')
         return result
+
+    def _cashflow_amount_to_invoice(self):
+        """Amount of the order not yet covered by posted vendor bills, in the
+        order currency.
+
+        Computed on quantities and on posted bills only: a draft bill has a
+        draft (hidden) forecast of its own, so the order keeps its amount
+        until the bill is posted. Posted down payments are subtracted: the
+        down payment lines have no quantity, and their bills are forecast (or
+        paid) on their own.
+        """
+        self.ensure_one()
+        amount = 0.0
+        for line in self.order_line:
+            if line.product_qty > 0:
+                amount += (
+                    line.price_total
+                    * (line.product_qty - line._cashflow_posted_billed_qty())
+                    / line.product_qty
+                )
+        amount -= self._cashflow_posted_down_payments()
+        return max(amount, 0.0)
+
+    def _cashflow_posted_down_payments(self):
+        """Down payments billed by posted vendor bills, in the order currency.
+
+        The deduction line of the final bill is negative and nets them back,
+        refunds subtract.
+        """
+        self.ensure_one()
+        amount = 0.0
+        down_payment_lines = self.order_line.filtered('is_downpayment')
+        for bill_line in down_payment_lines.invoice_lines:
+            move = bill_line.move_id
+            if move.state != 'posted':
+                continue
+            if move.move_type == 'in_invoice':
+                sign = 1
+            elif move.move_type == 'in_refund':
+                sign = -1
+            else:
+                continue
+            amount += sign * move.currency_id._convert(
+                bill_line.price_total, self.currency_id, self.company_id,
+                move.invoice_date or fields.Date.context_today(self))
+        return amount
+
+    def _cashflow_forecast_amount(self):
+        """Forecast amount in the company currency, at today's rate: the
+        unbilled remainder of a confirmed order (locked ones included), the
+        total of a request for quotation."""
+        self.ensure_one()
+        if self.state in ('purchase', 'done'):
+            amount = self._cashflow_amount_to_invoice()
+        else:
+            amount = self.amount_total
+        company = self.company_id
+        return self.currency_id._convert(
+            amount, company.currency_id, company, fields.Date.context_today(self))
+
+
+class PurchaseOrderLine(models.Model):
+    _inherit = 'purchase.order.line'
+
+    def _cashflow_posted_billed_qty(self):
+        """Quantity billed by posted vendor bills, in the line unit.
+
+        Same rule as qty_invoiced (refunds subtract), without draft bills.
+        """
+        self.ensure_one()
+        qty = 0.0
+        for bill_line in self.invoice_lines:
+            move = bill_line.move_id
+            if move.state != 'posted':
+                continue
+            if move.move_type == 'in_invoice':
+                sign = 1
+            elif move.move_type == 'in_refund':
+                sign = -1
+            else:
+                continue
+            qty += sign * bill_line.product_uom_id._compute_quantity(
+                bill_line.quantity, self.product_uom)
+        return qty

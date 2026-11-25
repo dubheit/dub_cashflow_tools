@@ -1,6 +1,7 @@
 import logging
 from datetime import date, time, timedelta
 from odoo import models, fields, api
+from odoo.tools import split_every
 from odoo.tools.safe_eval import safe_eval, datetime as safe_datetime
 
 _logger = logging.getLogger(__name__)
@@ -144,9 +145,44 @@ Example:
     # Fields that belong to cashflow.entry (not cashflow.item)
     ENTRY_FIELDS = {'state', 'entry_type', 'journal_id'}
 
+    def _payment_mode_of(self, record):
+        """Return the payment mode of a source record (possibly empty).
+
+        Looks at ``payment_mode_id`` on the record, then on its ``move_id``,
+        then at ``customer_payment_mode_id`` for partners. Fields that do not
+        exist are skipped, so the hook works without any payment mode module.
+        """
+        if 'account.payment.mode' not in self.env:
+            return self.env['account.payment.mode']
+        candidates = (
+            (record, 'payment_mode_id'),
+            (record.move_id if 'move_id' in record._fields else None, 'payment_mode_id'),
+            (record if record._name == 'res.partner' else None, 'customer_payment_mode_id'),
+        )
+        for rec, field_name in candidates:
+            if rec and field_name in rec._fields and rec[field_name]:
+                return rec[field_name]
+        return self.env['account.payment.mode']
+
+    def _fixed_bank_journal(self, record):
+        """Return the id of the bank journal fixed by the payment mode, or False."""
+        mode = self._payment_mode_of(record)
+        if mode and mode.bank_account_link == 'fixed':
+            return mode.fixed_journal_id.id or False
+        return False
+
+    def _is_superseded(self, record):
+        """Hook: True when the record is replaced by another document.
+
+        A superseded record loses its cashflow entry. Returns False by default.
+        """
+        return False
+
     def _get_eval_context(self, record):
         """Get evaluation context for Python expressions."""
         return {
+            'fixed_bank_journal': self._fixed_bank_journal,
+            'payment_mode_of': self._payment_mode_of,
             'record': record,
             'env': self.env,
             'datetime': safe_datetime,
@@ -172,11 +208,12 @@ Example:
         for line in self.line_ids:
             try:
                 value = line._evaluate(record, eval_context)
-                if value is None:
-                    continue
                 if line.cashflow_field == 'category_code':
-                    # Special target: resolve the evaluated code to a category.
+                    # Special target: resolve the evaluated code to a
+                    # category. No code (False, None, '') means no category.
                     entry_vals['category_id'] = self._resolve_category(record, value)
+                elif value is None:
+                    continue
                 elif line.cashflow_field in self.ENTRY_FIELDS:
                     entry_vals[line.cashflow_field] = value
                 else:
@@ -194,9 +231,12 @@ Example:
 
         Returns False (and logs a warning) when the code does not match any
         category, so a misconfigured classifier never raises nor creates
-        categories on the fly (R1.5).
+        categories on the fly (R1.5). A falsy code (False, None, '') is a
+        record without category: False, without warning.
         """
         self.ensure_one()
+        if not code:
+            return False
         company = self.env.company
         if 'company_id' in record._fields and record.company_id:
             company = record.company_id[:1]
@@ -217,6 +257,9 @@ Example:
         CashflowItem = self.env['cashflow.item']
 
         for record in records:
+            if self._is_superseded(record):
+                self.delete_cashflow(record)
+                continue
             if not self._evaluate_domain(record):
                 # If record doesn't match domain anymore, delete existing entries
                 _logger.info("CASHFLOW: Record %s does not match domain, deleting cashflow", record.id)
@@ -284,6 +327,32 @@ Example:
                     item_vals['entry_id'] = entry.id
                     CashflowItem.create(item_vals)
 
+        return True
+
+    def action_regenerate(self):
+        """Rebuild the entries of these configurations from the source records.
+
+        Runs synchronously over every matching record of every company, then
+        removes the entries whose source record no longer matches. Reserved
+        to the users who can change the configurations.
+        """
+        self.check_access('write')
+        Entry = self.env['cashflow.entry'].sudo()
+        for config in self.sudo():
+            Model = self.env[config.model_name].sudo()
+            domain = safe_eval(config.filter_domain or '[]')
+            matched_ids = set(Model.search(domain).ids)
+            for ids in split_every(500, list(matched_ids)):
+                config.generate_cashflow(Model.browse(ids))
+            # The stale entries are found in Python: a 'not in' over every
+            # matched id would send a huge query on a real database.
+            entries = Entry.search_fetch([
+                ('config_id', '=', config.id),
+                ('model', '=', config.model_name),
+            ], ['res_id'])
+            stale_ids = [entry.id for entry in entries if entry.res_id not in matched_ids]
+            for ids in split_every(500, stale_ids):
+                Entry.browse(ids).unlink()
         return True
 
     def _compute_payment_term_items(self, record, base_item_vals):

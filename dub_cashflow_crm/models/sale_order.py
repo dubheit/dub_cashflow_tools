@@ -11,8 +11,9 @@ class SaleOrder(models.Model):
         return records
 
     def write(self, vals):
-        # A quotation moved to another opportunity, or cancelled, gives the
-        # forecast back to the opportunity it leaves.
+        # The opportunity forecasts until an order is confirmed: confirming
+        # (state 'sale', written by action_confirm), cancelling or moving an
+        # order recomputes the opportunities it leaves or joins.
         old_opportunities = self.opportunity_id
         result = super().write(vals)
         if 'opportunity_id' in vals or 'state' in vals:
@@ -22,8 +23,8 @@ class SaleOrder(models.Model):
     def _refresh_opportunity_cashflow(self):
         """Have the opportunities of these orders recomputed.
 
-        The quotation now carries the forecast: the opportunity config filter
-        drops an opportunity with a live quotation, so its entries go away
-        when the queued recomputation runs.
+        The opportunity keeps its forecast next to a quotation: the config
+        filter drops it only once a linked order is confirmed, when the queued
+        recomputation runs.
         """
         self.opportunity_id._refresh_cashflow()

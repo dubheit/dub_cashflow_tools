@@ -30,6 +30,17 @@ class TestCashflowPayment(TransactionCase):
             ('type', '=', 'bank'),
             ('company_id', '=', cls.env.company.id),
         ], limit=1)
+        # Payments only get a journal entry (and so can reconcile with the
+        # invoice) when the journal has an outstanding account.
+        outstanding = cls.env['account.account'].create({
+            'name': 'Outstanding Cashflow Test',
+            'code': 'OUTCFT',
+            'account_type': 'asset_current',
+            'reconcile': True,
+        })
+        (cls.bank_journal.inbound_payment_method_line_ids
+         | cls.bank_journal.outbound_payment_method_line_ids
+         ).payment_account_id = outstanding
 
         # Get the cashflow configs
         cls.invoice_config = cls.env['cashflow.config'].search([

@@ -36,6 +36,11 @@
         <field name="model">cashflow.config</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_regenerate" type="object" string="Regenerate"
+                            groups="account.group_account_manager"
+                            help="Rebuild all cashflow entries of this configuration from the source records."/>
+                </header>
                 <sheet>
                     <div class="oe_title">
                         <label for="name"/>

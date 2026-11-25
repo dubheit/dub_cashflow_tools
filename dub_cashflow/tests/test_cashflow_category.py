@@ -92,3 +92,26 @@ class TestCashflowCategory(TransactionCase):
         partner = self.env['res.partner'].create({'name': 'Category Partner 2'})
         entry_vals, _item_vals = config._prepare_cashflow_vals(partner)
         self.assertFalse(entry_vals.get('category_id'))
+
+    def test_09_classifier_without_code_clears_category_silently(self):
+        """A falsy category code clears category_id without any warning."""
+        config = self.env['cashflow.config'].create({
+            'name': 'Category Empty Config',
+            'model_id': self.env.ref('base.model_res_partner').id,
+        })
+        line = self.env['cashflow.config.line'].create({
+            'config_id': config.id,
+            'cashflow_field': 'category_code',
+            'source_type': 'python_code',
+            'python_code': 'False',
+        })
+        partner = self.env['res.partner'].create({'name': 'Category Partner 3'})
+        for code in ('False', 'None', "''"):
+            with self.subTest(code=code):
+                line.python_code = code
+                with self.assertNoLogs(
+                        'odoo.addons.dub_cashflow.models.cashflow_config',
+                        level='WARNING'):
+                    entry_vals, _item_vals = config._prepare_cashflow_vals(partner)
+                self.assertIn('category_id', entry_vals)
+                self.assertFalse(entry_vals['category_id'])

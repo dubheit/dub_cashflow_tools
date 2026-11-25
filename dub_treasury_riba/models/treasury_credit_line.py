@@ -7,8 +7,8 @@ class TreasuryCreditLine(models.Model):
     def _get_riba_usage(self):
         """Usage coming from presented (not yet collected) Ri.Ba. effetti.
 
-        Sums the amount of ``riba.slip.line`` in state ``confirmed``
-        (presented to the bank, advance outstanding) whose slip
+        Sums the amount of ``riba.slip.line`` in state ``confirmed`` or
+        ``credited`` (presented to the bank, advance outstanding) whose slip
         configuration points to this credit line. Collected (``paid``),
         bounced (``past_due``) or cancelled lines free the castelletto.
         """
@@ -20,7 +20,7 @@ class TreasuryCreditLine(models.Model):
             return 0.0
         lines = self.env["riba.slip.line"].search([
             ("slip_id.config_id", "in", configs.ids),
-            ("state", "=", "confirmed"),
+            ("state", "in", ("confirmed", "credited")),
         ])
         return sum(lines.mapped("amount"))
 
@@ -32,7 +32,7 @@ class TreasuryCreditLine(models.Model):
     def _projected_riba_usage_at_date(self, target_date):
         """Ri.Ba. portfolio still outstanding at ``target_date``.
 
-        A presented (``confirmed``) effetto consumes the SBF/advance line from
+        A presented (``confirmed`` or ``credited``) effetto consumes the SBF/advance line from
         presentation until it matures: effects whose ``due_date`` has passed by
         ``target_date`` are collected and free the castelletto, so only effects
         maturing strictly after ``target_date`` still weigh on the line.
@@ -48,7 +48,7 @@ class TreasuryCreditLine(models.Model):
             return 0.0
         lines = self.env["riba.slip.line"].search([
             ("slip_id.config_id", "in", configs.ids),
-            ("state", "=", "confirmed"),
+            ("state", "in", ("confirmed", "credited")),
             ("due_date", ">", target_date),
         ])
         return sum(lines.mapped("amount"))

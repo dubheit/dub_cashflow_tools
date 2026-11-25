@@ -1,6 +1,6 @@
 {
     "name": "Treasury - RiBa Credit Line",
-    "version": "18.0.1.2.0",
+    "version": "18.0.1.3.0",
     "category": "Accounting",
     "summary": "Lega le configurazioni Ri.Ba. a un castelletto (linea di credito): "
                "l'utilizzo SBF è calcolato dagli effetti presentati e il residuo/"
@@ -13,6 +13,7 @@
         "dub_treasury_base",
     ],
     "data": [
+        "data/cashflow_config_data.xml",
         "views/riba_configuration_views.xml",
         "views/riba_issue_views.xml",
     ],

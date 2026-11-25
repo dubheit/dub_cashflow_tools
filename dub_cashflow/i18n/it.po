@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0+e-20260409\n"
+"Project-Id-Version: Odoo Server 18.0+e-20260926\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-25 06:48+0000\n"
-"PO-Revision-Date: 2026-06-25 06:48+0000\n"
+"POT-Creation-Date: 2026-11-25 09:52+0000\n"
+"PO-Revision-Date: 2026-11-25 09:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,8 @@ msgstr "<code>config</code> - Questo record di configurazione"
 msgid ""
 "<code>delete_cashflow()</code> - Call to execute default delete behavior"
 msgstr ""
-"<code>delete_cashflow()</code> - Chiamata per eseguire il comportamento di eliminazione predefinito"
+"<code>delete_cashflow()</code> - Chiamata per eseguire il comportamento di "
+"eliminazione predefinito"
 
 #. module: dub_cashflow
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
@@ -47,7 +48,8 @@ msgstr "<code>env</code> - L'ambiente Odoo"
 msgid ""
 "<code>generate_cashflow()</code> - Call to execute default generate behavior"
 msgstr ""
-"<code>generate_cashflow()</code> - Chiamata per eseguire il comportamento di generazione predefinito"
+"<code>generate_cashflow()</code> - Chiamata per eseguire il comportamento di"
+" generazione predefinito"
 
 #. module: dub_cashflow
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
@@ -55,8 +57,6 @@ msgid ""
 "<code>operation</code> - 'create', 'write', 'unlink', 'copy', 'post', "
 "'draft', 'cancel'"
 msgstr ""
-"<code>operation</code> - 'create', 'write', 'unlink', 'copy', 'post', "
-"'draft', 'cancel'"
 
 #. module: dub_cashflow
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
@@ -70,7 +70,9 @@ msgstr ""
 #. module: dub_cashflow
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
 msgid "<code>record.date_maturity or record.date</code> - Field with fallback"
-msgstr "<code>record.date_maturity or record.date</code> - Campo con valore di ripiego"
+msgstr ""
+"<code>record.date_maturity or record.date</code> - Campo con valore di "
+"ripiego"
 
 #. module: dub_cashflow
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
@@ -128,7 +130,6 @@ msgstr "Attivo"
 
 #. module: dub_cashflow
 #: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_entry__entry_type__actual
-#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_dashboard_search
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
 msgid "Actual"
@@ -169,7 +170,6 @@ msgstr "Saldo"
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__journal_id
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_recurring__journal_id
 #: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__journal_id
-#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_dashboard_search
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_recurring_search
@@ -185,7 +185,7 @@ msgstr "Registro bancario per questo movimento di cashflow"
 #. module: dub_cashflow
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_scenario_form
 msgid "Base"
-msgstr "Base"
+msgstr ""
 
 #. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__is_default
@@ -219,7 +219,7 @@ msgstr "Uscita"
 #. module: dub_cashflow
 #: model:ir.ui.menu,name:dub_cashflow.menu_cashflow_root
 msgid "Cashflow"
-msgstr "Cashflow"
+msgstr ""
 
 #. module: dub_cashflow
 #: model:ir.actions.act_window,name:dub_cashflow.action_cashflow_analysis
@@ -300,7 +300,8 @@ msgstr "Scenari di cashflow"
 msgid ""
 "Cashflow category used to group flows by nature for pivots and dashboards."
 msgstr ""
-"Categoria di cashflow usata per raggruppare i flussi per natura nei pivot e nei cruscotti."
+"Categoria di cashflow usata per raggruppare i flussi per natura nei pivot e "
+"nei cruscotti."
 
 #. module: dub_cashflow
 #: model:ir.model.fields,help:dub_cashflow.field_cashflow_scenario__config_ids
@@ -342,7 +343,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_item__category_id
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_recurring__category_id
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_category_tree
-#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_dashboard_search
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_recurring_search
@@ -499,8 +499,8 @@ msgid ""
 "Day of the month for monthly/quarterly/yearly recurrences (1-31). Clamped to"
 " the last day of shorter months."
 msgstr ""
-"Giorno del mese per le ricorrenze mensili/trimestrali/annuali (1-31). Limitato"
-" all'ultimo giorno dei mesi più corti."
+"Giorno del mese per le ricorrenze mensili/trimestrali/annuali (1-31). "
+"Limitato all'ultimo giorno dei mesi più corti."
 
 #. module: dub_cashflow
 #: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_recurring
@@ -651,7 +651,6 @@ msgstr "Tipo di flusso"
 
 #. module: dub_cashflow
 #: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_entry__entry_type__forecast
-#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_dashboard_search
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
 msgid "Forecast"
@@ -736,7 +735,7 @@ msgstr "Quanti mesi in anticipo il cron genera i movimenti previsionali."
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_recurring__id
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_scenario__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: dub_cashflow
 #: model:ir.ui.menu,name:dub_cashflow.menu_cashflow_item
@@ -817,7 +816,6 @@ msgstr "Lunedì"
 
 #. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_recurring__recurrence_month
-#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_dashboard_search
 msgid "Month"
 msgstr "Mese"
 
@@ -846,21 +844,6 @@ msgid "Next 3 Months"
 msgstr "Prossimi 3 mesi"
 
 #. module: dub_cashflow
-#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_dashboard_search
-msgid "Next 30 days"
-msgstr "Prossimi 30 giorni"
-
-#. module: dub_cashflow
-#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_dashboard_search
-msgid "Next 60 days"
-msgstr "Prossimi 60 giorni"
-
-#. module: dub_cashflow
-#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_dashboard_search
-msgid "Next 90 days"
-msgstr "Prossimi 90 giorni"
-
-#. module: dub_cashflow
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
 msgid "Next Month"
 msgstr "Prossimo mese"
@@ -869,11 +852,6 @@ msgstr "Prossimo mese"
 #: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_analysis
 msgid "No cashflow data to analyze"
 msgstr "Nessun dato di cashflow da analizzare"
-
-#. module: dub_cashflow
-#: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_dashboard
-msgid "No cashflow data to display"
-msgstr "Nessun dato di cashflow da visualizzare"
 
 #. module: dub_cashflow
 #: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_entry
@@ -947,7 +925,7 @@ msgstr "Riconciliazione parziale"
 #: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_config_line__cashflow_field__partner_id
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
 msgid "Partner"
-msgstr "Partner"
+msgstr ""
 
 #. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__payment_term_field
@@ -1015,6 +993,14 @@ msgid "Quarterly"
 msgstr "Trimestrale"
 
 #. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid ""
+"Rebuild all cashflow entries of this configuration from the source records."
+msgstr ""
+"Ricostruisce tutti i movimenti di cashflow di questa configurazione dai "
+"record di origine."
+
+#. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_recurring__recurrence_type
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_recurring_form
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_recurring_search
@@ -1063,15 +1049,19 @@ msgid "Reference"
 msgstr "Riferimento"
 
 #. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "Regenerate"
+msgstr "Rigenera"
+
+#. module: dub_cashflow
 #: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_recurring__recurrence_weekday__5
 msgid "Saturday"
 msgstr "Sabato"
 
 #. module: dub_cashflow
-#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_dashboard_search
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_item_search_analysis
 msgid "Scenario"
-msgstr "Scenario"
+msgstr ""
 
 #. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__scenario_ids
@@ -1193,8 +1183,8 @@ msgid ""
 "Technical code used for import/export and to reference this category from "
 "cashflow configuration classifiers."
 msgstr ""
-"Codice tecnico usato per l'importazione/esportazione e per riferirsi a questa "
-"categoria dai classificatori delle configurazioni di cashflow."
+"Codice tecnico usato per l'importazione/esportazione e per riferirsi a "
+"questa categoria dai classificatori delle configurazioni di cashflow."
 
 #. module: dub_cashflow
 #: model:ir.model.fields,help:dub_cashflow.field_cashflow_recurring__description_template
@@ -1218,17 +1208,6 @@ msgstr ""
 #: model:ir.model.constraint,message:dub_cashflow.constraint_cashflow_category_code_company_uniq
 msgid "The category code must be unique per company."
 msgstr "Il codice della categoria deve essere univoco per azienda."
-
-#. module: dub_cashflow
-#: model_terms:ir.actions.act_window,help:dub_cashflow.action_cashflow_dashboard
-msgid ""
-"The treasury dashboard shows projected cashflow across all your\n"
-"                bank journals side by side. One column per bank, scaling to any\n"
-"                number of banks."
-msgstr ""
-"Il cruscotto di tesoreria mostra il cashflow previsionale di tutti i tuoi\n"
-"                registri bancari affiancati. Una colonna per banca, adattandosi a qualsiasi\n"
-"                numero di banche."
 
 #. module: dub_cashflow
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_search
@@ -1263,14 +1242,6 @@ msgstr "Totale entrate"
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_entry_tree
 msgid "Total Out"
 msgstr "Totale uscite"
-
-#. module: dub_cashflow
-#: model:ir.actions.act_window,name:dub_cashflow.action_cashflow_dashboard
-#: model:ir.ui.menu,name:dub_cashflow.menu_cashflow_dashboard
-#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_dashboard_graph
-#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_dashboard_pivot
-msgid "Treasury Dashboard"
-msgstr "Cruscotto tesoreria"
 
 #. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_config__trigger_on_copy
@@ -1334,11 +1305,6 @@ msgid "Wednesday"
 msgstr "Mercoledì"
 
 #. module: dub_cashflow
-#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_dashboard_search
-msgid "Week"
-msgstr "Settimana"
-
-#. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_recurring__recurrence_weekday
 msgid "Weekday"
 msgstr "Giorno della settimana"
@@ -1398,4 +1364,4 @@ msgstr ""
 #. module: dub_cashflow
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
 msgid "record.display_name"
-msgstr "record.display_name"
+msgstr ""

@@ -4,17 +4,19 @@
         <!-- Cashflow configuration for Account Move Line (receivable/payable lines) -->
         <!--
             This config tracks invoice receivable/payable lines as cashflow entries.
-            The filter excludes:
-            - Non-receivable/payable lines
-            - Cancelled invoices
-            - Fully paid invoices (payment_state = 'paid')
+            The filter keeps only open receivable/payable lines of draft or
+            posted invoices. Cancelled and reversed invoices, and fully
+            reconciled lines, drop out.
 
-            Partial payments are handled by calculating: original_amount - sum(linked_payments)
+            The forecast amount is the company-currency residual of the line
+            (amount_residual), so partial payments and credit notes reduce it
+            without any lookup of payments. The bank is the fixed bank of the
+            payment mode of the invoice, or none.
         -->
         <record id="cashflow_config_move_line" model="cashflow.config">
             <field name="name">Invoice Lines Cashflow</field>
             <field name="model_id" ref="account.model_account_move_line"/>
-            <field name="filter_domain">[('account_id.account_type', 'in', ['asset_receivable', 'liability_payable']), ('move_id.move_type', 'in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')), ('move_id.state', '!=', 'cancel'), ('move_id.payment_state', '!=', 'paid')]</field>
+            <field name="filter_domain">[('account_id.account_type', 'in', ['asset_receivable', 'liability_payable']), ('move_id.move_type', 'in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')), ('move_id.state', 'in', ('draft', 'posted')), ('reconciled', '=', False)]</field>
             <field name="name_code">record.move_id.name or record.display_name</field>
             <field name="active">True</field>
         </record>
@@ -47,18 +49,13 @@
             <field name="python_code">record.date_maturity or record.date</field>
         </record>
 
-        <!--
-            Amount calculation for partial payments:
-            - Finds all payments linked to this invoice via memo field
-            - Subtracts sum of active payments (in_process, posted, paid) from original balance
-            - Uses max(0, ...) to prevent negative amounts
-        -->
+        <!-- Amount: company-currency residual of the line -->
         <record id="cashflow_config_line_amount" model="cashflow.config.line">
             <field name="config_id" ref="cashflow_config_move_line"/>
             <field name="sequence">20</field>
             <field name="cashflow_field">amount</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">(lambda base: max(0, base - sum(env['account.payment'].search([('memo', '=', record.move_id.name), ('state', 'in', ['in_process', 'posted', 'paid'])]).mapped('amount'))))(abs(record.balance))</field>
+            <field name="python_code">abs(record.amount_residual)</field>
         </record>
 
         <record id="cashflow_config_line_type" model="cashflow.config.line">
@@ -66,7 +63,7 @@
             <field name="sequence">30</field>
             <field name="cashflow_field">type</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">'in' if record.balance > 0 else 'out'</field>
+            <field name="python_code">'in' if record.amount_residual > 0 else 'out'</field>
         </record>
 
         <record id="cashflow_config_line_currency" model="cashflow.config.line">
@@ -74,7 +71,7 @@
             <field name="sequence">40</field>
             <field name="cashflow_field">currency_id</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">record.currency_id.id or record.company_currency_id.id</field>
+            <field name="python_code">record.company_currency_id.id</field>
         </record>
 
         <record id="cashflow_config_line_partner" model="cashflow.config.line">
@@ -93,13 +90,13 @@
             <field name="python_code">record.move_id.name or record.name or ''</field>
         </record>
 
-        <!-- Bank journal: use invoice journal if bank type, otherwise default bank -->
+        <!-- Bank journal: fixed bank of the payment mode, or none -->
         <record id="cashflow_config_line_journal" model="cashflow.config.line">
             <field name="config_id" ref="cashflow_config_move_line"/>
             <field name="sequence">70</field>
             <field name="cashflow_field">journal_id</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">record.move_id.journal_id.id if record.move_id.journal_id.type == 'bank' else env['account.journal'].search([('type', '=', 'bank'), ('company_id', '=', record.company_id.id)], limit=1).id</field>
+            <field name="python_code">fixed_bank_journal(record)</field>
         </record>
 
         <!-- Cashflow configuration for Account Payment -->
@@ -111,7 +108,10 @@
         <record id="cashflow_config_payment" model="cashflow.config">
             <field name="name">Payments Cashflow</field>
             <field name="model_id" ref="account.model_account_payment"/>
-            <field name="filter_domain">[('state', '!=', 'cancel')]</field>
+            <!-- A payment without journal entry is left to the forecast of its
+                 bills until the bank statement is reconciled with them: payment
+                 orders do not link their bills on the payment. -->
+            <field name="filter_domain">[('state', 'in', ('in_process', 'paid')), ('is_matched', '=', False), ('move_id', '!=', False)]</field>
             <field name="name_code">record.name or record.display_name</field>
             <field name="active">True</field>
             <field name="action_code">
@@ -149,7 +149,7 @@ if operation in ('create', 'write'):
             <field name="sequence">5</field>
             <field name="cashflow_field">state</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">{'draft': 'draft', 'in_process': 'draft', 'posted': 'confirmed', 'sent': 'confirmed', 'reconciled': 'confirmed', 'paid': 'confirmed', 'cancel': 'cancelled'}.get(record.state, 'draft')</field>
+            <field name="python_code">{'draft': 'draft', 'in_process': 'confirmed', 'paid': 'confirmed'}.get(record.state, 'cancelled')</field>
         </record>
 
         <!-- Entry type: draft/in_process -> forecast, posted/sent/reconciled/paid -> actual -->
@@ -170,13 +170,13 @@ if operation in ('create', 'write'):
             <field name="python_code">record.date</field>
         </record>
 
-        <!-- Amount -->
+        <!-- Amount, in company currency like the invoice installments -->
         <record id="cashflow_config_payment_amount" model="cashflow.config.line">
             <field name="config_id" ref="cashflow_config_payment"/>
             <field name="sequence">20</field>
             <field name="cashflow_field">amount</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">abs(record.amount)</field>
+            <field name="python_code">abs(record.amount_company_currency_signed)</field>
         </record>
 
         <!-- Type: inbound -> in, outbound -> out -->
@@ -188,13 +188,13 @@ if operation in ('create', 'write'):
             <field name="python_code">'in' if record.payment_type == 'inbound' else 'out'</field>
         </record>
 
-        <!-- Currency -->
+        <!-- Currency: the company currency -->
         <record id="cashflow_config_payment_currency" model="cashflow.config.line">
             <field name="config_id" ref="cashflow_config_payment"/>
             <field name="sequence">40</field>
             <field name="cashflow_field">currency_id</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">record.currency_id.id</field>
+            <field name="python_code">record.company_id.currency_id.id</field>
         </record>
 
         <!-- Partner -->
@@ -212,7 +212,7 @@ if operation in ('create', 'write'):
             <field name="sequence">55</field>
             <field name="cashflow_field">journal_id</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">record.journal_id.id if record.journal_id else False</field>
+            <field name="python_code">record.journal_id.id</field>
         </record>
 
         <!-- Description -->
@@ -264,6 +264,13 @@ for rec in records:
         # Update invoice cashflow (recalculate amount based on linked payments)
         _logger.info("CASHFLOW RECONCILE: Updating cashflow for invoice_lines=%s", invoice_lines.ids)
         env['cashflow.config'].process_records(invoice_lines, 'write')
+
+    # Payments whose journal entry lines were reconciled (e.g. with a bank
+    # statement line) are not written to: reprocess them so the forecast of a
+    # matched payment drops out.
+    payments = lines.move_id.origin_payment_id
+    if payments:
+        env['cashflow.config'].process_records(payments, 'write')
             </field>
         </record>
 

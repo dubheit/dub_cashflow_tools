@@ -41,19 +41,24 @@ class TestPurchaseOrderCashflow(TransactionCase):
         order.action_create_invoice()
         return order.invoice_ids
 
+    def _post(self, bill):
+        bill.invoice_date = bill.date = '2026-01-10'
+        bill.action_post()
+
     def test_bill_takes_over_order_forecast(self):
         order = self._confirmed_order()
         self.assertTrue(self._order_entries(order))
-        self._bill(order)
+        self._post(self._bill(order))
         self.assertFalse(self._order_entries(order))
 
-    def test_partially_billed_order_stays_out_after_a_write(self):
+    def test_partially_billed_order_keeps_remainder_after_a_write(self):
         order = self._confirmed_order()
         bill = self._bill(order)
         bill.invoice_line_ids.quantity = 1
+        self._post(bill)
         self.assertEqual(order.invoice_status, 'to invoice')
         order.write({'notes': 'touched after billing'})
-        self.assertFalse(self._order_entries(order))
+        self.assertEqual(sum(self._order_entries(order).mapped('total_out')), 100.0)
 
     def test_bill_creation_keeps_orm_cache(self):
         order = self._confirmed_order()
