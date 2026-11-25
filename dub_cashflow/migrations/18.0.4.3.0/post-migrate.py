@@ -60,7 +60,13 @@ VALUES = {
         'python_code': "fixed_bank_journal(record)",
     },
     'cashflow_config_payment': {
-        'filter_domain': "[('state', 'in', ('in_process', 'paid')), ('is_matched', '=', False), '|', ('move_id', '!=', False), ('invoice_ids', '=', False)]",
+        'filter_domain': "[('state', 'in', ('in_process', 'paid')), ('is_matched', '=', False), ('move_id', '!=', False)]",
+    },
+    'cashflow_config_payment_amount': {
+        'python_code': "abs(record.amount_company_currency_signed)",
+    },
+    'cashflow_config_payment_currency': {
+        'python_code': "record.company_id.currency_id.id",
     },
     'cashflow_config_reconcile': {
         'action_code': RECONCILE_ACTION_CODE,

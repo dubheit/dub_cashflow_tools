@@ -69,6 +69,13 @@ class AccountMove(models.Model):
                 # Also invalidate the lines' cache for the move_id relationship
                 lines.invalidate_recordset(['move_id'])
                 self.env['cashflow.config'].process_records(lines, 'write')
+        if 'payment_mode_id' in vals:
+            # The payment mode of the lines is a stored compute, the lines are
+            # not written: reprocess them so the bank and the category of
+            # their forecast follow the new mode.
+            lines = self.filtered(lambda move: move.state == 'posted')._get_cashflow_lines()
+            if lines:
+                self.env['cashflow.config'].process_records(lines, 'write')
         return result
 
     def action_post(self):

@@ -144,6 +144,47 @@ class TestCashflowInvoiceLines(TransactionCase):
         self.assertEqual(len(entry), 1)
         self.assertAlmostEqual(entry.item_ids.amount, 700.0)
 
+    def test_moveless_unlinked_payment_not_forecast(self):
+        journal = self._create_bank_journal('Cashflow No Outstanding 2', 'CFN2', outstanding_account=False)
+        payment = self.env['account.payment'].create({
+            'payment_type': 'outbound',
+            'partner_type': 'supplier',
+            'partner_id': self.partner.id,
+            'amount': 500.0,
+            'journal_id': journal.id,
+            'date': fields.Date.today(),
+        })
+        payment.action_post()
+        self.assertEqual(payment.state, 'in_process')
+        self.assertFalse(payment.move_id)
+        self.assertFalse(payment.invoice_ids)
+        self.assertFalse(self._entries('account.payment', payment.ids))
+
+    def test_foreign_currency_payment_uses_company_currency(self):
+        usd = self.env.ref('base.USD')
+        usd.active = True
+        self.assertNotEqual(usd, self.company.currency_id)
+        self.env['res.currency.rate'].create({
+            'currency_id': usd.id,
+            'company_id': self.company.id,
+            'name': fields.Date.today(),
+            'rate': 1.25,
+        })
+        payment = self.env['account.payment'].create({
+            'payment_type': 'outbound',
+            'partner_type': 'supplier',
+            'partner_id': self.partner.id,
+            'amount': 1250.0,
+            'currency_id': usd.id,
+            'journal_id': self.bank_journal.id,
+            'date': fields.Date.today(),
+        })
+        payment.action_post()
+        entry = self._entries('account.payment', payment.ids)
+        self.assertEqual(len(entry), 1)
+        self.assertEqual(entry.item_ids.currency_id, self.company.currency_id)
+        self.assertAlmostEqual(entry.item_ids.amount, 1000.0)
+
     def test_payment_entry_leaves_when_matched_with_the_bank(self):
         journal = self._create_bank_journal('Cashflow Matched Bank', 'CFMB')
         payment = self.env['account.payment'].create({

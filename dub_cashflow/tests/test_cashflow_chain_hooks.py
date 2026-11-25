@@ -1,6 +1,7 @@
 from unittest.mock import patch
 
-from odoo import fields
+from odoo import Command, fields
+from odoo.exceptions import AccessError
 from odoo.tests.common import TransactionCase, tagged
 
 
@@ -23,18 +24,18 @@ class TestCashflowChainHooks(TransactionCase):
             "type": "bank",
         })
 
-    def _mode(self, link):
+    def _mode(self, link, journal=None):
         if "payment_mode_id" not in self.env["account.move"]._fields:
             self.skipTest("payment_mode_id not available (OCA account_payment_mode)")
         vals = {
-            "name": "Chain mode %s" % link,
+            "name": "Chain mode %s %s" % (link, (journal or self.bank_journal).code),
             "bank_account_link": link,
             "payment_method_id": self.env.ref(
                 "account.account_payment_method_manual_in").id,
             "company_id": self.env.company.id,
         }
         if link == "fixed":
-            vals["fixed_journal_id"] = self.bank_journal.id
+            vals["fixed_journal_id"] = (journal or self.bank_journal).id
         return self.env["account.payment.mode"].create(vals)
 
     def _invoice(self, amount=1000.0, mode=None):
@@ -115,3 +116,26 @@ class TestCashflowChainHooks(TransactionCase):
         })
         self.config.action_regenerate()
         self.assertFalse(stale.exists())
+
+    def test_regenerate_requires_write_access(self):
+        user = self.env["res.users"].create({
+            "name": "Chain Hooks Accountant",
+            "login": "chain_hooks_accountant",
+            "groups_id": [Command.set([self.env.ref("account.group_account_user").id])],
+        })
+        with self.assertRaises(AccessError):
+            self.config.with_user(user).action_regenerate()
+
+    def test_payment_mode_change_moves_entry_to_new_bank(self):
+        mode = self._mode("fixed")
+        other_journal = self.env["account.journal"].create({
+            "name": "Chain Hooks Bank 2",
+            "code": "CHB2",
+            "type": "bank",
+        })
+        other_mode = self._mode("fixed", journal=other_journal)
+        invoice = self._invoice(mode=mode)
+        line = self._receivable(invoice)
+        self.assertEqual(self._entries(line).journal_id, self.bank_journal)
+        invoice.payment_mode_id = other_mode
+        self.assertEqual(self._entries(line).journal_id, other_journal)
