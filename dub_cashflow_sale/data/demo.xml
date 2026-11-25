@@ -5,7 +5,7 @@
         <record id="cashflow_config_sale_order" model="cashflow.config">
             <field name="name">Sale Orders Cashflow</field>
             <field name="model_id" ref="sale.model_sale_order"/>
-            <field name="filter_domain">[('state', 'not in', ['cancel']), ('invoice_status', '!=', 'invoiced'), ('invoice_ids', 'not any', [('state', '!=', 'cancel')])]</field>
+            <field name="filter_domain">[('state', '!=', 'cancel'), ('invoice_status', '!=', 'invoiced')]</field>
             <field name="name_code">record.name</field>
             <field name="active">True</field>
             <!-- Payment terms support -->
@@ -44,13 +44,13 @@
             <field name="python_code">record.commitment_date or record.date_order.date() if record.date_order else date.today()</field>
         </record>
 
-        <!-- Amount: total amount -->
+        <!-- Amount: the whole quotation, the uninvoiced remainder of a confirmed order -->
         <record id="cashflow_config_line_so_amount" model="cashflow.config.line">
             <field name="config_id" ref="cashflow_config_sale_order"/>
             <field name="sequence">20</field>
             <field name="cashflow_field">amount</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">record.amount_total</field>
+            <field name="python_code">record._cashflow_amount_to_invoice() if record.state == 'sale' else record.amount_total</field>
         </record>
 
         <!-- Type: sale orders are always inflow -->
@@ -89,13 +89,13 @@
             <field name="python_code">record.name or ''</field>
         </record>
 
-        <!-- Bank journal (default) -->
+        <!-- Bank journal: fixed bank of the payment mode, or none -->
         <record id="cashflow_config_line_so_journal" model="cashflow.config.line">
             <field name="config_id" ref="cashflow_config_sale_order"/>
             <field name="sequence">70</field>
             <field name="cashflow_field">journal_id</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">env['account.journal'].search([('type', '=', 'bank'), ('company_id', '=', record.company_id.id)], limit=1).id</field>
+            <field name="python_code">fixed_bank_journal(record)</field>
         </record>
     </data>
 </odoo>

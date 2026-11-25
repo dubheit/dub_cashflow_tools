@@ -33,3 +33,21 @@ class SaleOrder(models.Model):
         result = super().action_draft()
         self.env['cashflow.config'].process_records(self, 'draft')
         return result
+
+    def _cashflow_amount_to_invoice(self):
+        """Amount of the order not yet covered by posted invoices.
+
+        Computed on quantities: amount_to_invoice of Odoo is 0 for goods not
+        yet delivered under the "delivery" invoice policy, but the order still
+        has to be invoiced and paid.
+        """
+        self.ensure_one()
+        amount = 0.0
+        for line in self.order_line:
+            if line.product_uom_qty > 0:
+                amount += (
+                    line.price_total
+                    * (line.product_uom_qty - line.qty_invoiced_posted)
+                    / line.product_uom_qty
+                )
+        return max(amount, 0.0)

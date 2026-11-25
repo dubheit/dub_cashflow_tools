@@ -1,0 +1,35 @@
+"""Sale orders forecast their uninvoiced remainder on the payment mode bank.
+
+The configuration records are noupdate, so the new values of the data file
+are written here on existing databases.
+"""
+import logging
+
+from odoo import api, SUPERUSER_ID
+
+_logger = logging.getLogger(__name__)
+
+MODULE = 'dub_cashflow_sale'
+
+VALUES = {
+    'cashflow_config_sale_order': {
+        'filter_domain': "[('state', '!=', 'cancel'), ('invoice_status', '!=', 'invoiced')]",
+    },
+    'cashflow_config_line_so_amount': {
+        'python_code': "record._cashflow_amount_to_invoice() if record.state == 'sale' else record.amount_total",
+    },
+    'cashflow_config_line_so_journal': {
+        'python_code': "fixed_bank_journal(record)",
+    },
+}
+
+
+def migrate(cr, version):
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    for xmlid, values in VALUES.items():
+        record = env.ref('%s.%s' % (MODULE, xmlid), raise_if_not_found=False)
+        if not record:
+            _logger.info("Skipping %s: record not found", xmlid)
+            continue
+        record.write(values)
+        _logger.info("Updated cashflow configuration %s", xmlid)

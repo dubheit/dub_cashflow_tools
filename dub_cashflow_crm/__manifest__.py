@@ -1,6 +1,6 @@
 {
     'name': 'DUB Cashflow - CRM',
-    'version': '18.0.1.1.0',
+    'version': '18.0.1.2.0',
     'category': 'Accounting',
     'summary': 'Cashflow forecasting from CRM opportunities',
     'description': """
@@ -10,7 +10,7 @@
         - Automatic cashflow entry creation when opportunities are created/updated
         - Uses expected revenue * probability for amount calculation
         - Uses expected closing date for cashflow date
-        - Automatic deletion of CRM cashflow when sale order is created from opportunity
+        - Forecast kept until a sale order from the opportunity is confirmed
     """,
     'author': 'Dubhe Srls',
     'website': 'https://www.dubhe.it',

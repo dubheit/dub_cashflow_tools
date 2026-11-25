@@ -55,17 +55,18 @@ class TestSaleOrderCashflow(TransactionCase):
     def test_invoice_takes_over_order_forecast(self):
         order = self._confirmed_order()
         self.assertTrue(self._order_entries(order))
-        order._create_invoices()
+        order._create_invoices().action_post()
         self.assertFalse(self._order_entries(order))
 
-    def test_partially_invoiced_order_stays_out_after_a_write(self):
-        """A write on the order in the same transaction keeps it out."""
+    def test_partially_invoiced_order_keeps_remainder_after_a_write(self):
+        """A write on the order in the same transaction keeps the remainder."""
         order = self._confirmed_order()
         invoice = order._create_invoices()
         invoice.invoice_line_ids.quantity = 1
+        invoice.action_post()
         self.assertEqual(order.invoice_status, 'to invoice')
         order.write({'note': 'touched after invoicing'})
-        self.assertFalse(self._order_entries(order))
+        self.assertEqual(sum(self._order_entries(order).mapped('total_in')), 100.0)
 
     def test_invoice_creation_keeps_orm_cache(self):
         order = self._confirmed_order()

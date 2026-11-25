@@ -6,7 +6,10 @@
         <record id="cashflow_config_crm_opportunity" model="cashflow.config">
             <field name="name">CRM Opportunities</field>
             <field name="model_id" ref="crm.model_crm_lead"/>
-            <field name="filter_domain">[('type', '=', 'opportunity'), ('probability', '>', 0), ('order_ids', 'not any', [('state', '!=', 'cancel')])]</field>
+            <field name="filter_domain">[('type', '=', 'opportunity'), ('probability', '>', 0), ('order_ids', 'not any', [('state', '=', 'sale')])]</field>
+            <field name="use_payment_terms">True</field>
+            <field name="payment_term_field">partner_id.property_payment_term_id</field>
+            <field name="date_field">date_deadline</field>
             <field name="trigger_on_create">True</field>
             <field name="trigger_on_write">True</field>
             <field name="trigger_on_unlink">True</field>
@@ -88,13 +91,13 @@ elif operation in ('create', 'write'):
             <field name="fixed_value">forecast</field>
         </record>
 
-        <!-- Field mapping: Bank journal (default) -->
+        <!-- Field mapping: fixed bank of the customer payment mode, or none -->
         <record id="cashflow_config_line_crm_journal" model="cashflow.config.line">
             <field name="config_id" ref="cashflow_config_crm_opportunity"/>
             <field name="sequence">80</field>
             <field name="cashflow_field">journal_id</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">env['account.journal'].search([('type', '=', 'bank'), ('company_id', '=', record.company_id.id or env.company.id)], limit=1).id</field>
+            <field name="python_code">fixed_bank_journal(record.partner_id.commercial_partner_id)</field>
         </record>
 
     </data>

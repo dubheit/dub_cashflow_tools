@@ -10,13 +10,21 @@ class AccountMove(models.Model):
         self._refresh_sale_order_cashflow(moves)
         return moves
 
+    def write(self, vals):
+        result = super().write(vals)
+        if 'state' in vals:
+            # Posting, resetting or cancelling an invoice changes what the
+            # order still has to invoice.
+            self._refresh_sale_order_cashflow(self)
+        return result
+
     def _refresh_sale_order_cashflow(self, moves):
         """Have the sale orders of these invoices recomputed.
 
-        The invoice now carries the forecast: the sale order config filter
-        drops an order that has an invoice, so its entries go away when the
-        queued recomputation runs. Deleting them here cleared the whole ORM
-        cache in the middle of the invoice creation.
+        The order forecasts what the posted invoices do not cover yet, so it
+        is recomputed when an invoice is created or changes state. Deleting
+        its entries here cleared the whole ORM cache in the middle of the
+        invoice creation: the queued recomputation does the work.
         """
         sale_orders = moves.filtered(
             lambda move: move.move_type in ('out_invoice', 'out_refund')
