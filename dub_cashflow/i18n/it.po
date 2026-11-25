@@ -1015,6 +1015,14 @@ msgid "Quarterly"
 msgstr "Trimestrale"
 
 #. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid ""
+"Rebuild all cashflow entries of this configuration from the source records."
+msgstr ""
+"Ricostruisce tutti i movimenti di cashflow di questa configurazione dai "
+"record di origine."
+
+#. module: dub_cashflow
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_recurring__recurrence_type
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_recurring_form
 #: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_recurring_search
@@ -1061,6 +1069,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:dub_cashflow.field_cashflow_entry__reference
 msgid "Reference"
 msgstr "Riferimento"
+
+#. module: dub_cashflow
+#: model_terms:ir.ui.view,arch_db:dub_cashflow.view_cashflow_config_form
+msgid "Regenerate"
+msgstr "Rigenera"
 
 #. module: dub_cashflow
 #: model:ir.model.fields.selection,name:dub_cashflow.selection__cashflow_recurring__recurrence_weekday__5

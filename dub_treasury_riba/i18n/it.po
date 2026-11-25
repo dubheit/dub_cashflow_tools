@@ -1,0 +1,117 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* dub_treasury_riba
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20260926\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-25 09:50+0000\n"
+"PO-Revision-Date: 2026-11-25 09:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dub_treasury_riba
+#: model_terms:ir.ui.view,arch_db:dub_treasury_riba.riba_issue_view_treasury
+msgid ""
+"<strong>Castelletto entro il plafond.</strong>\n"
+"                    L'emissione rientra nel residuo disponibile."
+msgstr ""
+
+#. module: dub_treasury_riba
+#: model_terms:ir.ui.view,arch_db:dub_treasury_riba.riba_issue_view_treasury
+msgid ""
+"<strong>Plafond del castelletto superato.</strong>\n"
+"                    L'importo da presentare supera il residuo disponibile:\n"
+"                    non è possibile procedere. Riduci le scadenze selezionate\n"
+"                    oppure presenta su un'altra banca/configurazione."
+msgstr ""
+
+#. module: dub_treasury_riba
+#: model:ir.model,name:dub_treasury_riba.model_cashflow_config
+msgid "Cashflow Configuration"
+msgstr "Configurazione cashflow"
+
+#. module: dub_treasury_riba
+#: model:ir.model.fields,field_description:dub_treasury_riba.field_riba_configuration__credit_line_id
+#: model:ir.model.fields,field_description:dub_treasury_riba.field_riba_issue__credit_line_id
+msgid "Castelletto"
+msgstr ""
+
+#. module: dub_treasury_riba
+#: model:ir.model,name:dub_treasury_riba.model_riba_configuration
+msgid "Configuration parameters for RiBa"
+msgstr "Parametri di configurazione Riba"
+
+#. module: dub_treasury_riba
+#: model:ir.model.fields,field_description:dub_treasury_riba.field_riba_issue__castelletto_currency_id
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: dub_treasury_riba
+#: model:ir.model.fields,field_description:dub_treasury_riba.field_riba_issue__issue_amount
+msgid "Importo in emissione"
+msgstr ""
+
+#. module: dub_treasury_riba
+#: model:ir.model.fields,help:dub_treasury_riba.field_riba_configuration__credit_line_id
+#: model:ir.model.fields,help:dub_treasury_riba.field_riba_issue__credit_line_id
+msgid ""
+"Linea di credito (castelletto) consumata dagli effetti presentati con questa"
+" configurazione Ri.Ba. L'utilizzo SBF del castelletto è calcolato dagli "
+"effetti in stato 'Presentata'."
+msgstr ""
+
+#. module: dub_treasury_riba
+#: model:ir.model.fields,field_description:dub_treasury_riba.field_riba_issue__castelletto_limit
+msgid "Plafond"
+msgstr ""
+
+#. module: dub_treasury_riba
+#: model:ir.model.fields,field_description:dub_treasury_riba.field_riba_issue__castelletto_over
+msgid "Plafond superato"
+msgstr ""
+
+#. module: dub_treasury_riba
+#: model:ir.model.fields,field_description:dub_treasury_riba.field_riba_issue__castelletto_available
+msgid "Residuo disponibile"
+msgstr ""
+
+#. module: dub_treasury_riba
+#: model:ir.model.fields,field_description:dub_treasury_riba.field_riba_issue__castelletto_after
+msgid "Residuo dopo emissione"
+msgstr ""
+
+#. module: dub_treasury_riba
+#: model:ir.model,name:dub_treasury_riba.model_riba_slip_line
+msgid "RiBa Details"
+msgstr "Dettagli RiBa"
+
+#. module: dub_treasury_riba
+#: model:ir.model,name:dub_treasury_riba.model_riba_issue
+msgid "RiBa Issue"
+msgstr "Emissione RiBa"
+
+#. module: dub_treasury_riba
+#: model:ir.model.fields,field_description:dub_treasury_riba.field_riba_issue__castelletto_expiry
+msgid "Scadenza castelletto"
+msgstr ""
+
+#. module: dub_treasury_riba
+#: model:ir.model.fields,field_description:dub_treasury_riba.field_riba_issue__castelletto_state
+msgid "Stato castelletto"
+msgstr ""
+
+#. module: dub_treasury_riba
+#: model:ir.model,name:dub_treasury_riba.model_treasury_credit_line
+msgid "Treasury Credit Line"
+msgstr "Linea di Credito"
+
+#. module: dub_treasury_riba
+#: model:ir.model.fields,field_description:dub_treasury_riba.field_riba_issue__castelletto_used
+msgid "Utilizzato"
+msgstr ""
