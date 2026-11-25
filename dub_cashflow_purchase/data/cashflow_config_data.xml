@@ -45,13 +45,13 @@
             <field name="python_code">(record.date_planned or record.date_order).date() if (record.date_planned or record.date_order) else date.today()</field>
         </record>
 
-        <!-- Amount: the whole RFQ, the unbilled remainder of a confirmed order -->
+        <!-- Amount, in company currency: the whole RFQ, the unbilled remainder of a confirmed or locked order -->
         <record id="cashflow_config_line_po_amount" model="cashflow.config.line">
             <field name="config_id" ref="cashflow_config_purchase_order"/>
             <field name="sequence">20</field>
             <field name="cashflow_field">amount</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">record._cashflow_amount_to_invoice() if record.state == 'purchase' else record.amount_total</field>
+            <field name="python_code">record._cashflow_forecast_amount()</field>
         </record>
 
         <!-- Type: purchase orders are always outflow -->
@@ -63,13 +63,13 @@
             <field name="fixed_value">out</field>
         </record>
 
-        <!-- Currency -->
+        <!-- Currency: the company currency -->
         <record id="cashflow_config_line_po_currency" model="cashflow.config.line">
             <field name="config_id" ref="cashflow_config_purchase_order"/>
             <field name="sequence">40</field>
             <field name="cashflow_field">currency_id</field>
             <field name="source_type">python_code</field>
-            <field name="python_code">record.currency_id.id or record.company_id.currency_id.id</field>
+            <field name="python_code">record.company_id.currency_id.id</field>
         </record>
 
         <!-- Partner -->

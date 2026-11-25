@@ -1,4 +1,4 @@
-from odoo import Command
+from odoo import Command, fields
 from odoo.tests.common import TransactionCase, tagged
 
 
@@ -94,4 +94,73 @@ class TestPurchaseCashflowChain(TransactionCase):
         self.assertEqual(sum(self._entries(order).mapped('total_out')), 1000.0)
         bill.invoice_date = bill.date = '2026-01-10'
         bill.action_post()
+        self.assertFalse(self._entries(order))
+
+    def test_foreign_currency_order_in_company_currency(self):
+        company = self.env.company
+        usd = self.env.ref('base.USD')
+        usd.active = True
+        self.assertNotEqual(usd, company.currency_id)
+        self.env['res.currency.rate'].create({
+            'currency_id': usd.id,
+            'company_id': company.id,
+            'name': fields.Date.today(),
+            'rate': 1.25,
+        })
+        order = self.env['purchase.order'].create({
+            'partner_id': self.vendor.id,
+            'currency_id': usd.id,
+            'order_line': [Command.create({
+                'product_id': self.product.id, 'product_qty': 10, 'price_unit': 125.0,
+                'taxes_id': [Command.clear()],
+            })],
+        })
+        order.button_confirm()
+        items = self._entries(order).item_ids
+        self.assertTrue(items)
+        self.assertEqual(items.currency_id, company.currency_id)
+        self.assertAlmostEqual(sum(items.mapped('amount')), 1000.0)
+
+    def test_locked_order_keeps_remainder(self):
+        self.env.company.po_lock = 'lock'
+        order = self._order()
+        order.button_confirm()
+        self.assertEqual(order.state, 'done')
+        bill = self._bill(order, 4)
+        bill.invoice_date = bill.date = '2026-01-10'
+        bill.action_post()
+        self.assertEqual(sum(self._entries(order).mapped('total_out')), 600.0)
+
+    def test_down_payment_reduces_order_remainder(self):
+        order = self._order()
+        order.button_confirm()
+        down_payment_line = order._create_downpayments([{
+            'name': 'Down payment',
+            'product_qty': 0.0,
+            'is_downpayment': True,
+            'price_unit': 300.0,
+            'taxes_id': [Command.clear()],
+            'order_id': order.id,
+        }])
+        down_payment = self.env['account.move'].create({
+            'move_type': 'in_invoice',
+            'partner_id': self.vendor.id,
+            'invoice_date': '2026-01-10',
+            'invoice_line_ids': [Command.create({
+                'name': 'Down payment',
+                'quantity': 1.0,
+                'price_unit': 300.0,
+                'tax_ids': [Command.clear()],
+                'purchase_line_id': down_payment_line.id,
+                'is_downpayment': True,
+            })],
+        })
+        self.assertEqual(sum(self._entries(order).mapped('total_out')), 1000.0)
+        down_payment.action_post()
+        self.assertAlmostEqual(sum(self._entries(order).mapped('total_out')), 700.0)
+        order.action_create_invoice()
+        final = order.invoice_ids - down_payment
+        self.assertAlmostEqual(final.amount_total, 700.0)
+        final.invoice_date = final.date = '2026-01-10'
+        final.action_post()
         self.assertFalse(self._entries(order))

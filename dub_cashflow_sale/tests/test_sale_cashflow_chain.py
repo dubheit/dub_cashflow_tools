@@ -1,4 +1,4 @@
-from odoo import Command
+from odoo import Command, fields
 from odoo.tests.common import TransactionCase, tagged
 
 
@@ -95,4 +95,50 @@ class TestSaleCashflowChain(TransactionCase):
         invoice = order._create_invoices()
         self.assertEqual(sum(self._entries(order).mapped('total_in')), 1000.0)
         invoice.action_post()
+        self.assertFalse(self._entries(order))
+
+    def test_foreign_currency_order_in_company_currency(self):
+        company = self.env.company
+        usd = self.env.ref('base.USD')
+        usd.active = True
+        self.assertNotEqual(usd, company.currency_id)
+        self.env['res.currency.rate'].create({
+            'currency_id': usd.id,
+            'company_id': company.id,
+            'name': fields.Date.today(),
+            'rate': 1.25,
+        })
+        pricelist = self.env['product.pricelist'].create({
+            'name': 'Chain USD pricelist', 'currency_id': usd.id,
+        })
+        order = self.env['sale.order'].create({
+            'partner_id': self.partner.id,
+            'pricelist_id': pricelist.id,
+            'order_line': [Command.create({
+                'product_id': self.service.id, 'product_uom_qty': 10, 'price_unit': 125.0,
+            })],
+        })
+        self.assertEqual(order.currency_id, usd)
+        order.action_confirm()
+        items = self._entries(order).item_ids
+        self.assertTrue(items)
+        self.assertEqual(items.currency_id, company.currency_id)
+        self.assertAlmostEqual(sum(items.mapped('amount')), 1000.0)
+
+    def test_down_payment_reduces_order_remainder(self):
+        order = self._order(self.service)
+        order.action_confirm()
+        wizard = self.env['sale.advance.payment.inv'].with_context(
+            active_model='sale.order', active_ids=order.ids, active_id=order.id,
+        ).create({'advance_payment_method': 'percentage', 'amount': 30.0})
+        wizard.create_invoices()
+        down_payment = order.invoice_ids
+        self.assertEqual(len(down_payment), 1)
+        self.assertAlmostEqual(down_payment.amount_total, 300.0)
+        self.assertEqual(sum(self._entries(order).mapped('total_in')), 1000.0)
+        down_payment.action_post()
+        self.assertAlmostEqual(sum(self._entries(order).mapped('total_in')), 700.0)
+        final = order._create_invoices(final=True)
+        self.assertAlmostEqual(final.amount_total, 700.0)
+        final.action_post()
         self.assertFalse(self._entries(order))

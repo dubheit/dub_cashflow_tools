@@ -1,4 +1,5 @@
-"""Purchase orders forecast their unbilled remainder on the payment mode bank.
+"""Purchase orders forecast their unbilled remainder, in company currency, on
+the payment mode bank.
 
 The configuration records are noupdate, so the new values of the data file
 are written here on existing databases.
@@ -16,7 +17,10 @@ VALUES = {
         'filter_domain': "[('state', '!=', 'cancel'), '|', ('invoice_status', '!=', 'invoiced'), ('order_line.invoice_lines.parent_state', '=', 'draft')]",
     },
     'cashflow_config_line_po_amount': {
-        'python_code': "record._cashflow_amount_to_invoice() if record.state == 'purchase' else record.amount_total",
+        'python_code': "record._cashflow_forecast_amount()",
+    },
+    'cashflow_config_line_po_currency': {
+        'python_code': "record.company_id.currency_id.id",
     },
     'cashflow_config_line_po_journal': {
         'python_code': "fixed_bank_journal(record)",
