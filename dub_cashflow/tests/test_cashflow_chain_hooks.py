@@ -117,6 +117,25 @@ class TestCashflowChainHooks(TransactionCase):
         self.config.action_regenerate()
         self.assertFalse(stale.exists())
 
+    def _action_config(self, line, action_code):
+        return self.env["cashflow.config"].create({
+            "name": "Chain hooks action config",
+            "model_id": self.env.ref("account.model_account_move_line").id,
+            "filter_domain": "[('id', '=', %d)]" % line.id,
+            "action_code": action_code,
+        })
+
+    def test_regenerate_runs_the_action_code(self):
+        line = self._receivable(self._invoice(300.0))
+        reprocess_only = self._action_config(line, "pass")
+        self.assertTrue(reprocess_only.action_regenerate())
+        self.assertFalse(self.env["cashflow.entry"].search([
+            ("config_id", "=", reprocess_only.id)]))
+        generating = self._action_config(line, "generate_cashflow()")
+        generating.action_regenerate()
+        self.assertEqual(len(self.env["cashflow.entry"].search([
+            ("config_id", "=", generating.id)])), 1)
+
     def test_regenerate_requires_write_access(self):
         user = self.env["res.users"].create({
             "name": "Chain Hooks Accountant",
