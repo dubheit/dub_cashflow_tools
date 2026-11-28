@@ -493,6 +493,20 @@ msgid "Bills Discount (Sconto effetti)"
 msgstr "Sconto Effetti"
 
 #. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__overrun_policy__block
+msgid "Block"
+msgstr "Blocca"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__overrun_policy
+msgid ""
+"Block: a used amount over the credit limit is refused.\n"
+"Warn: the used amount can go over the limit; the available amount becomes negative and the line shows a warning. Useful when the usage comes from documents already issued, such as presented Ri.Ba., or when the bank tolerates an overrun."
+msgstr ""
+"Blocca: un importo utilizzato oltre il fido viene rifiutato.\n"
+"Avvisa: l'importo utilizzato può superare il fido; l'importo disponibile diventa negativo e la linea mostra un avviso. Utile quando l'utilizzo viene da documenti già emessi, come le Ri.Ba. presentate, o quando la banca tollera uno sconfinamento."
+
+#. module: dub_treasury_base
 #: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_financial_instrument__instrument_type__bond
 msgid "Bond (Obbligazione)"
 msgstr "Obbligazione"
@@ -1915,6 +1929,11 @@ msgid "Outbound (Granted)"
 msgstr "In Uscita (Concesso)"
 
 #. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__is_over_limit
+msgid "Over Limit"
+msgstr "Oltre il fido"
+
+#. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_search
 msgid "Overdraft"
 msgstr "Scoperto"
@@ -2239,6 +2258,11 @@ msgid "The code must be unique per company!"
 msgstr "Il codice deve essere univoco per azienda!"
 
 #. module: dub_treasury_base
+#: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_credit_line_view_form
+msgid "The used amount is over the credit limit."
+msgstr "L'importo utilizzato supera il fido."
+
+#. module: dub_treasury_base
 #: model_terms:ir.ui.view,arch_db:dub_treasury_base.treasury_installment_view_search
 msgid "This Month"
 msgstr "Questo Mese"
@@ -2408,6 +2432,11 @@ msgid "Upper utilization bound (inclusive). Leave 0 for no upper bound."
 msgstr "Limite superiore di utilizzo (incluso). Lasciare 0 per nessun limite superiore."
 
 #. module: dub_treasury_base
+#: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_credit_line__overrun_policy
+msgid "Usage Over Limit"
+msgstr "Utilizzo oltre il fido"
+
+#. module: dub_treasury_base
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_credit_line__sequence
 msgid ""
 "Usage priority for this credit line. Lower values come first (e.g. preferred"
@@ -2436,6 +2465,12 @@ msgstr "Importo Utilizzato"
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__used_at_date
 msgid "Used At Date"
 msgstr "Utilizzato alla Data"
+
+#. module: dub_treasury_base
+#. odoo-python
+#: code:addons/dub_treasury_base/models/treasury_credit_line.py:0
+msgid "Used amount (%(used)s) cannot exceed credit limit (%(limit)s)."
+msgstr "L'importo utilizzato (%(used)s) non può superare il fido (%(limit)s)."
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_availability_report__utilization_rate_at_date
@@ -2477,6 +2512,11 @@ msgstr "Fattura fornitore"
 #: model:ir.model.fields,help:dub_treasury_base.field_treasury_financial_instrument__vendor_bill_ids
 msgid "Vendor invoices related to this financial instrument"
 msgstr "Fatture fornitore collegate a questo strumento finanziario"
+
+#. module: dub_treasury_base
+#: model:ir.model.fields.selection,name:dub_treasury_base.selection__treasury_credit_line__overrun_policy__warn
+msgid "Warn"
+msgstr "Avvisa"
 
 #. module: dub_treasury_base
 #: model:ir.model.fields,field_description:dub_treasury_base.field_treasury_account__website_message_ids

@@ -119,6 +119,61 @@ class TestTreasuryCreditLine(TransactionCase):
                 'auto_compute_usage': False,
             })
 
+    def test_warn_policy_allows_usage_over_limit(self):
+        """With the warn policy the line keeps a usage over its limit."""
+        credit_line = self.CreditLine.create({
+            'name': 'Test Warn Over Limit',
+            'account_id': self.treasury_account.id,
+            'credit_type': 'sbf',
+            'limit_amount': 50000.00,
+            'manual_used_amount': 60000.00,
+            'auto_compute_usage': False,
+            'overrun_policy': 'warn',
+        })
+        self.assertTrue(credit_line.is_over_limit)
+        self.assertEqual(credit_line.available_amount, -10000.00)
+        self.assertEqual(credit_line.utilization_rate, 120.0)
+
+    def test_default_policy_is_block(self):
+        """New lines block a usage over the limit, as before."""
+        credit_line = self.CreditLine.create({
+            'name': 'Test Default Policy',
+            'account_id': self.treasury_account.id,
+            'credit_type': 'sbf',
+            'limit_amount': 50000.00,
+        })
+        self.assertEqual(credit_line.overrun_policy, 'block')
+        self.assertFalse(credit_line.is_over_limit)
+
+    def test_switch_to_block_over_limit_raises(self):
+        """A line over its limit cannot go back to the block policy."""
+        credit_line = self.CreditLine.create({
+            'name': 'Test Switch To Block',
+            'account_id': self.treasury_account.id,
+            'credit_type': 'sbf',
+            'limit_amount': 50000.00,
+            'manual_used_amount': 60000.00,
+            'auto_compute_usage': False,
+            'overrun_policy': 'warn',
+        })
+        with self.assertRaises(ValidationError):
+            credit_line.overrun_policy = 'block'
+
+    def test_warn_policy_allows_lower_limit(self):
+        """With the warn policy the limit can go under the current usage."""
+        credit_line = self.CreditLine.create({
+            'name': 'Test Lower Limit',
+            'account_id': self.treasury_account.id,
+            'credit_type': 'sbf',
+            'limit_amount': 100000.00,
+            'manual_used_amount': 80000.00,
+            'auto_compute_usage': False,
+            'overrun_policy': 'warn',
+        })
+        credit_line.limit_amount = 60000.00
+        self.assertTrue(credit_line.is_over_limit)
+        self.assertEqual(credit_line.available_amount, -20000.00)
+
     def test_date_validation(self):
         """Test that start date must be before expiry date."""
         with self.assertRaises(ValidationError):

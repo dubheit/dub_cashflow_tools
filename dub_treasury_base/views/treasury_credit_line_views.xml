@@ -13,7 +13,7 @@
                 <field name="credit_type"/>
                 <field name="limit_amount" sum="Total Limit"/>
                 <field name="used_amount" sum="Total Used"/>
-                <field name="available_amount" sum="Total Available"/>
+                <field name="available_amount" sum="Total Available" decoration-danger="is_over_limit"/>
                 <field name="utilization_rate" widget="progressbar"/>
                 <field name="interest_rate" optional="show"/>
                 <field name="expiry_date"/>
@@ -22,6 +22,7 @@
                        decoration-warning="state == 'expired'"
                        decoration-muted="state in ('draft', 'closed')"/>
                 <field name="currency_id" column_invisible="1"/>
+                <field name="is_over_limit" column_invisible="1"/>
             </list>
         </field>
     </record>
@@ -47,6 +48,9 @@
                     <field name="state" widget="statusbar" statusbar_visible="draft,active,closed"/>
                 </header>
                 <sheet>
+                    <div class="alert alert-warning" role="alert" invisible="not is_over_limit">
+                        The used amount is over the credit limit.
+                    </div>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_view_moves"
                                 type="object"
@@ -78,6 +82,7 @@
                         </group>
                         <group name="amounts">
                             <field name="limit_amount"/>
+                            <field name="overrun_policy"/>
                             <label for="used_amount"/>
                             <div class="o_row">
                                 <field name="used_amount" class="oe_inline"/>
@@ -85,9 +90,10 @@
                                 <span class="text-muted" invisible="not auto_compute_usage">Auto</span>
                                 <span class="text-muted" invisible="auto_compute_usage">Manual</span>
                             </div>
-                            <field name="available_amount"/>
+                            <field name="available_amount" decoration-danger="is_over_limit"/>
                             <field name="utilization_rate" widget="progressbar"/>
                             <field name="currency_id" invisible="1"/>
+                            <field name="is_over_limit" invisible="1"/>
                         </group>
                     </group>
                     <group>
