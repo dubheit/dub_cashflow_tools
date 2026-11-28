@@ -62,6 +62,25 @@ class TreasuryCreditLine(models.Model):
         required=True,
         tracking=True,
     )
+    overrun_policy = fields.Selection(
+        selection=[
+            ('block', 'Block'),
+            ('warn', 'Warn'),
+        ],
+        string='Usage Over Limit',
+        required=True,
+        default='block',
+        tracking=True,
+        help='Block: a used amount over the credit limit is refused.\n'
+             'Warn: the used amount can go over the limit; the available '
+             'amount becomes negative and the line shows a warning. Useful '
+             'when the usage comes from documents already issued, such as '
+             'presented Ri.Ba., or when the bank tolerates an overrun.',
+    )
+    is_over_limit = fields.Boolean(
+        string='Over Limit',
+        compute='_compute_is_over_limit',
+    )
     auto_compute_usage = fields.Boolean(
         string='Auto-compute Usage',
         default=True,
@@ -363,6 +382,13 @@ class TreasuryCreditLine(models.Model):
             else:
                 line.utilization_rate = 0.0
 
+    @api.depends('used_amount', 'limit_amount')
+    def _compute_is_over_limit(self):
+        for line in self:
+            currency = line.currency_id or self.env.company.currency_id
+            line.is_over_limit = currency.compare_amounts(
+                line.used_amount, line.limit_amount) > 0
+
     # ------------------------------------------------------------------
     # Projected availability at a given date (R4)
     #
@@ -456,9 +482,9 @@ class TreasuryCreditLine(models.Model):
             result[target_date] = (used, self.limit_amount - used)
         return result
 
-    @api.constrains('used_amount', 'limit_amount')
+    @api.constrains('used_amount', 'limit_amount', 'overrun_policy')
     def _check_used_amount(self):
-        for line in self:
+        for line in self.filtered(lambda line: line.overrun_policy == 'block'):
             if line.used_amount > line.limit_amount:
                 raise ValidationError(
                     _('Used amount (%(used)s) cannot exceed credit limit (%(limit)s).',
